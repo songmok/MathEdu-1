@@ -1,0 +1,53 @@
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Select from "./pages/select/Select";
+
+//Student
+import SLogin from "./pages/student/SLogin/SLogin";
+import SGrade from "./pages/student/SGrade/SGrade";
+import SNotice from "./pages/student/SNotice/SNotice";
+import SReference from "./pages/student/SReference/SReference";
+import SMypage from "./pages/student/SMypage/SMypage";
+
+//Teacher
+import TLogin from "./pages/teacher/TLogin/TLogin";
+import TSignup from "./pages/teacher/TSignup/TSignup";
+import TClass from "./pages/teacher/TClass/TClass";
+import TNotice from "./pages/teacher/TNotice/TNotice";
+import TReference from "./pages/teacher/TReference/TReference";
+
+import styled from "styled-components";
+
+function App() {
+    return (
+        <BrowserRouter>
+            <Center>
+                <Routes>
+                    <Route path="/" element={<Select />} />
+                    {/* 학생 사이트 */}
+                    <Route path="/student/*">
+                        <Route path="login" element={<SLogin />} />
+                        <Route path="grade" element={<SGrade />} />
+                        <Route path="notice" element={<SNotice />} />
+                        <Route path="reference" element={<SReference />} />
+                        <Route path="mypage" element={<SMypage />} />
+                    </Route>
+                    {/* 선생님 사이트 */}
+                    <Route path="/teacher/*">
+                        <Route path="login" element={<TLogin />} />
+                        <Route path="signup" element={<TSignup />} />
+                        <Route path="class" element={<TClass />} />
+                        <Route path="notice" element={<TNotice />} />
+                        <Route path="reference" element={<TReference />} />
+                    </Route>
+                </Routes>
+            </Center>
+        </BrowserRouter>
+    );
+}
+
+const Center = styled.div`
+    display: flex;
+`;
+
+export default App;
