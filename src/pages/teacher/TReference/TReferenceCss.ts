@@ -4,9 +4,13 @@ import { mainContainer } from "../../../utils/Layout";
 
 const TReferenceCss = styled.div`
     ${mainContainer}
-    .title {
-        color: ${TfontCol};
-        font-size: 25px;
+    .header {
+        display: flex;
+        justify-content: space-between;
+        .title {
+            color: ${TfontCol};
+            font-size: 25px;
+        }
     }
 `;
 

@@ -1,8 +1,8 @@
+import { mainContainer } from "./../../../utils/Layout";
 import styled from "styled-components";
 import { TfontCol } from "../../../utils/Color";
-import { mainContainer } from "../../../utils/Layout";
 
-const TNoticeCss = styled.div`
+const TGradeCss = styled.div`
     ${mainContainer}
     .header {
         display: flex;
@@ -14,5 +14,4 @@ const TNoticeCss = styled.div`
     }
 `;
 
-export default TNoticeCss;
-    
+export default TGradeCss;

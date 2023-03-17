@@ -1,4 +1,4 @@
-import SSidebar from "../../../components/SSidebar/SSidebar";
+import SSidebar from "../../../components/sSidebar/SSidebar";
 import SMypageCss from "./SMypageCss";
 
 const SMypage = () => {

@@ -4,6 +4,7 @@ import TSidebarCss from "./TSidebarCss";
 const TSidebar = () => {
     const menu = [
         { name: "클 래 스 관 리", path: "/teacher/class" },
+        { name: "성 적 관 리", path: "/teacher/grade" },
         { name: "자 료 실", path: "/teacher/reference" },
         { name: "공 지 사 항", path: "/teacher/notice" },
     ];

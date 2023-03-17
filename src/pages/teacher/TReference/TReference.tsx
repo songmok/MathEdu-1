@@ -1,4 +1,5 @@
-import TSidebar from "../../../components/TSidebar/TSidebar";
+import LogoutBt from "../../../components/logoutBt/LogoutBt";
+import TSidebar from "../../../components/tSidebar/TSidebar";
 import TReferenceCss from "./TReferenceCss";
 
 const TReference = () => {
@@ -6,7 +7,10 @@ const TReference = () => {
         <>
             <TSidebar />
             <TReferenceCss>
-                <p className="title">자료실</p>
+                <header className="header">
+                    <p className="title">자료실</p>
+                    <LogoutBt />
+                </header>
             </TReferenceCss>
         </>
     );

@@ -1,4 +1,4 @@
-import TSidebar from "../../../components/TSidebar/TSidebar";
+import TSidebar from "../../../components/tSidebar/TSidebar";
 import TLoginCss from "./TLoginCss";
 
 const TLogin = () => {

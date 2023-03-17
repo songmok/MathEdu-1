@@ -1,12 +1,12 @@
 import LogoutBt from "../../../components/logoutBt/LogoutBt";
-import SSidebar from "../../../components/sSidebar/SSidebar";
-import SGradeCss from "./SGradeCss";
+import TSidebar from "../../../components/tSidebar/TSidebar";
+import TGradeCss from "./TGradeCss";
 
-const SGrade = () => {
+const TGrade = () => {
     return (
         <>
-            <SSidebar />
-            <SGradeCss>
+            <TSidebar />
+            <TGradeCss>
                 <header className="header">
                     <p className="title">성적관리</p>
                     <LogoutBt />
@@ -22,9 +22,9 @@ const SGrade = () => {
                 <div>
                     <p className="subTitle">성적 분석</p>
                 </div>
-            </SGradeCss>
+            </TGradeCss>
         </>
     );
 };
 
-export default SGrade;
+export default TGrade;

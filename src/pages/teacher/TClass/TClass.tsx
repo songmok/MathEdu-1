@@ -1,4 +1,5 @@
-import TSidebar from "../../../components/TSidebar/TSidebar";
+import LogoutBt from "../../../components/logoutBt/LogoutBt";
+import TSidebar from "../../../components/tSidebar/TSidebar";
 import TClassCss from "./TClaaCss";
 
 const TClass = () => {
@@ -6,7 +7,10 @@ const TClass = () => {
         <>
             <TSidebar />
             <TClassCss>
-                <p className="title">클래스 관리</p>
+                <header className="header">
+                    <p className="title">클래스 관리</p>
+                    <LogoutBt />
+                </header>
             </TClassCss>
         </>
     );

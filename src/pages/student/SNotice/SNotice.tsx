@@ -1,4 +1,4 @@
-import SSidebar from "../../../components/SSidebar/SSidebar";
+import SSidebar from "../../../components/sSidebar/SSidebar";
 import SNoticeCss from "./SNotiecCss";
 
 const SNotice = () => {

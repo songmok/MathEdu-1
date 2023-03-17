@@ -17,6 +17,7 @@ import TNotice from "./pages/teacher/TNotice/TNotice";
 import TReference from "./pages/teacher/TReference/TReference";
 
 import styled from "styled-components";
+import TGrade from "./pages/teacher/TGrade/TGrade";
 
 function App() {
     return (
@@ -35,6 +36,7 @@ function App() {
                     {/* 선생님 사이트 */}
                     <Route path="/teacher/*">
                         <Route path="login" element={<TLogin />} />
+                        <Route path="grade" element={<TGrade />} />
                         <Route path="signup" element={<TSignup />} />
                         <Route path="class" element={<TClass />} />
                         <Route path="notice" element={<TNotice />} />
