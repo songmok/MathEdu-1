@@ -31,3 +31,8 @@ body {
     margin: 0 auto;
     background-color: #ededed;
 }
+table {
+    border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 0px;
+}

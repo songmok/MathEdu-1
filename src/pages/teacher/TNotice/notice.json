@@ -1,0 +1,49 @@
+{
+    "status": true,
+    "totalPage": 10,
+    "currentPage": 1,
+    "totalCount": 98,
+    "keyword": "검색어",
+    "list": [
+        {
+            "no": 10,
+            "category": "기초강화 a반",
+            "title": "공지사항 입니다. 10",
+            "regDt": "2023-03-01",
+            "author": {
+                "no": 1,
+                "name": "김채원"
+            }
+        },
+        {
+            "no": 9,
+            "category": "기초강화 a반",
+            "title": "공지사항 입니다. 9",
+            "regDt": "2023-02-28",
+            "author": {
+                "no": 1,
+                "name": "김채원"
+            }
+        },
+        {
+            "no": 8,
+            "category": "기초강화 a반",
+            "title": "공지사항 입니다. 9",
+            "regDt": "2023-02-28",
+            "author": {
+                "no": 1,
+                "name": "김채원"
+            }
+        },
+        {
+            "no": 7,
+            "category": "기초강화 a반",
+            "title": "공지사항 입니다. 9",
+            "regDt": "2023-02-28",
+            "author": {
+                "no": 1,
+                "name": "김채원"
+            }
+        }
+    ]
+}
