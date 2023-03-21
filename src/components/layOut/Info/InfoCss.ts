@@ -1,18 +1,22 @@
 import styled from "styled-components";
-import { SfontCol } from "../../../utils/Color";
+import { SfontCol, TfontCol } from "../../../utils/Color";
 import { mainContainer } from "../../../utils/Layout";
-
-const SMypageCss = styled.div`
+export const InfoCss = styled.div`
     ${mainContainer}
     .title {
-        color: ${SfontCol};
         font-size: 25px;
         margin-bottom: 30px;
     }
-    .mypage {
+    .teacher {
+        color: ${TfontCol};
+    }
+    .student {
+        color: ${SfontCol};
+    }
+    .infoPage {
         position: relative;
         padding: 30px;
-        height: 435px;
+        height: 333px;
         border-radius: 30px;
         background-color: #fff;
         h5 {
@@ -24,14 +28,14 @@ const SMypageCss = styled.div`
         .info {
             display: flex;
             .profileImg {
+                width: 135px;
+                height: 175px;
+                background-color: pink;
                 .img {
-                    width: 135px;
-                    height: 175px;
-                    background-color: pink;
                 }
             }
             .infoGrid {
-                width: 100%;
+                width: 90%;
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 justify-items: center;
@@ -59,5 +63,3 @@ const SMypageCss = styled.div`
         }
     }
 `;
-
-export default SMypageCss;

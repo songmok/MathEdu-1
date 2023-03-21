@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { SfontCol } from "../../../utils/Color";
-import { mainContainer } from "../../../utils/Layout";
-
-const SMypageCss = styled.div`
+import { SfontCol } from "../../../../utils/Color";
+import { mainContainer } from "../../../../utils/Layout";
+const TStudentInfoCss = styled.div`
     ${mainContainer}
     .title {
         color: ${SfontCol};
@@ -12,7 +11,7 @@ const SMypageCss = styled.div`
     .mypage {
         position: relative;
         padding: 30px;
-        height: 435px;
+        height: 333px;
         border-radius: 30px;
         background-color: #fff;
         h5 {
@@ -59,5 +58,4 @@ const SMypageCss = styled.div`
         }
     }
 `;
-
-export default SMypageCss;
+export default TStudentInfoCss;

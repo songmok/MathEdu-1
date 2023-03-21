@@ -5,7 +5,7 @@ const LogoutBt = () => {
     return (
         <LogoutBtCss>
             <img className="profileImg" />
-            <span>오한수</span>
+            <span>김채원</span>
             <img className="outImg" />
         </LogoutBtCss>
     );
