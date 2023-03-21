@@ -18,6 +18,7 @@ import TReference from "./pages/teacher/TReference/TReference";
 
 import styled from "styled-components";
 import TGrade from "./pages/teacher/TGrade/TGrade";
+import TStudentInfo from "./pages/teacher/TClass/TStudentInfo/TStudentInfo";
 
 function App() {
     return (
@@ -39,6 +40,7 @@ function App() {
                         <Route path="grade" element={<TGrade />} />
                         <Route path="signup" element={<TSignup />} />
                         <Route path="class" element={<TClass />} />
+                        <Route path="studentinfo" element={<TStudentInfo />} />
                         <Route path="notice" element={<TNotice />} />
                         <Route path="reference" element={<TReference />} />
                     </Route>
