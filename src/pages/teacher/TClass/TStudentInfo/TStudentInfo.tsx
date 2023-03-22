@@ -34,7 +34,6 @@ export interface TStudentInfo {
 }
 
 const TStudentInfo = () => {
-    console.log("data", tstudentinfo.basicInfo);
     const student: TStudentInfo = JSON.parse(
         JSON.stringify(tstudentinfo.basicInfo),
     );
