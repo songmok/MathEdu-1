@@ -30,10 +30,6 @@ const TReference = () => {
         <>
             <TSidebar />
             <TReferenceCss>
-                <header className="header">
-                    <p className="title">자료실</p>
-                    <LogoutBt />
-                </header>
                 <section className="section">
                     <ReferenceForm
                         sectionTitle={"자료실"}

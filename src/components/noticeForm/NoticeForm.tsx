@@ -1,7 +1,7 @@
 import NoticeFormCss from "./NoticeFormCss";
 
-import Pagination from "@mui/material/Pagination";
 import { INotice } from "../../pages/teacher/TNotice/TNotice";
+import { useNavigate } from "react-router";
 
 interface IProps {
     sectionTitle: string;
@@ -9,6 +9,11 @@ interface IProps {
 }
 
 const NoticeForm = (props: IProps) => {
+    const navigate = useNavigate();
+    const goNoticePost = (no: number) => {
+        navigate("/teacher/notice/post");
+    };
+
     return (
         <NoticeFormCss>
             <div className="sectionTop">
@@ -34,7 +39,13 @@ const NoticeForm = (props: IProps) => {
                     <tbody>
                         {props.notice.list.map(ele => {
                             return (
-                                <tr key={ele.no} className="tableMain">
+                                <tr
+                                    key={ele.no}
+                                    className="tableMain"
+                                    onClick={() => {
+                                        goNoticePost(ele.no);
+                                    }}
+                                >
                                     <td>{ele.no}</td>
                                     <td>{ele.category}</td>
                                     <td>{ele.title}</td>
@@ -45,11 +56,6 @@ const NoticeForm = (props: IProps) => {
                         })}
                     </tbody>
                 </table>
-                <Pagination
-                    count={10}
-                    color="secondary"
-                    className="pagination"
-                />
             </div>
         </NoticeFormCss>
     );

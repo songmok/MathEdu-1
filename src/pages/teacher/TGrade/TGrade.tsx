@@ -7,10 +7,6 @@ const TGrade = () => {
         <>
             <TSidebar />
             <TGradeCss>
-                <header className="header">
-                    <p className="title">성적관리</p>
-                    <LogoutBt />
-                </header>
                 <div className="tests">
                     <div className="weekT">
                         <p className="subTitle">주간 테스트</p>

@@ -20,10 +20,14 @@ import styled from "styled-components";
 import TGrade from "./pages/teacher/TGrade/TGrade";
 import TStudentInfo from "./pages/teacher/TClass/TStudentInfo/TStudentInfo";
 import TClassStudentList from "./pages/teacher/TClass/TClassDetail/TClassStudentList";
+import TNoticePost from "./pages/teacher/TNotice/TNoticePost/TNoticePost";
+import Header from "./components/header/Header";
+
 
 function App() {
     return (
         <BrowserRouter>
+            <Header />
             <Center>
                 <Routes>
                     <Route path="/" element={<Select />} />
@@ -41,7 +45,11 @@ function App() {
                         <Route path="grade" element={<TGrade />} />
                         <Route path="signup" element={<TSignup />} />
                         <Route path="class" element={<TClass />} />
-                        <Route path="notice" element={<TNotice />} />
+                        <Route path="studentinfo" element={<TStudentInfo />} />
+                        <Route path="notice">
+                            <Route path="" element={<TNotice />} />
+                            <Route path="post" element={<TNoticePost />} />
+                        </Route>
                         <Route path="reference" element={<TReference />} />
                         {/* detail 페이지 */}
                         <Route
