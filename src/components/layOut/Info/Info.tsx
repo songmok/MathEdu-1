@@ -5,20 +5,8 @@ interface StudentInfoProps {
     title?: string;
     headerName?: string;
     basicInfo: TStudentInfo; // basicInfo 속성의 타입을 TStudentInfo로 변경
-    weeklyTest?: {
-        score: number;
-        rank: number;
-        tieCnt: number;
-        totalStudents: number;
-        testDt: string;
-    };
-    monthlyTest?: {
-        score: number;
-        rank: number;
-        tieCnt: number;
-        totalStudents: number;
-        testDt: string;
-    };
+    weeklyTest?: TStudentInfo;
+    monthlyTest?: TStudentInfo;
 }
 
 const Info = (props: StudentInfoProps) => {
