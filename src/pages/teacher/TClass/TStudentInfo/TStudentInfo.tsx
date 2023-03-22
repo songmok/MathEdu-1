@@ -17,11 +17,33 @@ export interface TStudentInfo {
     grade: number;
     regDt: string;
     teacher: string;
+    weeklyTest?: {
+        score: number;
+        rank: number;
+        tieCnt: number;
+        totalStudents: number;
+        testDt: string;
+    };
+    monthlyTest?: {
+        score: number;
+        rank: number;
+        tieCnt: number;
+        totalStudents: number;
+        testDt: string;
+    };
 }
 
 const TStudentInfo = () => {
-    console.log("data", tstudentinfo);
-    const student: TStudentInfo = JSON.parse(JSON.stringify(tstudentinfo));
+    console.log("data", tstudentinfo.basicInfo);
+    const student: TStudentInfo = JSON.parse(
+        JSON.stringify(tstudentinfo.basicInfo),
+    );
+    const weekly: TStudentInfo = JSON.parse(
+        JSON.stringify(tstudentinfo.weeklyTest),
+    );
+    const monthly: TStudentInfo = JSON.parse(
+        JSON.stringify(tstudentinfo.weeklyTest),
+    );
     return (
         <>
             <TSidebar />
@@ -29,6 +51,8 @@ const TStudentInfo = () => {
                 title="title teacher"
                 headerName="학생 정보"
                 basicInfo={student}
+                weeklyTest={weekly}
+                monthlyTest={monthly}
             />
         </>
     );

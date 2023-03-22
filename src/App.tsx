@@ -19,8 +19,10 @@ import TReference from "./pages/teacher/TReference/TReference";
 import styled from "styled-components";
 import TGrade from "./pages/teacher/TGrade/TGrade";
 import TStudentInfo from "./pages/teacher/TClass/TStudentInfo/TStudentInfo";
+import TClassStudentList from "./pages/teacher/TClass/TClassDetail/TClassStudentList";
 import TNoticePost from "./pages/teacher/TNotice/TNoticePost/TNoticePost";
 import Header from "./components/header/Header";
+
 
 function App() {
     return (
@@ -49,6 +51,12 @@ function App() {
                             <Route path="post" element={<TNoticePost />} />
                         </Route>
                         <Route path="reference" element={<TReference />} />
+                        {/* detail 페이지 */}
+                        <Route
+                            path="classdetail"
+                            element={<TClassStudentList />}
+                        />
+                        <Route path="studentinfo" element={<TStudentInfo />} />
                     </Route>
                 </Routes>
             </Center>
