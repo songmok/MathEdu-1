@@ -19,10 +19,6 @@ const TClass = () => {
         <>
             <TSidebar />
             <TClassCss>
-                <header className="header">
-                    <p className="title">클래스 관리</p>
-                    <LogoutBt />
-                </header>
                 <section className="section">
                     <div className="sectionTop">
                         <p>클래스 리스트</p>

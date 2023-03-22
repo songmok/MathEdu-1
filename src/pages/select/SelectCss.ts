@@ -21,6 +21,7 @@ const SelectCss = styled.div`
         background: ${SmainCol};
         color: #fff;
         border-radius: 5px;
+        cursor: pointer;
     }
     .teacher {
         display: flex;
@@ -31,6 +32,7 @@ const SelectCss = styled.div`
         background: ${TmainCol};
         color: #fff;
         border-radius: 5px;
+        cursor: pointer;
     }
 
     @media screen and (max-width: 428px) {

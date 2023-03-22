@@ -19,10 +19,13 @@ import TReference from "./pages/teacher/TReference/TReference";
 import styled from "styled-components";
 import TGrade from "./pages/teacher/TGrade/TGrade";
 import TStudentInfo from "./pages/teacher/TClass/TStudentInfo/TStudentInfo";
+import TNoticePost from "./pages/teacher/TNotice/TNoticePost/TNoticePost";
+import Header from "./components/header/Header";
 
 function App() {
     return (
         <BrowserRouter>
+            <Header />
             <Center>
                 <Routes>
                     <Route path="/" element={<Select />} />
@@ -41,7 +44,10 @@ function App() {
                         <Route path="signup" element={<TSignup />} />
                         <Route path="class" element={<TClass />} />
                         <Route path="studentinfo" element={<TStudentInfo />} />
-                        <Route path="notice" element={<TNotice />} />
+                        <Route path="notice">
+                            <Route path="" element={<TNotice />} />
+                            <Route path="post" element={<TNoticePost />} />
+                        </Route>
                         <Route path="reference" element={<TReference />} />
                     </Route>
                 </Routes>
