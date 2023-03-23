@@ -16,4 +16,3 @@ export const Button = `
     border-radius: 5px;
     cursor: pointer;
 `;
-    

@@ -11,7 +11,7 @@ interface IProps {
 const NoticeForm = (props: IProps) => {
     const navigate = useNavigate();
     const goNoticePost = (no: number) => {
-        navigate("/teacher/notice/post");
+        navigate(`/teacher/notice/post?no=${no}`);
     };
 
     return (
@@ -39,18 +39,29 @@ const NoticeForm = (props: IProps) => {
                     <tbody>
                         {props.notice.list.map(ele => {
                             return (
-                                <tr
-                                    key={ele.no}
-                                    className="tableMain"
-                                    onClick={() => {
-                                        goNoticePost(ele.no);
-                                    }}
-                                >
-                                    <td>{ele.no}</td>
-                                    <td>{ele.category}</td>
-                                    <td>{ele.title}</td>
-                                    <td>{ele.regDt}</td>
-                                    <td>{ele.author.name}</td>
+                                <tr key={ele.no} className="tableMain">
+                                    <td>
+                                        <span>{ele.no}</span>
+                                    </td>
+                                    <td>
+                                        <span>{ele.category}</span>
+                                    </td>
+                                    <td>
+                                        <span
+                                            className="noticeName"
+                                            onClick={() => {
+                                                goNoticePost(ele.no);
+                                            }}
+                                        >
+                                            {ele.title}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span>{ele.regDt}</span>
+                                    </td>
+                                    <td>
+                                        <span>{ele.author.name}</span>
+                                    </td>
                                 </tr>
                             );
                         })}

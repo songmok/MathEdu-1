@@ -4,14 +4,17 @@ import HeaderCss from "./HeaderCss";
 
 const Header = () => {
     const location = useLocation();
-    if (location.pathname === "/") return null;
-    if (location.pathname === "/student/login") return null;
-    if (location.pathname === "/teacher/login") return null;
+    if (
+        location.pathname === "/" ||
+        location.pathname === "/student/login" ||
+        location.pathname === "/teacher/login"
+    )
+        return null;
 
     return (
         <HeaderCss>
             <header className="header">
-                <p className="Stitle">한수 관리 시스템</p>
+                <p className="Stitle">반 이름이 들어갈 자리입니다</p>
                 <LogoutBt />
             </header>
         </HeaderCss>

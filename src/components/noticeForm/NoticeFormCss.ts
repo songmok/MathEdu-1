@@ -41,6 +41,14 @@ const NoticeFormCss = styled.div`
             }
             .tableMain {
                 height: 40px;
+                .noticeName {
+                    cursor: pointer;
+                    &:hover {
+                        border-bottom: 1px solid;
+                        padding-bottom: 1px;
+                        color: ${TfontCol};
+                    }
+                }
             }
         }
     }
