@@ -1,15 +1,33 @@
 {
-    "name": "김채원",
-    "id": "23030001",
-    "pwd": "1234",
-    "birthYear": 2010,
-    "birthMonth": 3,
-    "birthDate": 14,
-    "schoolNo": 1,
-    "schoolGrade": 3,
-    "phoneNo": "010-1234-5678",
-    "alternatePhone": "010-4567-8979",
-    "classNo": 1,
-    "school": "그린초등학교",
-    "join": "가입일"
+    "basicInfo": {
+        "name": "김채원",
+        "profileImgURL": "/images/student/aY725ITngA23.jpg",
+        "birth": "2010-03-04",
+        "phone": "010-1234-5678",
+        "class": "기초 강화 학습 A",
+        "school": "그린초등학교",
+        "id": "23030001",
+        "alternatePhone": "010-1234-4567",
+        "classDays": "월,수,금",
+        "startTime": "18:30",
+        "endTime": "22:30",
+        "grade": 3,
+        "regDt": "2021-03-05",
+        "address": "대구광역시 수성구",
+        "teacher": "선생님"
+    },
+    "weeklyTest": {
+        "score": 65,
+        "rank": 13,
+        "tieCnt": 2,
+        "totalStudents": 20,
+        "testDt": "2023-03-01"
+    },
+    "monthlyTest": {
+        "score": 65,
+        "rank": 13,
+        "tieCnt": 2,
+        "totalStudents": 20,
+        "testDt": "2023-03-01"
+    }
 }

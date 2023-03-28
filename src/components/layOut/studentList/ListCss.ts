@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TfontCol, TmainCol } from "../../../utils/Color";
+import { SfontCol, TfontCol, TmainCol } from "../../../utils/Color";
 import { mainContainer } from "../../../utils/Layout";
 
 const ListCss = styled.div`
@@ -9,7 +9,6 @@ const ListCss = styled.div`
         justify-content: space-between;
         margin-bottom: 30px;
         .title {
-            color: ${TfontCol};
             font-size: 25px;
         }
     }
@@ -23,6 +22,12 @@ const ListCss = styled.div`
             p {
                 color: ${TfontCol};
                 font-size: 18px;
+            }
+            .studnetTitle {
+                color: ${SfontCol};
+            }
+            .teacherTitle {
+                color: ${TfontCol};
             }
             .search {
                 display: flex;
