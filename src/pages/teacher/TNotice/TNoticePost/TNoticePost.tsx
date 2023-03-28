@@ -66,7 +66,7 @@ const TNoticePost = () => {
 
     return (
         <>
-            {/* <TSidebar /> */}
+            <TSidebar />
             <TNoticePostCss>
                 <section className="section">
                     <p className="section-title">공지사항</p>

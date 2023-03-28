@@ -44,7 +44,13 @@ function App() {
                         <Route path="login" element={<TLogin />} />
                         <Route path="grade" element={<TGrade />} />
                         <Route path="signup" element={<TSignup />} />
-                        <Route path="class" element={<TClass />} />
+                        <Route path="class">
+                            <Route path="" element={<TClass />} />
+                            <Route
+                                path="detail"
+                                element={<TClassDetail />}
+                            />
+                        </Route>
                         <Route path="studentinfo" element={<TStudentInfo />} />
                         <Route path="notice">
                             <Route path="" element={<TNotice />} />
@@ -52,7 +58,6 @@ function App() {
                         </Route>
                         <Route path="reference" element={<TReference />} />
                         {/* detail 페이지 */}
-                        <Route path="classdetail" element={<TClassDetail />} />
                         <Route path="studentinfo" element={<TStudentInfo />} />
                     </Route>
                 </Routes>

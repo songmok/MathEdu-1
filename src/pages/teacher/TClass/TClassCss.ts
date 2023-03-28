@@ -20,6 +20,7 @@ const TClassCss = styled.div`
         .sectionTop {
             display: flex;
             justify-content: space-between;
+            margin-bottom: 10px;
             p {
                 color: ${TfontCol};
                 font-size: 18px;
@@ -27,19 +28,22 @@ const TClassCss = styled.div`
             .search {
                 display: flex;
                 align-items: center;
-                .searchBox {
-                    border: 2px solid #d9d9d9;
-                    height: 30px;
-                    border-radius: 5px;
-                }
-                .searchBt {
-                    border: none;
-                    background: ${TmainCol};
-                    color: #fff;
-                    height: 30px;
-                    width: 70px;
-                    border-radius: 5px;
-                    margin-left: 15px;
+                form {
+                    display: flex;
+                    .searchBox {
+                        border: 2px solid #d9d9d9;
+                        height: 30px;
+                        border-radius: 5px;
+                    }
+                    .searchBt {
+                        border: none;
+                        background: ${TmainCol};
+                        color: #fff;
+                        height: 30px;
+                        width: 70px;
+                        border-radius: 5px;
+                        margin-left: 15px;
+                    }
                 }
             }
         }
@@ -56,6 +60,14 @@ const TClassCss = styled.div`
                 }
                 .tableMain {
                     height: 40px;
+                    .className {
+                        cursor: pointer;
+                        &:hover {
+                            border-bottom: 1px solid;
+                            padding-bottom: 1px;
+                            color: ${TfontCol};
+                        }
+                    }
                 }
             }
             .pagination {
