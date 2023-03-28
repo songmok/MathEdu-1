@@ -12,14 +12,32 @@ import dummyData from "./gradedummy.json";
 highchartsMore(Highcharts);
 solidGauge(Highcharts);
 
+// const data1 = dummyData.personalScores;
+
+const personalSc = JSON.parse(dummyData.personalScores);
+const classSc = JSON.parse(dummyData.classAvgScores);
+const topSc = JSON.parse(dummyData.top30pAvgScores);
+
+const weekSc = personalSc.length;
+let temp = [];
+// console.log(weekSc);
+for (let i = 0; i < weekSc; i++) {
+    let temp = i + 1 + "주";
+    console.log(temp);
+}
+
+// console.log(personal);
+
+const data2 = [40, 50, 60, 70, 80];
+const data3 = [50, 60, 70, 80, 60];
+
+// const arr = data1.split(",");
+
+// console.log(Array.isArray(arr));
+// console.log(arr);
+
 const SGrade = () => {
     const chartRef = useRef(null);
-
-    const data1 = dummyData.personalScores;
-    console.log(data1);
-
-    const data2 = [40, 50, 60, 70, 80];
-    const data3 = [50, 60, 70, 80, 60];
 
     const options = {
         chart: {
@@ -42,15 +60,39 @@ const SGrade = () => {
         series: [
             {
                 name: "내 점수",
-                data: data1,
+                data: personalSc,
+                lineColor: "#005853",
+                lineWidth: 3,
+                marker: {
+                    symbol: "circle",
+                    lineWidth: 3,
+                    fillColor: "#fff",
+                    lineColor: "#005853",
+                },
             },
             {
                 name: "반 평균",
-                data: data2,
+                data: classSc,
+                lineColor: "#4543A0",
+                lineWidth: 3,
+                marker: {
+                    symbol: "circle",
+                    lineWidth: 3,
+                    fillColor: "#fff",
+                    lineColor: "#4543A0",
+                },
             },
             {
                 name: "최고점수",
-                data: data3,
+                data: topSc,
+                lineColor: "#00A49A",
+                lineWidth: 3,
+                marker: {
+                    symbol: "circle",
+                    lineWidth: 3,
+                    fillColor: "#fff",
+                    lineColor: "#00A49A",
+                },
             },
         ],
     };
@@ -171,11 +213,11 @@ const SGrade = () => {
                                     <span>2</span>
                                 </li>
                                 <li className="gradeLR">
-                                    <span className='gradeLRC'>수강인원</span>
+                                    <span className="gradeLRC">수강인원</span>
                                     <span>25</span>
                                 </li>
                                 <li className="gradeLR">
-                                    <span className='gradeLRC'>시험일자</span>
+                                    <span className="gradeLRC">시험일자</span>
                                     <span>2023-03-01</span>
                                 </li>
                             </ul>
