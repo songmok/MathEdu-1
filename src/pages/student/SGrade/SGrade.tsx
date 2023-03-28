@@ -7,13 +7,17 @@ import { useRef } from "react";
 import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
 
+import dummyData from "./gradedummy.json";
+
 highchartsMore(Highcharts);
 solidGauge(Highcharts);
 
 const SGrade = () => {
     const chartRef = useRef(null);
 
-    const data1 = [30, 40, 50, 90, 60];
+    const data1 = dummyData.personalScores;
+    console.log(data1);
+
     const data2 = [40, 50, 60, 70, 80];
     const data3 = [50, 60, 70, 80, 60];
 
@@ -143,6 +147,7 @@ const SGrade = () => {
                 <div className="tests">
                     <div className="weekT">
                         <p className="subTitle">주간 테스트</p>
+                        <form></form>
                         <div className="newTest">
                             <div className="donutGraph">
                                 <HighchartsReact
@@ -154,23 +159,23 @@ const SGrade = () => {
 
                             <ul className="gradeList">
                                 <li className="gradeLR">
-                                    <span>점수</span>
+                                    <span className="gradeLRC">점수</span>
                                     <span>65</span>
                                 </li>
                                 <li className="gradeLR">
-                                    <span>석차</span>
+                                    <span className="gradeLRC">석차</span>
                                     <span>13</span>
                                 </li>
                                 <li className="gradeLR">
-                                    <span>동차석수</span>
+                                    <span className="gradeLRC">동차석수</span>
                                     <span>2</span>
                                 </li>
                                 <li className="gradeLR">
-                                    <span>수강인원</span>
+                                    <span className='gradeLRC'>수강인원</span>
                                     <span>25</span>
                                 </li>
                                 <li className="gradeLR">
-                                    <span>시험일자</span>
+                                    <span className='gradeLRC'>시험일자</span>
                                     <span>2023-03-01</span>
                                 </li>
                             </ul>
@@ -201,13 +206,15 @@ const SGrade = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className="tableMain">
-                                <td>2023-03-15</td>
-                                <td>45</td>
-                                <td>74</td>
-                                <td>85</td>
-                                <td>25명</td>
-                            </tr>
+                            {dummyData.tableData.map((item, index) => (
+                                <tr key={index} className="tableMain">
+                                    <td>{item.examDt}</td>
+                                    <td>{item.score}</td>
+                                    <td>{item.classAvg}</td>
+                                    <td>{item.top30pAvg}</td>
+                                    <td>{item.attend}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>

@@ -47,16 +47,20 @@ const SGradeCss = styled.div`
                     .gradeLR::before {
                         position: absolute;
                         content: "";
+                        left: 0px;
                         width: 5px;
                         height: 5px;
                         border-radius: 50%;
-                        background: #000;
+                        background: ${SfontCol};
                     }
                     .gradeLR {
                         display: flex;
                         justify-content: space-between;
                         padding-bottom: 10px;
                         margin-left: 30px;
+                        .gradeLRC {
+                            color: ${SfontCol};
+                        }
                     }
                 }
             }
@@ -76,6 +80,25 @@ const SGradeCss = styled.div`
         border-radius: 15px;
         background: #fff;
     }
+
+    .table {
+        border-radius: 5px;
+        width: 100%;
+        text-align: center;
+        .tableHeader {
+            background: ${SfontCol};
+            color: #fff;
+            border: none;
+            height: 50px;
+        }
+        .tableMain {
+            height: 40px;
+        }
+    }
+    /* .pagination {
+                display: flex;
+                justify-content: center;
+            } */
 `;
 
 export default SGradeCss;
