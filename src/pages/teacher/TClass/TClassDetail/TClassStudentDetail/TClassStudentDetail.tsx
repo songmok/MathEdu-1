@@ -1,5 +1,4 @@
-import React from "react";
-import List from "../../../../components/layOut/List/List";
+import StudentList from "../../../../../components/layOut/studentList/StudentList";
 import tclassdetail from "./tclassdetail.json";
 export interface ITlist {
     no: string;
@@ -31,8 +30,7 @@ const TClassStudentDetail = () => {
     }; //반 학생 헤더
     return (
         <>
-            <div>TClassDetail</div>
-            <List
+            <StudentList
                 state={0}
                 tclassstudentList={tclassstudentList}
                 headerList={headerList}

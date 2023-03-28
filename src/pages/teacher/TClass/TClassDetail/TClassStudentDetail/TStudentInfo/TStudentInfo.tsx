@@ -1,6 +1,7 @@
+import Info from "../../../../../../components/layOut/Info/Info";
+import TSidebar from "../../../../../../components/tSidebar/TSidebar";
 import tstudentinfo from "./data/tstudentinfo.json";
-import TSidebar from "../../../../components/tSidebar/TSidebar";
-import Info from "../../../../components/layOut/Info/Info";
+
 export interface TStudentInfo {
     name: string;
     profileImgURL: string;
@@ -47,8 +48,8 @@ const TStudentInfo = () => {
         <>
             <TSidebar />
             <Info
-                title="title teacher"
                 headerName="학생 정보"
+                color="teacher"
                 basicInfo={student}
                 weeklyTest={weekly}
                 monthlyTest={monthly}
