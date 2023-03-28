@@ -1,5 +1,6 @@
-import StudentList from "../../../../../components/layOut/studentList/StudentList";
 import tclassdetail from "./tclassdetail.json";
+import { TClassStudentDetailCss } from "./TClassStudentDetailCss";
+import profile from "../../../../../asset/img/profile.png";
 export interface ITlist {
     no: string;
     img: string;
@@ -30,11 +31,41 @@ const TClassStudentDetail = () => {
     }; //반 학생 헤더
     return (
         <>
-            <StudentList
-                state={0}
-                tclassstudentList={tclassstudentList}
-                headerList={headerList}
-            />
+            <TClassStudentDetailCss>
+                <div className="wrap">
+                    <div className="sectionTop">
+                        <p>학생 리스트</p>
+                    </div>
+                    <div className="sectionMain">
+                        <table className="table">
+                            <tr className="tableHeader">
+                                <th>{headerList.number}</th>
+                                <th>{headerList.picture}</th>
+                                <th>{headerList.student}</th>
+                                <th>{headerList.phone}</th>
+                                <th style={{ letterSpacing: "-1px" }}>
+                                    {headerList.parentPhone}
+                                </th>
+                                <th>{headerList.address}</th>
+                            </tr>
+                            {tclassstudentList.map((ele, idx) => (
+                                <tr key={ele.no} className="tableMain">
+                                    <td>{ele.no}</td>
+                                    <td>
+                                        <img
+                                            src={`${process.env.PUBLIC_URL}/images/profile.jpg`}
+                                        />
+                                    </td>
+                                    <td>{ele.name}</td>
+                                    <td>{ele.phone}</td>
+                                    <td>{ele.alternatephone}</td>
+                                    <td>{ele.address}</td>
+                                </tr>
+                            ))}
+                        </table>
+                    </div>
+                </div>
+            </TClassStudentDetailCss>
         </>
     );
 };
