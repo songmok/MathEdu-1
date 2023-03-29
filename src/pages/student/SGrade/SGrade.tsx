@@ -8,6 +8,7 @@ import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
 
 import dummyData from "./gradedummy.json";
+import infodata from "./infodummy.json";
 
 highchartsMore(Highcharts);
 solidGauge(Highcharts);
@@ -18,25 +19,26 @@ const personalSc = JSON.parse(dummyData.personalScores);
 const classSc = JSON.parse(dummyData.classAvgScores);
 const topSc = JSON.parse(dummyData.top30pAvgScores);
 
-const weekSc = personalSc.length;
-let temp = [];
-// console.log(weekSc);
-for (let i = 0; i < weekSc; i++) {
-    let temp = i + 1 + "주";
-    console.log(temp);
-}
+const month = () => {
+    let month = [];
+    for (let i = 1; i < 13; i += 1) {
+        month.push(i);
+    }
 
-// console.log(personal);
-
-const data2 = [40, 50, 60, 70, 80];
-const data3 = [50, 60, 70, 80, 60];
-
-// const arr = data1.split(",");
-
-// console.log(Array.isArray(arr));
-// console.log(arr);
+    return month.map(item => (
+        <option key={item} value={item < 10 ? "0" + item : item}>
+            {item}월
+        </option>
+    ));
+};
 
 const SGrade = () => {
+    const weekSc = personalSc.length;
+    let week = [];
+    for (let i = 0; i < weekSc; i++) {
+        week.push(i + 1 + "주");
+    }
+    console.log(week);
     const chartRef = useRef(null);
 
     const options = {
@@ -44,13 +46,13 @@ const SGrade = () => {
             type: "spline",
         },
         title: {
-            text: "월간테스트 결과",
+            text: "주간테스트 결과",
         },
         xAxis: {
             title: {
                 text: "Month",
             },
-            categories: ["1주", "2주", "3주", "4주", "5주"],
+            categories: week,
         },
         yAxis: {
             title: {
@@ -189,36 +191,47 @@ const SGrade = () => {
                 <div className="tests">
                     <div className="weekT">
                         <p className="subTitle">주간 테스트</p>
-                        <form></form>
                         <div className="newTest">
                             <div className="donutGraph">
                                 <HighchartsReact
                                     highcharts={Highcharts}
                                     options={GaugeChart}
                                 />
-                                <span className="aa">65%</span>
+                                <span className="percentage">
+                                    65<span className="percent">%</span>
+                                </span>
                             </div>
 
                             <ul className="gradeList">
                                 <li className="gradeLR">
                                     <span className="gradeLRC">점수</span>
-                                    <span>65</span>
+                                    <span className="gradeLRCI">
+                                        {infodata.weeklyTest.scor}
+                                    </span>
                                 </li>
                                 <li className="gradeLR">
                                     <span className="gradeLRC">석차</span>
-                                    <span>13</span>
+                                    <span className="gradeLRCI">
+                                        {infodata.weeklyTest.rank}
+                                    </span>
                                 </li>
                                 <li className="gradeLR">
                                     <span className="gradeLRC">동차석수</span>
-                                    <span>2</span>
+                                    <span className="gradeLRCI">
+                                        {infodata.weeklyTest.tieCnt}
+                                    </span>
                                 </li>
                                 <li className="gradeLR">
                                     <span className="gradeLRC">수강인원</span>
-                                    <span>25</span>
+                                    <span className="gradeLRCI">
+                                        {infodata.weeklyTest.totalStudents}
+                                    </span>
                                 </li>
                                 <li className="gradeLR">
                                     <span className="gradeLRC">시험일자</span>
-                                    <span>2023-03-01</span>
+                                    <span className="gradeLRCI">
+                                        {infodata.weeklyTest.testDt}
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -229,7 +242,16 @@ const SGrade = () => {
                 </div>
                 <div className="analysis">
                     <p className="subTitle">성적 분석</p>
-                    <form></form>
+                    <form className="">
+                        <select>{month()}</select>
+                        <span>월</span>
+                        <select>
+                            <option value="주간">주간</option>
+                            <option value="월간">월간</option>
+                        </select>
+                        <span>테스트</span>
+                        <button type="submit">확인</button>
+                    </form>
 
                     <HighchartsReact
                         ref={chartRef}

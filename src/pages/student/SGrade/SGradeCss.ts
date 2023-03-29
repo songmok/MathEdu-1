@@ -33,10 +33,18 @@ const SGradeCss = styled.div`
                     position: relative;
                     width: 50%;
 
-                    .aa {
+                    .percentage {
+                        font-size: 36px;
+                        font-weight: 600;
                         position: absolute;
                         top: 50%;
                         left: 50%;
+                        transform: translate(-50%, -50%);
+                        color: ${SfontCol};
+                        .percent {
+                            font-size: 20px;
+                            font-weight: 500;
+                        }
                     }
                 }
                 .gradeList {
@@ -47,6 +55,7 @@ const SGradeCss = styled.div`
                     .gradeLR::before {
                         position: absolute;
                         content: "";
+
                         left: 0px;
                         width: 5px;
                         height: 5px;
