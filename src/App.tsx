@@ -23,6 +23,8 @@ import TNoticePost from "./pages/teacher/TNotice/TNoticePost/TNoticePost";
 import Header from "./components/header/Header";
 import TClassDetail from "./pages/teacher/TClass/TClassDetail/TClassDetail";
 import TStudentInfo from "./pages/teacher/TClass/TClassDetail/TClassStudentDetail/TStudentInfo/TStudentInfo";
+import TReferencePost from "./pages/teacher/TReference/TReferencePost/TReferencePost";
+import TReferenceWrite from "./pages/teacher/TReference/TReferenceWrite/TReferenceWrite";
 
 function App() {
     return (
@@ -36,7 +38,10 @@ function App() {
                         <Route path="login" element={<SLogin />} />
                         <Route path="grade" element={<SGrade />} />
                         <Route path="notice" element={<SNotice />} />
-                        <Route path="reference" element={<SReference />} />
+                        <Route path="reference">
+                            <Route path="" element={<SReference />} />
+                            <Route path="reference" element={<SReference />} />
+                        </Route>
                         <Route path="mypage" element={<SMypage />} />
                     </Route>
                     {/* 선생님 사이트 */}
@@ -46,17 +51,18 @@ function App() {
                         <Route path="signup" element={<TSignup />} />
                         <Route path="class">
                             <Route path="" element={<TClass />} />
-                            <Route
-                                path="detail"
-                                element={<TClassDetail />}
-                            />
+                            <Route path="detail" element={<TClassDetail />} />
                         </Route>
                         <Route path="studentinfo" element={<TStudentInfo />} />
                         <Route path="notice">
                             <Route path="" element={<TNotice />} />
                             <Route path="post" element={<TNoticePost />} />
                         </Route>
-                        <Route path="reference" element={<TReference />} />
+                        <Route path="reference">
+                            <Route path="" element={<TReference />} />
+                            <Route path="post" element={<TReferencePost />} />
+                            <Route path="write" element={<TReferenceWrite />} />
+                        </Route>
                         {/* detail 페이지 */}
                         <Route path="studentinfo" element={<TStudentInfo />} />
                     </Route>

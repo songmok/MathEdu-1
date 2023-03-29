@@ -1,34 +1,34 @@
 import styled from "styled-components";
 import { TfontCol, TmainCol } from "../../utils/Color";
+import { Button } from "../../utils/Layout";
 
 const ReferenceFormCss = styled.div`
     .sectionTop {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 10px;
         p {
             color: ${TfontCol};
             font-size: 18px;
         }
         .search {
-            display: flex;
-            align-items: center;
-            .searchBox {
-                border: 2px solid #d9d9d9;
-                height: 30px;
-                border-radius: 5px;
-            }
-            .searchBt {
-                border: none;
-                background: ${TmainCol};
-                color: #fff;
-                height: 30px;
-                width: 70px;
-                border-radius: 5px;
-                margin-left: 15px;
+            form {
+                display: flex;
+                .searchBox {
+                    border: 2px solid #d9d9d9;
+                    height: 30px;
+                    border-radius: 5px;
+                }
+                .searchBt {
+                    ${Button}
+                    background: ${TmainCol};
+                    margin-left: 15px;
+                }
             }
         }
     }
     .sectionMain {
+        margin-bottom: 10px;
         .table {
             border-radius: 5px;
             width: 100%;
@@ -41,11 +41,15 @@ const ReferenceFormCss = styled.div`
             }
             .tableMain {
                 height: 40px;
+                .referenceName {
+                    cursor: pointer;
+                    &:hover {
+                        border-bottom: 1px solid;
+                        padding-bottom: 1px;
+                        color: ${TfontCol};
+                    }
+                }
             }
-        }
-        .pagination {
-            display: flex;
-            justify-content: center;
         }
     }
 `;

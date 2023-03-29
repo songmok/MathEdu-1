@@ -73,6 +73,9 @@ const TClassCss = styled.div`
             .pagination {
                 display: flex;
                 justify-content: center;
+                .css-19micn4-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+                    background: ${TmainCol};
+                }
             }
         }
     }
