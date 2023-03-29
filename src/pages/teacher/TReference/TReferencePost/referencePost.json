@@ -1,0 +1,31 @@
+{
+    "no": 10,
+    "category": "기초강화 a반",
+    "title": "공지사항 입니다. 10",
+    "regDt": "2023-03-01",
+    "contents": "글내용<br/>입니다.",
+    "author": {
+        "no": 1,
+        "name": "김채원"
+    },
+    "files": [
+        {
+            "fileName": "somefile1.pdf",
+            "fileType": "pdf",
+            "downloadURL": "/files/board/somefile1.pdf"
+        },
+        {
+            "fileName": "somefile1.jpg",
+            "fileType": "jpg",
+            "downloadURL": "/files/board/somefile1.pdf"
+        }
+    ],
+    "prevPost": {
+        "no": 9,
+        "title": "이전 글의 제목입니다."
+    },
+    "nextPost": {
+        "no": 11,
+        "title": "다음 글의 제목입니다."
+    }
+}

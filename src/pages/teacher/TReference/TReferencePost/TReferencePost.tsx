@@ -1,14 +1,14 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import TSidebar from "../../../../components/tSidebar/TSidebar";
-import TNoticePostCss from "./TNoticePostCss";
+import TReferencePostCss from "./TReferencePostCss";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 //  임시 데이터
-import noticePost from "./noticePost.json";
+import referencePost from "./referencePost.json";
 
-interface INotice {
+interface IReference {
     no: number;
     category: string;
     title: string;
@@ -33,12 +33,12 @@ interface INotice {
     };
 }
 
-const TNoticePost = () => {
+const TReferencePost = () => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const no = searchParams.get("no");
 
-    const [notice, setNotice] = useState<INotice>();
+    const [reference, setReference] = useState<IReference>();
 
     const fetchData = async () => {
         try {
@@ -47,10 +47,10 @@ const TNoticePost = () => {
             // );
             // console.log(response.data);
             // setNotice(response.data);
-            console.log(noticePost);
-            const fetchedNotice = noticePost;
-            fetchedNotice.contents = fetchedNotice.contents ?? "";
-            setNotice(fetchedNotice);
+            console.log(referencePost);
+            const fetchedReference = referencePost;
+            fetchedReference.contents = fetchedReference.contents ?? "";
+            setReference(fetchedReference);
         } catch (error) {
             console.error(error);
         }
@@ -61,36 +61,36 @@ const TNoticePost = () => {
     }, []);
 
     const goNotice = () => {
-        navigate("/teacher/notice");
+        navigate("/teacher/reference");
     };
 
     return (
         <>
             <TSidebar />
-            <TNoticePostCss>
+            <TReferencePostCss>
                 <section className="section">
-                    <p className="section-title">공지사항</p>
+                    <p className="section-title">자료실</p>
                     <div className="notice-board">
                         <div className="title-area">
-                            <span>{notice?.category}</span>
-                            <div className="title">{notice?.title}</div>
+                            <span>{reference?.category}</span>
+                            <div className="title">{reference?.title}</div>
                         </div>
                         <div className="info-area">
                             <p>
                                 <strong>작성자</strong>
-                                <span>{notice?.author.name} 선생님</span>
+                                <span>{reference?.author.name} 선생님</span>
                             </p>
                             <p>
                                 <strong>등록일</strong>
-                                <span>{notice?.regDt}</span>
+                                <span>{reference?.regDt}</span>
                             </p>
                         </div>
 
                         <div className="content-area">
-                            {notice?.contents !== undefined && (
+                            {reference?.contents !== undefined && (
                                 <p
                                     dangerouslySetInnerHTML={{
-                                        __html: notice?.contents,
+                                        __html: reference?.contents,
                                     }}
                                 ></p>
                             )}
@@ -109,13 +109,13 @@ const TNoticePost = () => {
                             <p className="prev">
                                 <span>이전</span>
                                 <span className="prev-title">
-                                    {notice?.prevPost?.title}
+                                    {reference?.prevPost?.title}
                                 </span>
                             </p>
                             <p className="next">
                                 <span>다음</span>
                                 <span className="next-title">
-                                    {notice?.nextPost?.title}
+                                    {reference?.nextPost?.title}
                                 </span>
                             </p>
                         </div>
@@ -133,9 +133,9 @@ const TNoticePost = () => {
                         </div>
                     </div>
                 </section>
-            </TNoticePostCss>
+            </TReferencePostCss>
         </>
     );
 };
 
-export default TNoticePost;
+export default TReferencePost;

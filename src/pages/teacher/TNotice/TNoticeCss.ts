@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TfontCol, TmainCol } from "../../../utils/Color";
+import { TmainCol } from "../../../utils/Color";
 import { Button, mainContainer } from "../../../utils/Layout";
 
 const TNoticeCss = styled.div`
@@ -25,6 +25,9 @@ const TNoticeCss = styled.div`
         .pagination {
             display: flex;
             justify-content: center;
+            .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+                background-color: ${TmainCol};
+            }
         }
     }
 `;
