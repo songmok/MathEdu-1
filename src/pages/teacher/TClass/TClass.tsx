@@ -5,6 +5,7 @@ import TClassCss from "./TClassCss";
 import classList from "./ClassList.json";
 
 import Pagination from "@mui/material/Pagination";
+import { useNavigate } from "react-router";
 
 interface IList {
     name: string;
@@ -15,6 +16,12 @@ interface IList {
 }
 
 const TClass = () => {
+    const navigate = useNavigate();
+    const goClassDetail = (no: number) => {
+        console.log(no);
+        navigate(`/teacher/class/detail?no=${no}`);
+    };
+
     return (
         <>
             <TSidebar />
@@ -31,24 +38,49 @@ const TClass = () => {
                     </div>
                     <div className="sectionMain">
                         <table className="table">
-                            <tr className="tableHeader">
-                                <th>번호</th>
-                                <th>반</th>
-                                <th>요일</th>
-                                <th>학년</th>
-                                <th>개강일</th>
-                                <th>종강일</th>
-                            </tr>
-                            {classList.list.map((ele, idx) => {
+                            <thead>
+                                <tr className="tableHeader">
+                                    <th>번호</th>
+                                    <th>반</th>
+                                    <th>요일</th>
+                                    <th>학년</th>
+                                    <th>개강일</th>
+                                    <th>종강일</th>
+                                </tr>
+                            </thead>
+                            {classList.list.map(ele => {
                                 return (
-                                    <tr key={idx} className="tableMain">
-                                        <td>{idx}</td>
-                                        <td>{ele.name}</td>
-                                        <td>{ele.grade}</td>
-                                        <td>{ele.days}</td>
-                                        <td>{ele.opendt}</td>
-                                        <td>{ele.closedt}</td>
-                                    </tr>
+                                    <tbody key={ele.classNo}>
+                                        <tr className="tableMain">
+                                            <td>
+                                                <span>{ele.classNo}</span>
+                                            </td>
+                                            <td>
+                                                <span
+                                                    className="className"
+                                                    onClick={() => {
+                                                        goClassDetail(
+                                                            ele.classNo,
+                                                        );
+                                                    }}
+                                                >
+                                                    {ele.name}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>{ele.grade}</span>
+                                            </td>
+                                            <td>
+                                                <span>{ele.days}</span>
+                                            </td>
+                                            <td>
+                                                <span>{ele.opendt}</span>
+                                            </td>
+                                            <td>
+                                                <span>{ele.closedt}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 );
                             })}
                         </table>

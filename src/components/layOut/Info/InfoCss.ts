@@ -3,10 +3,6 @@ import { SfontCol, TfontCol } from "../../../utils/Color";
 import { mainContainer } from "../../../utils/Layout";
 export const InfoCss = styled.div`
     ${mainContainer}
-    .title {
-        font-size: 25px;
-        margin-bottom: 30px;
-    }
     .teacher {
         color: ${TfontCol};
     }
@@ -22,7 +18,7 @@ export const InfoCss = styled.div`
         h5 {
             font-weight: normal;
             font-size: 18px;
-            color: ${SfontCol};
+
             margin-bottom: 30px;
         }
         .info {
@@ -50,7 +46,6 @@ export const InfoCss = styled.div`
                     .key {
                         position: absolute;
                         left: 0;
-                        color: ${SfontCol};
                         font-size: 20px;
                         display: block;
                     }

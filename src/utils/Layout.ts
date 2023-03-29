@@ -15,4 +15,5 @@ export const Button = `
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    
 `;
