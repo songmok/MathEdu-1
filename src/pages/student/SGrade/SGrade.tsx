@@ -2,37 +2,42 @@ import SSidebar from "../../../components/sSidebar/SSidebar";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 import SGradeCss from "./SGradeCss";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
-
+// 더미데이터
 import dummyData from "./gradedummy.json";
 import infodata from "./infodummy.json";
 
 highchartsMore(Highcharts);
 solidGauge(Highcharts);
 
-// const data1 = dummyData.personalScores;
-
-const personalSc = JSON.parse(dummyData.personalScores);
-const classSc = JSON.parse(dummyData.classAvgScores);
-const topSc = JSON.parse(dummyData.top30pAvgScores);
-
-const month = () => {
-    let month = [];
-    for (let i = 1; i < 13; i += 1) {
-        month.push(i);
-    }
-
-    return month.map(item => (
-        <option key={item} value={item < 10 ? "0" + item : item}>
-            {item}월
-        </option>
-    ));
-};
-
 const SGrade = () => {
+    const [scMunth, setScMunth] = useState("");
+    console.log(scMunth);
+
+    const month = () => {
+        let month = [];
+        for (let i = 1; i < 13; i += 1) {
+            if (i < 10) {
+                month.push("0" + i);
+            } else {
+                month.push(i);
+            }
+        }
+
+        return month.map(item => (
+            <option key={item} value={item}>
+                {item}월
+            </option>
+        ));
+    };
+
+    const personalSc = JSON.parse(dummyData.personalScores);
+    const classSc = JSON.parse(dummyData.classAvgScores);
+    const topSc = JSON.parse(dummyData.top30pAvgScores);
+
     const weekSc = personalSc.length;
     let week = [];
     for (let i = 0; i < weekSc; i++) {
@@ -50,7 +55,7 @@ const SGrade = () => {
         },
         xAxis: {
             title: {
-                text: "Month",
+                text: "",
             },
             categories: week,
         },
@@ -242,15 +247,19 @@ const SGrade = () => {
                 </div>
                 <div className="analysis">
                     <p className="subTitle">성적 분석</p>
-                    <form className="">
-                        <select>{month()}</select>
+                    <form className="subTitle flex">
+                        <select onChange={e => setScMunth(e.target.value)}>
+                            {month()}
+                        </select>
                         <span>월</span>
                         <select>
                             <option value="주간">주간</option>
                             <option value="월간">월간</option>
                         </select>
                         <span>테스트</span>
-                        <button type="submit">확인</button>
+                        <button type="submit" className="submitBt">
+                            확인
+                        </button>
                     </form>
 
                     <HighchartsReact
