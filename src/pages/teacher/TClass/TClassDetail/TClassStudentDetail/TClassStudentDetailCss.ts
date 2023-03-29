@@ -1,18 +1,8 @@
 import styled from "styled-components";
-import { SfontCol, TfontCol, TmainCol } from "../../../utils/Color";
-import { mainContainer } from "../../../utils/Layout";
-
-const ListCss = styled.div`
-    ${mainContainer}
-    .header {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 30px;
-        .title {
-            font-size: 25px;
-        }
-    }
-    .section {
+import { SfontCol, TfontCol, TmainCol } from "../../../../../utils/Color";
+import { mainContainer } from "../../../../../utils/Layout";
+export const TClassStudentDetailCss = styled.div`
+     .wrap {
         background: #fff;
         padding: 30px;
         border-radius: 15px;
@@ -20,32 +10,9 @@ const ListCss = styled.div`
             display: flex;
             justify-content: space-between;
             p {
+                padding-bottom: 15px;
                 color: ${TfontCol};
                 font-size: 18px;
-            }
-            .studnetTitle {
-                color: ${SfontCol};
-            }
-            .teacherTitle {
-                color: ${TfontCol};
-            }
-            .search {
-                display: flex;
-                align-items: center;
-                .searchBox {
-                    border: 2px solid #d9d9d9;
-                    height: 30px;
-                    border-radius: 5px;
-                }
-                .searchBt {
-                    border: none;
-                    background: ${TmainCol};
-                    color: #fff;
-                    height: 30px;
-                    width: 70px;
-                    border-radius: 5px;
-                    margin-left: 15px;
-                }
             }
         }
         .sectionMain {
@@ -68,6 +35,13 @@ const ListCss = styled.div`
                 }
                 .tableMain {
                     height: 40px;
+                    width: 100%;
+                    > td {
+                        width: calc(100% / 6);
+                        > img {
+                            width: 45%;
+                        }
+                    }
                 }
             }
             .pagination {
@@ -77,5 +51,3 @@ const ListCss = styled.div`
         }
     }
 `;
-
-export default ListCss;

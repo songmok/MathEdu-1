@@ -36,18 +36,7 @@ const SidebarCss = styled.div`
                 font-size: 16px;
             }
         }
-        a:after {
-            content: "";
-            display: inline-block;
-            width: 100%;
-            height: 0px;
-        }
-        a:before {
-            content: "";
-            display: inline-block;
-            width: 100%;
-            height: 0px;
-        }
+        
         .active {
             width: 100%;
             background-color: #03716a;
