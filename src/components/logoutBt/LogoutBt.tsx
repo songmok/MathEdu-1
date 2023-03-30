@@ -1,11 +1,18 @@
-import React from "react";
+import { IUserData } from "../header/Header";
 import LogoutBtCss from "./LogoutBtCss";
 
-const LogoutBt = () => {
+interface IProps {
+    userData: IUserData;
+}
+
+const LogoutBt = (props: IProps) => {
     return (
         <LogoutBtCss>
-            <img className="profileImg" />
-            <span>김채원</span>
+            <img
+                className="profileImg"
+                src={`http://192.168.0.62:9988${props.userData.imageURL} `}
+            />
+            <span>{props.userData.name}</span>
             <img className="outImg" />
         </LogoutBtCss>
     );
