@@ -22,9 +22,10 @@ import TGrade from "./pages/teacher/TGrade/TGrade";
 import TNoticePost from "./pages/teacher/TNotice/TNoticePost/TNoticePost";
 import Header from "./components/header/Header";
 import TClassDetail from "./pages/teacher/TClass/TClassDetail/TClassDetail";
-import TStudentInfo from "./pages/teacher/TClass/TClassDetail/TClassStudentDetail/TStudentInfo/TStudentInfo";
+
 import TReferencePost from "./pages/teacher/TReference/TReferencePost/TReferencePost";
 import TReferenceWrite from "./pages/teacher/TReference/TReferenceWrite/TReferenceWrite";
+import TStudentInfo from "./pages/teacher/TClass/TClassDetail/TStudentInfo/TStudentInfo";
 
 function App() {
     return (
@@ -51,9 +52,14 @@ function App() {
                         <Route path="signup" element={<TSignup />} />
                         <Route path="class">
                             <Route path="" element={<TClass />} />
-                            <Route path="detail" element={<TClassDetail />} />
+                            <Route path="detail">
+                                <Route path="" element={<TClassDetail />} />
+                                <Route
+                                    path="studentinfo"
+                                    element={<TStudentInfo />}
+                                />
+                            </Route>
                         </Route>
-                        <Route path="studentinfo" element={<TStudentInfo />} />
                         <Route path="notice">
                             <Route path="" element={<TNotice />} />
                             <Route path="post" element={<TNoticePost />} />
@@ -63,8 +69,6 @@ function App() {
                             <Route path="post" element={<TReferencePost />} />
                             <Route path="write" element={<TReferenceWrite />} />
                         </Route>
-                        {/* detail 페이지 */}
-                        <Route path="studentinfo" element={<TStudentInfo />} />
                     </Route>
                 </Routes>
             </Center>

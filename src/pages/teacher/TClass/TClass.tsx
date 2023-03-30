@@ -6,6 +6,11 @@ import classList from "./ClassList.json";
 
 import Pagination from "@mui/material/Pagination";
 import { useNavigate } from "react-router";
+import axios from "axios";
+import { useSelector } from "react-redux";
+
+import { RootState } from "../../../reducer/store";
+import { useEffect, useState } from "react";
 
 interface IList {
     name: string;
@@ -21,7 +26,27 @@ const TClass = () => {
         console.log(no);
         navigate(`/teacher/class/detail?no=${no}`);
     };
-
+    const teacherId = useSelector((state: RootState) => state.user.no);
+    const [classData, setClassData] = useState<any>();
+    console.log("teacherId", teacherId);
+    const classListApi = async () => {
+        const params = {
+            page: 1,
+            keyword: "",
+        };
+        try {
+            const response = await axios.get(
+                `http://192.168.0.62:9988/api/class/${teacherId}`,
+                { params: params },
+            );
+            console.log("반정보 리스트조회", response);
+        } catch (error) {
+            console.error("ree", error);
+        }
+    };
+    useEffect(() => {
+        classListApi();
+    }, []);
     return (
         <>
             <TSidebar />

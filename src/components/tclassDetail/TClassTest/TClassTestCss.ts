@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { TfontCol, TmainCol } from "../../../../../utils/Color";
+import { TfontCol, TmainCol } from "../../../utils/Color";
+
 export const TClassTestCss = styled.div`
     background-color: #fff;
     padding: 15px;
@@ -10,20 +11,18 @@ export const TClassTestCss = styled.div`
         padding-bottom: 15px;
         > span {
             color: ${TfontCol};
-            font-size: 13px;
-            font-weight: bold;
+            font-size: 18px;
         }
     }
     .sectionMain {
         .table {
             border-radius: 5px;
-            width: 100%;
             text-align: center;
-
             .tableHeader {
                 background: ${TmainCol};
                 color: #fff;
                 border: none;
+                overflow: hidden;
                 th {
                     padding: 5px 76px;
                 }
@@ -36,8 +35,12 @@ export const TClassTestCss = styled.div`
                 height: 50px;
             }
             .tableMain {
-                width: 100%;
+                overflow: hidden;
                 > td {
+                    max-width: 50px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
                     font-size: 20px;
                     padding: 15px 0;
                 }

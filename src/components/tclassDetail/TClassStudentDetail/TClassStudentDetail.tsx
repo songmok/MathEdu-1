@@ -1,6 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import tclassdetail from "./tclassdetail.json";
 import { TClassStudentDetailCss } from "./TClassStudentDetailCss";
-import profile from "../../../../../asset/img/profile.png";
+
 export interface ITlist {
     no: string;
     img: string;
@@ -17,7 +18,13 @@ export interface ITheader {
     parentPhone: string;
     address: string;
 }
+
 const TClassStudentDetail = () => {
+    const navigate = useNavigate();
+    const goClassStudent = (no: number) => {
+        navigate(`/teacher/class/detail/studentinfo`);
+    };
+
     const tclassstudentList: ITlist[] = JSON.parse(
         JSON.stringify(tclassdetail),
     ); //반 학생 리스트 data json
@@ -50,13 +57,22 @@ const TClassStudentDetail = () => {
                             </tr>
                             {tclassstudentList.map((ele, idx) => (
                                 <tr key={ele.no} className="tableMain">
+                                    {/* <Link></Link> */}
                                     <td>{ele.no}</td>
                                     <td>
                                         <img
                                             src={`${process.env.PUBLIC_URL}/images/profile.jpg`}
                                         />
                                     </td>
-                                    <td>{ele.name}</td>
+                                    <td>
+                                        <span
+                                            onClick={() => {
+                                                goClassStudent(idx);
+                                            }}
+                                        >
+                                            {ele.name}
+                                        </span>
+                                    </td>
                                     <td>{ele.phone}</td>
                                     <td>{ele.alternatephone}</td>
                                     <td>{ele.address}</td>
