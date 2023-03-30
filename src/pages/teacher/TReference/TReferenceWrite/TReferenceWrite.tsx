@@ -6,10 +6,21 @@ import "react-quill/dist/quill.snow.css";
 import { useMemo, useRef, useState } from "react";
 import TSidebar from "../../../../components/tSidebar/TSidebar";
 import { useNavigate } from "react-router";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../reducer/store";
 
 const TReferenceWrite = () => {
     const navigate = useNavigate();
     const QuillRef = useRef<ReactQuill>();
+    const user = useSelector((state: RootState) => state.user);
+
+    const [title, setTtitle] = useState("");
+
+    const contentTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setTtitle(e.target.value);
+    };
+
     const [contents, setContents] = useState("");
 
     const goBack = () => {
@@ -48,6 +59,25 @@ const TReferenceWrite = () => {
         }),
         [],
     );
+
+    const writeRef = async () => {
+        try {
+            const response = await axios.put(
+                `http://192.168.0.62:9988/api/notice`,
+                {
+                    category: "",
+                    classNo: 1,
+                    content: contents,
+                    files: [],
+                    teacherNo: user.no,
+                    title: "",
+                },
+            );
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <>
             <TSidebar />
@@ -58,7 +88,10 @@ const TReferenceWrite = () => {
                     </div>
                     <div className="sectionMain">
                         <form className="title-area">
-                            <textarea placeholder="제목을 입력해주세요." />
+                            <textarea
+                                placeholder="제목을 입력해주세요."
+                                onChange={contentTitle}
+                            />
                         </form>
                         <div className="content-area">
                             <ReactQuill

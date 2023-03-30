@@ -14,10 +14,8 @@ interface IReference {
     title: string;
     regDt: string;
     contents: string;
-    author: {
-        no: number;
-        name: string;
-    };
+    authorName: string;
+    authorno: number;
     files: {
         fileName: string;
         fileType: string;
@@ -36,19 +34,17 @@ interface IReference {
 const TReferencePost = () => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
-    const no = searchParams.get("no");
+    const bbsNo = searchParams.get("no");
 
     const [reference, setReference] = useState<IReference>();
 
     const fetchData = async () => {
         try {
-            // const response = await axios.get(
-            //     `https://example.com/api/notice/${no}`,
-            // );
-            // console.log(response.data);
-            // setNotice(response.data);
-            console.log(referencePost);
-            const fetchedReference = referencePost;
+            const response = await axios.get(
+                `http://192.168.0.62:9988/api/bbs/detail/${bbsNo}`,
+            );
+            console.log(response.data);
+            const fetchedReference = response.data;
             fetchedReference.contents = fetchedReference.contents ?? "";
             setReference(fetchedReference);
         } catch (error) {
@@ -78,7 +74,7 @@ const TReferencePost = () => {
                         <div className="info-area">
                             <p>
                                 <strong>작성자</strong>
-                                <span>{reference?.author.name} 선생님</span>
+                                <span>{reference?.authorName} 선생님</span>
                             </p>
                             <p>
                                 <strong>등록일</strong>

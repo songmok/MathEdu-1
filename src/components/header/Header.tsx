@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { RootState } from "../../reducer/store";
+import Loading from "../loading/Loading";
 import LogoutBt from "../logoutBt/LogoutBt";
 import HeaderCss from "./HeaderCss";
 
@@ -28,6 +29,14 @@ interface IStudentData {
 }
 
 const Header = () => {
+    const location = useLocation();
+    if (
+        location.pathname === "/" ||
+        location.pathname === "/student/login" ||
+        location.pathname === "/teacher/login"
+    )
+        return null;
+
     const user = useSelector((state: RootState) => state.user);
 
     const [userData, setUserData] = useState<IUserData>();
@@ -47,24 +56,16 @@ const Header = () => {
         fetchData();
     }, []);
 
-    const location = useLocation();
-    if (
-        location.pathname === "/" ||
-        location.pathname === "/student/login" ||
-        location.pathname === "/teacher/login"
-    )
-        return null;
-
-    if (!userData) {
-        return <div>Loading...</div>; // 데이터가 로드되기 전에 로딩 화면을 표시할 수 있습니다.
-    }
-
     return (
         <HeaderCss>
-            <header className="header">
-                <p className="Stitle">반 이름이 들어갈 자리입니다</p>
-                <LogoutBt userData={userData} />
-            </header>
+            {userData ? (
+                <header className="header">
+                    <p className="Stitle">반 이름이 들어갈 자리입니다</p>
+                    <LogoutBt userData={userData} />
+                </header>
+            ) : (
+                <Loading />
+            )}
         </HeaderCss>
     );
 };

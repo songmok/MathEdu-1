@@ -16,6 +16,7 @@ const LogoutBtCss = styled.div`
         width: 20px;
         height: 20px;
         background: yellow;
+        cursor: pointer;
     }
     span {
         font-size: 20px;

@@ -9,7 +9,10 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { PaginationItem } from "@mui/material";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/store";
+import Loading from "../../../components/loading/Loading";
 
 export interface INotice {
     status: boolean;
@@ -22,10 +25,8 @@ export interface INotice {
         category: string;
         title: string;
         regDt: string;
-        author: {
-            no: number;
-            name: string;
-        };
+        authorName: string;
+        authorNo: number;
     }[];
 }
 
@@ -35,10 +36,39 @@ const TNotice = () => {
     const page = searchParams.get("page");
     const keyword = searchParams.get("keyword");
 
-    const deleteNotice = async (no: number) => {
+    const user = useSelector((state: RootState) => state.user);
+    const teacherNo = user.no;
+
+    const [classNo, setClassNo] = useState(0);
+    const [order, setOrder] = useState("asc");
+
+    const [notiLIst, setNotiList] = useState<INotice>();
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(
+                `http://192.168.0.62:9988/api/notice/${classNo}/${teacherNo}/${order}`,
+                {
+                    params: {
+                        keyword: "",
+                        page: "",
+                    },
+                },
+            );
+            setNotiList(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const deleteNotice = async () => {
         try {
             const response = await axios.delete(
-                `http://192.168.0.62:9988/api/notice/${result}/${no}`,
+                `http://192.168.0.62:9988/api/notice/${noticeNos}/${teacherNo}`,
             );
             alert(response.data.message); // handle success response
         } catch (error) {
@@ -47,7 +77,7 @@ const TNotice = () => {
     };
 
     const [checkedList, setCheckedList] = useState<number[]>([]);
-    const result = checkedList.join(",");
+    const noticeNos = checkedList.join(",");
 
     const goWrite = () => {
         naviagate("/teacher/notice/write");
@@ -57,38 +87,39 @@ const TNotice = () => {
         <>
             <TSidebar />
             <TNoticeCss>
-                <section className="section">
-                    <NoticeForm
-                        sectionTitle={"공지사항"}
-                        notice={notice}
-                        checkedList={checkedList}
-                        setCheckedList={setCheckedList}
-                    />
-                    <div className="sectionBt">
-                        <button
-                            className="deleteBt"
-                            onClick={() => deleteNotice(1)}
-                        >
-                            삭제
-                        </button>
-                        <button className="createBt" onClick={goWrite}>
-                            작성
-                        </button>
-                    </div>
-                    <Pagination
-                        renderItem={item => (
-                            <PaginationItem
-                                component={Link}
-                                to={`/teacher/notice?page=${notice.currentPage}`}
-                                {...item}
-                            />
-                        )}
-                        count={notice.totalPage}
-                        defaultPage={1}
-                        color="primary"
-                        className="pagination"
-                    />
-                </section>
+                {notiLIst ? (
+                    <section className="section">
+                        <NoticeForm
+                            sectionTitle={"공지사항"}
+                            notice={notiLIst}
+                            checkedList={checkedList}
+                            setCheckedList={setCheckedList}
+                        />
+                        <div className="sectionBt">
+                            <button className="deleteBt" onClick={deleteNotice}>
+                                삭제
+                            </button>
+                            <button className="createBt" onClick={goWrite}>
+                                작성
+                            </button>
+                        </div>
+                        <Pagination
+                            renderItem={item => (
+                                <PaginationItem
+                                    component={Link}
+                                    to={`/teacher/notice?page=${notice.currentPage}`}
+                                    {...item}
+                                />
+                            )}
+                            count={notiLIst.totalPage}
+                            defaultPage={1}
+                            color="primary"
+                            className="pagination"
+                        />
+                    </section>
+                ) : (
+                    <Loading />
+                )}
             </TNoticeCss>
         </>
     );

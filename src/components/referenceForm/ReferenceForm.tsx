@@ -79,46 +79,61 @@ const ReferenceForm = (props: IProps) => {
                             <th>작성자</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {props.reference.list.map(ele => {
+
+                    {props.reference.list && props.reference.list.length > 0 ? (
+                        props.reference.list.map(ele => {
                             return (
-                                <tr key={ele.no} className="tableMain">
-                                    <td>
-                                        <input
-                                            type="checkbox"
-                                            value={ele.no}
-                                            onChange={checkHandler}
-                                            checked={props.checkedList.includes(
-                                                ele.no,
-                                            )}
-                                        />
-                                    </td>
-                                    <td>
-                                        <span>{ele.no}</span>
-                                    </td>
-                                    <td>
-                                        <span>{ele.category}</span>
-                                    </td>
-                                    <td>
-                                        <span
-                                            className="referenceName"
-                                            onClick={() => {
-                                                goReferencePost(ele.no);
-                                            }}
-                                        >
-                                            {ele.title}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span>{ele.regDt}</span>
-                                    </td>
-                                    <td>
-                                        <span>{ele.author.name}</span>
-                                    </td>
-                                </tr>
+                                <tbody key={ele.no}>
+                                    <tr className="tableMain">
+                                        <td>
+                                            <input
+                                                type="checkbox"
+                                                value={ele.no}
+                                                onChange={checkHandler}
+                                                checked={props.checkedList.includes(
+                                                    ele.no,
+                                                )}
+                                            />
+                                        </td>
+                                        <td>
+                                            <span>{ele.no}</span>
+                                        </td>
+                                        <td>
+                                            <span>{ele.category}</span>
+                                        </td>
+                                        <td>
+                                            <span
+                                                className="referenceName"
+                                                onClick={() => {
+                                                    goReferencePost(ele.no);
+                                                }}
+                                            >
+                                                {ele.title}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span>
+                                                {ele.regDt
+                                                    .toString()
+                                                    .slice(0, 10)}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span>{ele.authorName}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             );
-                        })}
-                    </tbody>
+                        })
+                    ) : (
+                        <tbody>
+                            <tr>
+                                <td colSpan={6} className="noRef">
+                                    <span>등록된 게시글이 없습니다.</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    )}
                 </table>
             </div>
         </ReferenceFormCss>
