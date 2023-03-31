@@ -1,18 +1,21 @@
-import TSidebar from "../../../../components/tSidebar/TSidebar";
-import TReferenceWriteCss from "./TReferenceWriteCss";
-
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../reducer/store";
-import { IClassList } from "../../TNotice/TNoticeWrite/TNoticeWrite";
+import TSidebar from "../../../../components/tSidebar/TSidebar";
+import TNoticeWriteCss from "./TNoticeWriteCss";
 
 // React-Quill
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const TReferenceWrite = () => {
+export interface IClassList {
+    name: string;
+    no: number;
+}
+
+const TNoticeWrite = () => {
     const navigate = useNavigate();
     const QuillRef = useRef<ReactQuill>();
     const user = useSelector((state: RootState) => state.user);
@@ -99,6 +102,7 @@ const TReferenceWrite = () => {
     }, []);
 
     const writeRef = async () => {
+        cate === "category" && alert("카테고리를 선택해주세요.");
         try {
             const arr = new Array();
 
@@ -107,10 +111,10 @@ const TReferenceWrite = () => {
             }
 
             const response = await axios.put(
-                `http://192.168.0.62:9988/api/bbs`,
+                `http://192.168.0.62:9988/api/notice`,
                 {
                     category: cate,
-                    classNo: 1,
+                    classNo: classNo,
                     content: contents,
                     teacherNo: user.no,
                     files: arr,
@@ -131,10 +135,10 @@ const TReferenceWrite = () => {
     return (
         <>
             <TSidebar />
-            <TReferenceWriteCss>
+            <TNoticeWriteCss>
                 <div className="section">
                     <div className="sectionTop">
-                        <p>자료실 작성</p>
+                        <p>공지사항 작성</p>
                     </div>
                     <div className="sectionMain">
                         <form className="title-area">
@@ -204,9 +208,9 @@ const TReferenceWrite = () => {
                         </button>
                     </div>
                 </div>
-            </TReferenceWriteCss>
+            </TNoticeWriteCss>
         </>
     );
 };
 
-export default TReferenceWrite;
+export default TNoticeWrite;

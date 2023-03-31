@@ -41,19 +41,23 @@ const NoticeFormCss = styled.div`
             }
             .tableMain {
                 height: 40px;
+                &:hover {
+                    background: #f8f9fa;
+                }
                 .noticeName {
                     cursor: pointer;
-                    &:hover {
-                        border-bottom: 1px solid;
-                        padding-bottom: 1px;
-                        color: ${TfontCol};
-                    }
+                    text-align: left;
+                    padding-left: 20px;
                 }
             }
             .noRef {
                 padding: 100px 0;
             }
         }
+    }
+    th,
+    td {
+        border-bottom: 1px solid #d8d8d8;
     }
 `;
 

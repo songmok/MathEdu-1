@@ -61,7 +61,7 @@ const ReferenceForm = (props: IProps) => {
                 <table className="table">
                     <thead>
                         <tr className="tableHeader">
-                            <th>
+                            <th style={{ width: "5%" }}>
                                 <input
                                     type="checkbox"
                                     checked={
@@ -72,11 +72,11 @@ const ReferenceForm = (props: IProps) => {
                                     onChange={allCheckHandler}
                                 />
                             </th>
-                            <th>번호</th>
-                            <th>카테고리</th>
-                            <th>제목</th>
-                            <th>작성일</th>
-                            <th>작성자</th>
+                            <th style={{ width: "5%" }}>번호</th>
+                            <th style={{ width: "10%" }}>카테고리</th>
+                            <th style={{ width: "50%" }}>제목</th>
+                            <th style={{ width: "15%" }}>작성일</th>
+                            <th style={{ width: "15%" }}>작성자</th>
                         </tr>
                     </thead>
 
@@ -101,15 +101,13 @@ const ReferenceForm = (props: IProps) => {
                                         <td>
                                             <span>{ele.category}</span>
                                         </td>
-                                        <td>
-                                            <span
-                                                className="referenceName"
-                                                onClick={() => {
-                                                    goReferencePost(ele.no);
-                                                }}
-                                            >
-                                                {ele.title}
-                                            </span>
+                                        <td
+                                            className="referenceName"
+                                            onClick={() => {
+                                                goReferencePost(ele.no);
+                                            }}
+                                        >
+                                            <span>{ele.title}</span>
                                         </td>
                                         <td>
                                             <span>

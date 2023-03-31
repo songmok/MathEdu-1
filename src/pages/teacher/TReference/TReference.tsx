@@ -39,7 +39,7 @@ const TReference = () => {
     const teacherNo = user.no;
 
     const [classNo, setClassNo] = useState(0);
-    const [order, setOrder] = useState("asc");
+    const [order, setOrder] = useState("desc");
 
     const [refLIst, setRefList] = useState<IReference>();
 

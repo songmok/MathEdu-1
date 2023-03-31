@@ -51,10 +51,21 @@ const TReferencePost = () => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [bbsNo]);
 
     const goNotice = () => {
-        navigate("/teacher/reference");
+        navigate("/teacher/reference?page=1");
+    };
+
+    const goPrev = () => {
+        navigate(`/teacher/reference/post?no=${reference?.prevPost?.no}`);
+    };
+    const goNext = () => {
+        navigate(`/teacher/reference/post?no=${reference?.nextPost?.no}`);
+    };
+
+    const goFix = () => {
+        navigate(`/teacher/reference/fix`, { state: reference });
     };
 
     console.log(reference?.files);
@@ -73,11 +84,13 @@ const TReferencePost = () => {
                         <div className="info-area">
                             <p>
                                 <strong>작성자</strong>
-                                <span>{reference?.authorName} 선생님</span>
+                                <span>{reference?.authorName} </span>
                             </p>
                             <p>
                                 <strong>등록일</strong>
-                                <span>{reference?.regDt}</span>
+                                <span>
+                                    {reference?.regDt.toString().slice(0, 10)}
+                                </span>
                             </p>
                         </div>
 
@@ -115,15 +128,33 @@ const TReferencePost = () => {
                         <div className="prevnext-area">
                             <p className="prev">
                                 <span>이전</span>
-                                <span className="prev-title">
-                                    {reference?.prevPost?.title}
-                                </span>
+                                {reference?.prevPost ? (
+                                    <span
+                                        className="prev-title"
+                                        onClick={goPrev}
+                                    >
+                                        {reference?.prevPost?.title}
+                                    </span>
+                                ) : (
+                                    <span className="prev-titleNo">
+                                        이전글이 없습니다.
+                                    </span>
+                                )}
                             </p>
                             <p className="next">
                                 <span>다음</span>
-                                <span className="next-title">
-                                    {reference?.nextPost?.title}
-                                </span>
+                                {reference?.nextPost ? (
+                                    <span
+                                        className="next-title"
+                                        onClick={goNext}
+                                    >
+                                        {reference?.nextPost?.title}
+                                    </span>
+                                ) : (
+                                    <span className="next-titleNo">
+                                        다음글이 없습니다.
+                                    </span>
+                                )}
                             </p>
                         </div>
 
@@ -135,7 +166,9 @@ const TReferencePost = () => {
                             </div>
                             <div className="button-right">
                                 <button className="deleteBt">삭제</button>
-                                <button className="modifyBt">수정</button>
+                                <button className="modifyBt" onClick={goFix}>
+                                    수정
+                                </button>
                             </div>
                         </div>
                     </div>
