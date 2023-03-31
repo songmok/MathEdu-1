@@ -1,5 +1,6 @@
 import { SImypage } from "../../../pages/student/SMypage/SMypage";
-import { TStudentInfo } from "../../../pages/teacher/TClass/TClassDetail/TClassStudentDetail/TStudentInfo/TStudentInfo";
+import { TStudentInfo } from "../../../pages/teacher/TClass/TClassDetail/TStudentInfo/TStudentInfo";
+
 import { InfoCss } from "./InfoCss";
 
 interface StudentInfoProps {
@@ -20,8 +21,7 @@ interface MYstudentInfoProps {
 }
 
 const Info = (props: StudentInfoProps | MYstudentInfoProps) => {
-    const { basicInfo, weeklyTest, monthlyTest, title, headerName, color } =
-        props;
+    const { basicInfo, headerName, color } = props;
 
     return (
         <>

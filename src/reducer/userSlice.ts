@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface userType {
+export interface userType {
     id: string;
     imageURL: string;
     name: string;

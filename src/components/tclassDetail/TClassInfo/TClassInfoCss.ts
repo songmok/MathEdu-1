@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { TfontCol } from "../../../../../utils/Color";
+import { TfontCol } from "../../../utils/Color";
+
 export const TClassInfoCss = styled.div`
     background-color: #fff;
     padding: 15px;
@@ -9,8 +10,7 @@ export const TClassInfoCss = styled.div`
         justify-content: space-between;
         > span {
             color: ${TfontCol};
-            font-size: 13px;
-            font-weight: bold;
+            font-size: 18px;
         }
     }
     .wrap {
@@ -63,7 +63,7 @@ export const TClassInfoCss = styled.div`
                     }
                     span {
                         text-overflow: ellipsis;
-                        overflow: hidden;
+
                         font-weight: bold;
                     }
                 }
