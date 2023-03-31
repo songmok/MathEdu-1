@@ -45,7 +45,7 @@ const Header = () => {
 
     useEffect(() => {
         fetchData();
-    }, [userData]);
+    }, []);
 
     const location = useLocation();
     if (

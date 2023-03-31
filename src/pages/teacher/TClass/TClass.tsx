@@ -19,6 +19,20 @@ interface IList {
     opendt: string;
     closedt: string;
 }
+interface CLassData {
+    currentPage: number;
+    keyword: string;
+    list: {
+        classNo: number;
+        name: string;
+        grade: number;
+        days: string;
+        opendt: string;
+        closedt: string;
+    }[];
+    totalCount: number;
+    totalPage: number;
+}
 
 const TClass = () => {
     const navigate = useNavigate();
@@ -26,23 +40,27 @@ const TClass = () => {
         console.log(no);
         navigate(`/teacher/class/detail?no=${no}`);
     };
-    const teacherId = useSelector((state: RootState) => state.user.no);
-    const [classData, setClassData] = useState<any>();
-    console.log("teacherId", teacherId);
+    const teacherId = useSelector((state: RootState) => state.user.id);
+    const [classData, setClassData] = useState<CLassData["list"]>([]);
+    const [searchKeyword, setSearchKeyword] = useState<string>("");
     const classListApi = async () => {
-        const params = {
+        const params: { page: number; keyword: string } = {
             page: 1,
-            keyword: "",
+            keyword: searchKeyword,
         };
         try {
-            const response = await axios.get(
+            const response = await axios.get<CLassData>(
                 `http://192.168.0.62:9988/api/class/${teacherId}`,
                 { params: params },
             );
-            console.log("반정보 리스트조회", response);
+            setClassData(response.data.list);
         } catch (error) {
-            console.error("ree", error);
+            console.error("err", error);
         }
+    };
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+        e.preventDefault();
+        classListApi();
     };
     useEffect(() => {
         classListApi();
@@ -55,9 +73,19 @@ const TClass = () => {
                     <div className="sectionTop">
                         <p>클래스 리스트</p>
                         <div className="search">
-                            <form>
-                                <input className="searchBox" />
-                                <button className="searchBt">검색</button>
+                            <form onSubmit={handleSubmit}>
+                                <input
+                                    type="text"
+                                    placeholder="검색어를 입력하세요"
+                                    value={searchKeyword}
+                                    onChange={e =>
+                                        setSearchKeyword(e.target.value)
+                                    }
+                                    className="searchBox"
+                                />
+                                <button type="submit" className="searchBt">
+                                    검색
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -73,41 +101,61 @@ const TClass = () => {
                                     <th>종강일</th>
                                 </tr>
                             </thead>
-                            {classList.list.map(ele => {
-                                return (
-                                    <tbody key={ele.classNo}>
-                                        <tr className="tableMain">
-                                            <td>
-                                                <span>{ele.classNo}</span>
-                                            </td>
-                                            <td>
-                                                <span
-                                                    className="className"
-                                                    onClick={() => {
-                                                        goClassDetail(
-                                                            ele.classNo,
-                                                        );
-                                                    }}
-                                                >
-                                                    {ele.name}
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <span>{ele.grade}</span>
-                                            </td>
-                                            <td>
-                                                <span>{ele.days}</span>
-                                            </td>
-                                            <td>
-                                                <span>{ele.opendt}</span>
-                                            </td>
-                                            <td>
-                                                <span>{ele.closedt}</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                );
-                            })}
+                            {classData?.map(
+                                (
+                                    ele: {
+                                        classNo: number;
+                                        name: string;
+                                        grade: number;
+                                        days: string;
+                                        opendt: string;
+                                        closedt: string;
+                                    },
+                                    idx: number,
+                                ) => {
+                                    return (
+                                        <tbody key={ele.classNo}>
+                                            <tr className="tableMain">
+                                                <td>
+                                                    <span>{ele.classNo}</span>
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        className="className"
+                                                        onClick={() => {
+                                                            goClassDetail(
+                                                                ele.classNo,
+                                                            );
+                                                        }}
+                                                    >
+                                                        {ele.name}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span>{ele.grade}</span>
+                                                </td>
+                                                <td>
+                                                    <span>{ele.days}</span>
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        {ele.opendt
+                                                            .toString()
+                                                            .slice(0, 10)}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        {ele.closedt
+                                                            .toString()
+                                                            .slice(0, 10)}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    );
+                                },
+                            )}
                         </table>
                         <Pagination
                             count={10}
