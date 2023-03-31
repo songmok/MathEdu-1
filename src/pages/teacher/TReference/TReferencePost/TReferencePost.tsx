@@ -5,9 +5,6 @@ import TReferencePostCss from "./TReferencePostCss";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-//  임시 데이터
-import referencePost from "./referencePost.json";
-
 interface IReference {
     no: number;
     category: string;
@@ -60,6 +57,8 @@ const TReferencePost = () => {
         navigate("/teacher/reference");
     };
 
+    console.log(reference?.files);
+
     return (
         <>
             <TSidebar />
@@ -93,12 +92,24 @@ const TReferencePost = () => {
                         </div>
 
                         <div className="file-area">
-                            <a href="" title="파일 다운로드">
-                                <span className="iconset ico-file">
-                                    첨부파일
-                                </span>
-                                &nbsp;2022년_공공데이터_활용기업_실태조사_보고서_(배포용).pdf
-                            </a>
+                            <span className="file">첨부파일</span>
+                            {reference?.files ? (
+                                <div className="file-list">
+                                    {reference.files.map(file => (
+                                        <div key={file.fileName}>
+                                            <a
+                                                href={`http://192.168.0.62:9988${file.downloadURL}`}
+                                                download
+                                                title="파일 다운로드"
+                                            >
+                                                {file.fileName}
+                                            </a>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <span>없음</span>
+                            )}
                         </div>
 
                         <div className="prevnext-area">

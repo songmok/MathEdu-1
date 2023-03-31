@@ -16,12 +16,17 @@ const TReferenceWrite = () => {
     const user = useSelector((state: RootState) => state.user);
 
     const [title, setTtitle] = useState("");
+    const [contents, setContents] = useState("");
+    const [files, setFiles] = useState<File[]>([]);
 
     const contentTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setTtitle(e.target.value);
     };
 
-    const [contents, setContents] = useState("");
+    const fileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const uploadedFiles = e.target.files;
+        setFiles(uploadedFiles ? Array.from(uploadedFiles) : []);
+    };
 
     const goBack = () => {
         navigate(-1);
@@ -60,19 +65,37 @@ const TReferenceWrite = () => {
         [],
     );
 
+    console.log(files);
+
     const writeRef = async () => {
         try {
+            const formData = new FormData(); // 파일을 담을 FormData 객체 생성
+            const arr = new Array();
+            // 파일을 formData에 append
+            for (let i = 0; i < files.length; i++) {
+                // let data = new FormData();
+                // data.append("files", files[i]);
+                arr.push(files[i]);
+            }
+            console.log(arr);
+
             const response = await axios.put(
-                `http://192.168.0.62:9988/api/notice`,
+                `http://192.168.0.62:9988/api/bbs`,
                 {
-                    category: "",
+                    category: "category",
                     classNo: 1,
                     content: contents,
-                    files: [],
                     teacherNo: user.no,
-                    title: "",
+                    files: arr,
+                    title: title,
+                },
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
                 },
             );
+            console.log(response.data);
         } catch (error) {
             console.log(error);
         }
@@ -108,14 +131,21 @@ const TReferenceWrite = () => {
                             />
                         </div>
                         <form className="file-area">
-                            <input type="file" accept=".pdf" />
+                            <input
+                                type="file"
+                                accept=".pdf"
+                                multiple={true}
+                                onChange={fileUpload}
+                            />
                         </form>
                     </div>
                     <div className="sectionBt">
                         <button className="cancleBt" onClick={goBack}>
                             취소
                         </button>
-                        <button className="completeBt">완료</button>
+                        <button className="completeBt" onClick={writeRef}>
+                            완료
+                        </button>
                     </div>
                 </div>
             </TReferenceWriteCss>

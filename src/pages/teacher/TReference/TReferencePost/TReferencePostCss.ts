@@ -57,6 +57,16 @@ const TReferencePostCss = styled.div`
                 padding: 10px;
                 border-top: 1px solid lightgray;
                 font-size: 14px;
+                display: flex;
+                .file {
+                    display: flex;
+                    align-items: center;
+                    margin-right: 10px;
+                }
+                .file-list {
+                    display: flex;
+                    flex-direction: column;
+                }
             }
 
             .prevnext-area {

@@ -4,8 +4,9 @@ import TReferenceCss from "./TReferenceCss";
 
 import Pagination from "@mui/material/Pagination";
 
-import reference from "./reference.json";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { PaginationItem } from "@mui/material";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -48,8 +49,8 @@ const TReference = () => {
                 `http://192.168.0.62:9988/api/bbs/${classNo}/${teacherNo}/${order}`,
                 {
                     params: {
-                        keyword: "",
-                        page: "",
+                        keyword: keyword,
+                        page: page,
                     },
                 },
             );
@@ -61,16 +62,16 @@ const TReference = () => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [page]);
 
-    const deleteRef = async (teacherNo: number) => {
+    const deleteRef = async () => {
         try {
             const response = await axios.delete(
                 `http://192.168.0.62:9988/api/bbs/${bbsNos}/${teacherNo}`,
             );
-            console.log(response.data); // handle success response
+            console.log(response.data);
         } catch (error) {
-            console.error(error); // handle error response
+            console.error(error);
         }
     };
 
@@ -97,10 +98,7 @@ const TReference = () => {
                         />
 
                         <div className="sectionBt">
-                            <button
-                                className="deleteBt"
-                                onClick={() => deleteRef(1)}
-                            >
+                            <button className="deleteBt" onClick={deleteRef}>
                                 삭제
                             </button>
                             <button className="createBt" onClick={goWrite}>
@@ -108,6 +106,13 @@ const TReference = () => {
                             </button>
                         </div>
                         <Pagination
+                            renderItem={item => (
+                                <PaginationItem
+                                    component={Link}
+                                    to={`/teacher/reference?page=${item.page}`}
+                                    {...item}
+                                />
+                            )}
                             count={refLIst.totalPage}
                             color="secondary"
                             className="pagination"
