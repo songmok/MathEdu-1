@@ -55,7 +55,7 @@ function App() {
                             <Route path="detail">
                                 <Route path="" element={<TClassDetail />} />
                                 <Route
-                                    path="studentinfo"
+                                    path="studentinfo/:studentId"
                                     element={<TStudentInfo />}
                                 />
                             </Route>

@@ -1,12 +1,16 @@
 import { TClassTestCss } from "./TClassTestCss";
 import tclassdata from "./tclassdata.json";
-export interface ITlist {
-    no: string;
-    title: string;
-    name: string;
-    attend: string;
-    average: number;
-    examdt: string;
+import axios from "axios";
+import { useEffect, useState } from "react";
+export interface TExamInfo {
+    examNo: number;
+    examName: string;
+    examDt: string;
+    examType: "monthly" | "weekly";
+    totalStuCount: number;
+    missedCount: number;
+    attendCount: number;
+    avgScore: number;
 }
 export interface ITheader {
     no: string;
@@ -15,9 +19,12 @@ export interface ITheader {
     average: string;
     examdt: string;
 }
-
-const TClassTest = () => {
-    const tclassdatamap: ITlist[] = JSON.parse(JSON.stringify(tclassdata)); //반 학생 리스트 data json
+interface IClassNumber {
+    classQuNo: string | null;
+}
+const TClassTest = (props: IClassNumber) => {
+    const { classQuNo } = props;
+    const [testList, setTestList] = useState<TExamInfo[]>([]);
     const headerList: ITheader = {
         no: "번호",
         title: "시험과목",
@@ -25,6 +32,20 @@ const TClassTest = () => {
         average: "평균점수",
         examdt: "날짜",
     }; //반 학생 헤더
+    const classStudentInfoApi = async () => {
+        try {
+            const response = await axios.get(
+                `http://192.168.0.62:9988/api/exam/list/all/${classQuNo}/examDt/desc`,
+            );
+            console.log("test", response.data.list);
+            setTestList(response.data.list);
+        } catch (error) {
+            console.error("학생정보를 찾을 수 없습니다.", error);
+        }
+    };
+    useEffect(() => {
+        classStudentInfoApi();
+    }, []);
     return (
         <>
             <TClassTestCss>
@@ -42,13 +63,13 @@ const TClassTest = () => {
                                 {headerList.examdt}
                             </th>
                         </tr>
-                        {tclassdatamap.map((ele, idx) => (
-                            <tr key={ele.no} className="tableMain">
-                                <td>{ele.no}</td>
-                                <td>{ele.title}</td>
-                                <td>{ele.attend}</td>
-                                <td>{ele.average}</td>
-                                <td>{ele.examdt}</td>
+                        {testList.slice(0, 5).map((ele, idx) => (
+                            <tr key={idx} className="tableMain">
+                                <td>{ele.examNo}</td>
+                                <td>{ele.examName}</td>
+                                <td>{ele.attendCount}</td>
+                                <td>{ele.avgScore}</td>
+                                <td>{ele.examDt}</td>
                             </tr>
                         ))}
                     </table>
