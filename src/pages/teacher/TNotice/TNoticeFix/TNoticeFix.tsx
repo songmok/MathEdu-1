@@ -1,21 +1,24 @@
 import TSidebar from "../../../../components/tSidebar/TSidebar";
-import TReferenceFixCss from "./TReferenceFixCss";
+import TNoticeFixCss from "./TNoticeFixCss";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../reducer/store";
+import { IClassList } from "../TNoticeWrite/TNoticeWrite";
 
 // React-Quill
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const TReferenceFix = () => {
+const TNoticeFix = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
     const QuillRef = useRef<ReactQuill>();
     const user = useSelector((state: RootState) => state.user);
+
+    const [classList, setClassList] = useState<IClassList[]>([]);
 
     const [title, setTtitle] = useState(state.title);
     const [contents, setContents] = useState(state.contents);
@@ -23,6 +26,7 @@ const TReferenceFix = () => {
         Array.isArray(state.files) ? state.files : [state.files],
     );
     const [cate, setCate] = useState(state.category);
+    const [classNo, setClassNo] = useState("");
 
     const contentTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setTtitle(e.target.value);
@@ -35,6 +39,10 @@ const TReferenceFix = () => {
 
     const cateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setCate(e.target.value);
+    };
+
+    const classChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setClassNo(e.target.value);
     };
 
     const goBack = () => {
@@ -76,6 +84,22 @@ const TReferenceFix = () => {
         [],
     );
 
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(
+                `http://192.168.0.62:9988/api/teacher/classList/${user.id}`,
+            );
+            console.log(response.data);
+            setClassList(response.data.classList);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     const fixRef = async () => {
         try {
             const arr = new Array();
@@ -88,11 +112,11 @@ const TReferenceFix = () => {
                 `http://192.168.0.62:9988/api/bbs/${state.no}`,
                 {
                     category: cate,
-                    classNo: 1,
+                    classNo: state.classNo,
                     content: contents,
                     teacherNo: user.no,
-                    files: arr,
                     title: title,
+                    files: arr,
                 },
                 {
                     headers: {
@@ -101,6 +125,8 @@ const TReferenceFix = () => {
                 },
             );
             console.log(response.data);
+            alert(response.data.message);
+            navigate("/teacher/notice?page=1");
         } catch (error) {
             console.log(error);
         }
@@ -109,10 +135,10 @@ const TReferenceFix = () => {
     return (
         <>
             <TSidebar />
-            <TReferenceFixCss>
+            <TNoticeFixCss>
                 <div className="section">
                     <div className="sectionTop">
-                        <p>자료실 작성</p>
+                        <p>공지사항 수정</p>
                     </div>
                     <div className="sectionMain">
                         <form className="title-area">
@@ -134,6 +160,22 @@ const TReferenceFix = () => {
                                 <option value="문제풀이">문제풀이</option>
                                 <option value="과제">과제</option>
                             </select>
+                            {classList && (
+                                <select
+                                    placeholder="반 선택"
+                                    defaultValue="class-list"
+                                    onChange={classChange}
+                                >
+                                    <option value="class-list" disabled>
+                                        반 목록
+                                    </option>
+                                    {classList.map(ele => (
+                                        <option key={ele.no} value={ele.no}>
+                                            {ele.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            )}
                         </form>
                         <div className="content-area">
                             <ReactQuill
@@ -172,9 +214,9 @@ const TReferenceFix = () => {
                         </button>
                     </div>
                 </div>
-            </TReferenceFixCss>
+            </TNoticeFixCss>
         </>
     );
 };
 
-export default TReferenceFix;
+export default TNoticeFix;

@@ -28,6 +28,7 @@ import TReferenceWrite from "./pages/teacher/TReference/TReferenceWrite/TReferen
 import TStudentInfo from "./pages/teacher/TClass/TClassDetail/TStudentInfo/TStudentInfo";
 import TNoticeWrite from "./pages/teacher/TNotice/TNoticeWrite/TNoticeWrite";
 import TReferenceFix from "./pages/teacher/TReference/TReferenceFix/TReferenceFix";
+import TNoticeFix from "./pages/teacher/TNotice/TNoticeFix/TNoticeFix";
 
 function App() {
     return (
@@ -66,7 +67,7 @@ function App() {
                             <Route path="" element={<TNotice />} />
                             <Route path="post" element={<TNoticePost />} />
                             <Route path="write" element={<TNoticeWrite />} />
-                            {/* <Route path="fix" element={<TNoticeFix />} /> */}
+                            <Route path="fix" element={<TNoticeFix />} />
                         </Route>
                         <Route path="reference">
                             <Route path="" element={<TReference />} />

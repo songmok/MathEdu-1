@@ -95,14 +95,15 @@ const TNoticeWrite = () => {
         }
     };
 
-    console.log(classList);
-
     useEffect(() => {
         fetchData();
     }, []);
 
     const writeRef = async () => {
-        cate === "category" && alert("카테고리를 선택해주세요.");
+        if (!title) return alert("제목을 입력해주세요.");
+        if (!contents) return alert("내용을 입력해주세요.");
+        if (!cate) return alert("카테고리를 선택해주세요.");
+        if (!classNo) return alert("반을 선택해주세요.");
         try {
             const arr = new Array();
 
@@ -127,6 +128,8 @@ const TNoticeWrite = () => {
                 },
             );
             console.log(response.data);
+            alert(response.data.message);
+            navigate("/teacher/notice?page=1");
         } catch (error) {
             console.log(error);
         }
@@ -193,7 +196,6 @@ const TNoticeWrite = () => {
                         <form className="file-area">
                             <input
                                 type="file"
-                                accept=".pdf"
                                 multiple={true}
                                 onChange={fileUpload}
                             />

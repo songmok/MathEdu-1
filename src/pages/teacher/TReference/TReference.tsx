@@ -114,6 +114,7 @@ const TReference = () => {
                                 />
                             )}
                             count={refLIst.totalPage}
+                            defaultPage={1}
                             color="secondary"
                             className="pagination"
                         />

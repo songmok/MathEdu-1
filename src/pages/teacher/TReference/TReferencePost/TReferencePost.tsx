@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 interface IReference {
     no: number;
     category: string;
+    classNo: number;
     title: string;
     regDt: string;
     contents: string;
@@ -67,8 +68,6 @@ const TReferencePost = () => {
     const goFix = () => {
         navigate(`/teacher/reference/fix`, { state: reference });
     };
-
-    console.log(reference?.files);
 
     return (
         <>

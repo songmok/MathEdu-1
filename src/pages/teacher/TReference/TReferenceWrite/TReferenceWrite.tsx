@@ -100,6 +100,9 @@ const TReferenceWrite = () => {
 
     const writeRef = async () => {
         try {
+
+            
+
             const arr = new Array();
 
             for (let i = 0; i < files.length; i++) {
