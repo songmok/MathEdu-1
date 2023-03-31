@@ -2,55 +2,69 @@ import SSidebar from "../../../components/sSidebar/SSidebar";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 import SGradeCss from "./SGradeCss";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
-
+// 더미데이터
 import dummyData from "./gradedummy.json";
 import infodata from "./infodummy.json";
 
 highchartsMore(Highcharts);
 solidGauge(Highcharts);
 
-// const data1 = dummyData.personalScores;
-
-const personalSc = JSON.parse(dummyData.personalScores);
-const classSc = JSON.parse(dummyData.classAvgScores);
-const topSc = JSON.parse(dummyData.top30pAvgScores);
-
-const month = () => {
-    let month = [];
-    for (let i = 1; i < 13; i += 1) {
-        month.push(i);
-    }
-
-    return month.map(item => (
-        <option key={item} value={item < 10 ? "0" + item : item}>
-            {item}월
-        </option>
-    ));
-};
-
 const SGrade = () => {
+    const chartRef = useRef(null);
+
+    const [wmBtn, setWmBtn] = useState({ name: "주간" });
+    const wmchange = () => {
+        if (wmBtn.name === "주간") {
+            setWmBtn({ name: "월간" });
+        } else {
+            setWmBtn({ name: "주간" });
+        }
+    };
+
+    const [scMunth, setScMunth] = useState("");
+    console.log(scMunth);
+
+    const month = () => {
+        let month = [];
+        for (let i = 1; i < 13; i += 1) {
+            if (i < 10) {
+                month.push("0" + i);
+            } else {
+                month.push(i);
+            }
+        }
+
+        return month.map(item => (
+            <option key={item} value={item}>
+                {item}월
+            </option>
+        ));
+    };
+
+    const personalSc = JSON.parse(dummyData.personalScores);
+    const classSc = JSON.parse(dummyData.classAvgScores);
+    const topSc = JSON.parse(dummyData.top30pAvgScores);
+
     const weekSc = personalSc.length;
     let week = [];
     for (let i = 0; i < weekSc; i++) {
         week.push(i + 1 + "주");
     }
-    console.log(week);
-    const chartRef = useRef(null);
 
     const options = {
         chart: {
             type: "spline",
         },
         title: {
-            text: "주간테스트 결과",
+            text: `${wmBtn.name} 테스트 결과`,
         },
         xAxis: {
             title: {
-                text: "Month",
+                text: "",
             },
             categories: week,
         },
@@ -189,7 +203,7 @@ const SGrade = () => {
             <SSidebar />
             <SGradeCss>
                 <div className="tests">
-                    <div className="weekT">
+                    {/* <div className="weekT">
                         <p className="subTitle">주간 테스트</p>
                         <div className="newTest">
                             <div className="donutGraph">
@@ -235,22 +249,30 @@ const SGrade = () => {
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="monthT">
                         <p className="subTitle">월간 테스트</p>
                     </div>
                 </div>
                 <div className="analysis">
-                    <p className="subTitle">성적 분석</p>
-                    <form className="">
-                        <select>{month()}</select>
-                        <span>월</span>
-                        <select>
-                            <option value="주간">주간</option>
-                            <option value="월간">월간</option>
+                    <div className="title">
+                        <p className="subTitle">{`${wmBtn.name}`} 성적 분석</p>
+                    </div>
+                    <button className="chbt" onClick={wmchange}>
+                        {`${wmBtn.name}` === "주간" ? "월간" : "주간"} 성적 분석
+                        보기
+                    </button>
+                    <form className="subTitle flex">
+                        <select
+                            value={scMunth}
+                            onChange={e => setScMunth(e.target.value)}
+                        >
+                            {month()}
                         </select>
-                        <span>테스트</span>
-                        <button type="submit">확인</button>
+                        <span>월</span>
+                        <button type="submit" className="submitBt">
+                            확인
+                        </button>
                     </form>
 
                     <HighchartsReact

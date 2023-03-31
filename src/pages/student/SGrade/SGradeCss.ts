@@ -1,6 +1,7 @@
 import { mainContainer } from "./../../../utils/Layout";
 import styled from "styled-components";
 import { SfontCol } from "../../../utils/Color";
+import { Button } from "../../../utils/Layout";
 
 const SGradeCss = styled.div`
     ${mainContainer}
@@ -15,6 +16,23 @@ const SGradeCss = styled.div`
     .subTitle {
         color: ${SfontCol};
         font-size: 18px;
+    }
+    .flex {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        margin-bottom: 30px;
+        select {
+            margin: 0 10px;
+            height: 30px;
+            font-size: 14px;
+            padding: 0 5px;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            ::selection {
+                border: none;
+            }
+        }
     }
     .tests {
         display: flex;
@@ -52,16 +70,6 @@ const SGradeCss = styled.div`
                     display: block;
                     width: 50%;
 
-                    .gradeLR::before {
-                        position: absolute;
-                        content: "";
-
-                        left: 0px;
-                        width: 5px;
-                        height: 5px;
-                        border-radius: 50%;
-                        background: ${SfontCol};
-                    }
                     .gradeLR {
                         display: flex;
                         justify-content: space-between;
@@ -69,6 +77,16 @@ const SGradeCss = styled.div`
                         margin-left: 30px;
                         .gradeLRC {
                             color: ${SfontCol};
+                        }
+                        .gradeLRC::after {
+                            position: absolute;
+                            content: "";
+                            transform: translateY(8px);
+                            left: 15px;
+                            width: 5px;
+                            height: 5px;
+                            border-radius: 50%;
+                            background: ${SfontCol};
                         }
                     }
                 }
@@ -91,6 +109,7 @@ const SGradeCss = styled.div`
     }
 
     .table {
+        margin-top: 30px;
         border-radius: 5px;
         width: 100%;
         text-align: center;
@@ -99,6 +118,7 @@ const SGradeCss = styled.div`
             color: #fff;
             border: none;
             height: 50px;
+            border-radius: 20px;
         }
         .tableMain {
             height: 40px;
@@ -108,6 +128,12 @@ const SGradeCss = styled.div`
                 display: flex;
                 justify-content: center;
             } */
+
+    .submitBt {
+        ${Button}
+        background: ${SfontCol};
+        margin-left: 15px;
+    }
 `;
 
 export default SGradeCss;
