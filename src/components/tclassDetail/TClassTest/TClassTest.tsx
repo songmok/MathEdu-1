@@ -20,10 +20,10 @@ const TClassTest = () => {
     const tclassdatamap: ITlist[] = JSON.parse(JSON.stringify(tclassdata)); //반 학생 리스트 data json
     const headerList: ITheader = {
         no: "번호",
-        title: "사진",
-        attend: "학생",
-        average: "전화번호",
-        examdt: "학부모전화번호",
+        title: "시험과목",
+        attend: "참석인원",
+        average: "평균점수",
+        examdt: "날짜",
     }; //반 학생 헤더
     return (
         <>

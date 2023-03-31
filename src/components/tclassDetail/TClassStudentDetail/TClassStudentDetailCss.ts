@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { SfontCol, TfontCol, TmainCol } from "../../../../../utils/Color";
-import { mainContainer } from "../../../../../utils/Layout";
+import { TfontCol, TmainCol } from "../../../utils/Color";
+
 export const TClassStudentDetailCss = styled.div`
-     .wrap {
+    .wrap {
         background: #fff;
         padding: 30px;
         border-radius: 15px;

@@ -1,5 +1,5 @@
-import Info from "../../../../../../components/layOut/Info/Info";
-import TSidebar from "../../../../../../components/tSidebar/TSidebar";
+import Info from "../../../../../components/layOut/Info/Info";
+import TSidebar from "../../../../../components/tSidebar/TSidebar";
 import tstudentinfo from "./data/tstudentinfo.json";
 
 export interface TStudentInfo {
@@ -44,6 +44,7 @@ const TStudentInfo = () => {
     const monthly: TStudentInfo = JSON.parse(
         JSON.stringify(tstudentinfo.weeklyTest),
     );
+
     return (
         <>
             <TSidebar />
