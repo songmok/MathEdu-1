@@ -10,7 +10,6 @@ const TGradeCss = styled.div`
         .title {
             color: ${TfontCol};
             font-size: 25px;
-          
         }
     }
     .subTitle {
@@ -52,13 +51,22 @@ const TGradeCss = styled.div`
                     width: 50%;
 
                     .percentage {
+                        display: flex;
+                        flex-direction: column;
                         font-size: 36px;
                         font-weight: 600;
+                        line-height: 36px;
                         position: absolute;
                         top: 50%;
                         left: 50%;
                         transform: translate(-50%, -50%);
                         color: ${TfontCol};
+                        > span {
+                            font-size: 14px;
+                            font-weight: 400;
+                            text-align: center;
+                            line-height: 18px;
+                        }
                         .percent {
                             font-size: 20px;
                             font-weight: 500;
@@ -75,7 +83,9 @@ const TGradeCss = styled.div`
                         justify-content: space-between;
                         padding-bottom: 10px;
                         margin-left: 30px;
+
                         .gradeLRC {
+                            text-align: left;
                             color: ${TfontCol};
                         }
                         .gradeLRC::after {

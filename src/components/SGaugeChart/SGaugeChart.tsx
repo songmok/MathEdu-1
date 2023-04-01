@@ -104,6 +104,9 @@ const SGaugeChart = (props: Iprops) => {
         ],
     };
 
+    const percentage =
+        (props.testResult.srank / props.testResult.totalStudents) * 100;
+
     return (
         <div className="testType">
             <p className="subTitle">{props.examType.typeName}테스트</p>
@@ -114,7 +117,11 @@ const SGaugeChart = (props: Iprops) => {
                         options={GaugeChart}
                     />
                     <span className="percentage">
-                        65<span className="percent">%</span>
+                        <span>상위</span>
+                        <p>
+                            {percentage}
+                            <span className="percent">%</span>
+                        </p>
                     </span>
                 </div>
 
@@ -125,6 +132,7 @@ const SGaugeChart = (props: Iprops) => {
                             {props.testResult.score}
                         </span>
                     </li>
+
                     <li className="gradeLR">
                         <span className="gradeLRC">석차</span>
                         <span className="gradeLRCI">

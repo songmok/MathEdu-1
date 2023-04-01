@@ -92,7 +92,7 @@ const SGrade = () => {
 
     const now = new Date(); // 현재 날짜 및 시간
     const nowYear = now.getFullYear(); // 연도
-    console.log("연도 : ", nowYear);
+    // console.log("연도 : ", nowYear);
 
     const month = () => {
         let months = [];
