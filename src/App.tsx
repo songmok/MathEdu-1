@@ -26,6 +26,7 @@ import TClassDetail from "./pages/teacher/TClass/TClassDetail/TClassDetail";
 import TReferencePost from "./pages/teacher/TReference/TReferencePost/TReferencePost";
 import TReferenceWrite from "./pages/teacher/TReference/TReferenceWrite/TReferenceWrite";
 import TStudentInfo from "./pages/teacher/TClass/TClassDetail/TStudentInfo/TStudentInfo";
+import TStudentTestList from "./pages/teacher/TClass/TClassDetail/TStudentTestList/TStudentTestList";
 
 function App() {
     return (
@@ -57,6 +58,10 @@ function App() {
                                 <Route
                                     path="studentinfo/:studentId"
                                     element={<TStudentInfo />}
+                                />
+                                <Route
+                                    path="test"
+                                    element={<TStudentTestList />}
                                 />
                             </Route>
                         </Route>

@@ -13,11 +13,30 @@ export const TClassTestCss = styled.div`
             color: ${TfontCol};
             font-size: 18px;
         }
+        button {
+            background: transparent;
+            border: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 70px;
+            height: 30px;
+            border: medium none;
+            border-radius: 5px;
+            background: rgb(32, 30, 89);
+            margin-left: 15px;
+            span {
+                color: white;
+                display: block;
+            }
+        }
     }
     .sectionMain {
         .table {
             border-radius: 5px;
             text-align: center;
+            position: relative;
+
             .tableHeader {
                 background: ${TmainCol};
                 color: #fff;
@@ -45,10 +64,6 @@ export const TClassTestCss = styled.div`
                     padding: 15px 0;
                 }
             }
-        }
-        .pagination {
-            display: flex;
-            justify-content: center;
         }
     }
 `;

@@ -1,7 +1,8 @@
 import { TClassTestCss } from "./TClassTestCss";
-import tclassdata from "./tclassdata.json";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+
 export interface TExamInfo {
     examNo: number;
     examName: string;
@@ -32,6 +33,13 @@ const TClassTest = (props: IClassNumber) => {
         average: "평균점수",
         examdt: "날짜",
     }; //반 학생 헤더
+    const Navigate = useNavigate();
+    const goClassTest = (no: number) => {
+        Navigate(`/teacher/class/detail/test/${no}`);
+    };
+    const goClassTestList = (no: string | null) => {
+        Navigate(`/teacher/class/detail/test?classno=${no}`);
+    };
     const classStudentInfoApi = async () => {
         try {
             const response = await axios.get(
@@ -51,6 +59,13 @@ const TClassTest = (props: IClassNumber) => {
             <TClassTestCss>
                 <div className="header">
                     <span>시험 리스트</span>
+                    <button
+                        onClick={() => {
+                            goClassTestList(classQuNo);
+                        }}
+                    >
+                        <span>전체보기</span>
+                    </button>
                 </div>
                 <div className="sectionMain">
                     <table className="table">
@@ -66,7 +81,13 @@ const TClassTest = (props: IClassNumber) => {
                         {testList.slice(0, 5).map((ele, idx) => (
                             <tr key={idx} className="tableMain">
                                 <td>{ele.examNo}</td>
-                                <td>{ele.examName}</td>
+                                <td
+                                    onClick={() => {
+                                        goClassTest(ele.examNo);
+                                    }}
+                                >
+                                    {ele.examName}
+                                </td>
                                 <td>{ele.attendCount}</td>
                                 <td>{ele.avgScore}</td>
                                 <td>{ele.examDt}</td>

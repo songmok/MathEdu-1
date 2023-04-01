@@ -50,9 +50,9 @@ const TStudentInfo = () => {
             const response = await axios.get(
                 `http://192.168.0.62:9988/api/student/${stuId}`,
             );
-            console.log("시험정보", response.data.info);
             setStudent(response.data.info.basicInfo);
             setWeekly(response.data.info);
+            console.log("시험정보", response.data.info);
             console.log("상세정보", response.data.info.basicInfo);
         } catch (error) {
             console.error("학생정보를 찾을 수 없습니다.", error);
