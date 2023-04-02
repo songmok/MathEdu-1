@@ -17,7 +17,7 @@ const SGradeCss = styled.div`
         color: ${SfontCol};
         font-size: 18px;
     }
-    .flex {
+    .flexForm {
         display: flex;
         align-items: center;
         justify-content: end;
@@ -37,7 +37,7 @@ const SGradeCss = styled.div`
     .tests {
         display: flex;
         gap: 30px;
-        .weekT {
+        .testType {
             padding: 30px;
             width: 520px;
             height: 320px;
@@ -92,13 +92,6 @@ const SGradeCss = styled.div`
                 }
             }
         }
-        .monthT {
-            padding: 30px;
-            width: 520px;
-            height: 320px;
-            border-radius: 15px;
-            background: #fff;
-        }
     }
     .analysis {
         margin-top: 30px;
@@ -106,6 +99,20 @@ const SGradeCss = styled.div`
         width: calc(520px * 2 + 30px);
         border-radius: 15px;
         background: #fff;
+        .chtitle {
+            display: flex;
+            gap: 15px;
+            .chbt {
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: #d9d9d9;
+
+                :hover {
+                    color: #c3c3c3;
+                }
+            }
+        }
     }
 
     .table {
