@@ -26,6 +26,9 @@ import TClassDetail from "./pages/teacher/TClass/TClassDetail/TClassDetail";
 import TReferencePost from "./pages/teacher/TReference/TReferencePost/TReferencePost";
 import TReferenceWrite from "./pages/teacher/TReference/TReferenceWrite/TReferenceWrite";
 import TStudentInfo from "./pages/teacher/TClass/TClassDetail/TStudentInfo/TStudentInfo";
+import TNoticeWrite from "./pages/teacher/TNotice/TNoticeWrite/TNoticeWrite";
+import TReferenceFix from "./pages/teacher/TReference/TReferenceFix/TReferenceFix";
+import TNoticeFix from "./pages/teacher/TNotice/TNoticeFix/TNoticeFix";
 
 function App() {
     return (
@@ -63,11 +66,14 @@ function App() {
                         <Route path="notice">
                             <Route path="" element={<TNotice />} />
                             <Route path="post" element={<TNoticePost />} />
+                            <Route path="write" element={<TNoticeWrite />} />
+                            <Route path="fix" element={<TNoticeFix />} />
                         </Route>
                         <Route path="reference">
                             <Route path="" element={<TReference />} />
                             <Route path="post" element={<TReferencePost />} />
                             <Route path="write" element={<TReferenceWrite />} />
+                            <Route path="fix" element={<TReferenceFix />} />
                         </Route>
                     </Route>
                 </Routes>

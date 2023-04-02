@@ -1,28 +1,31 @@
 import TSidebar from "../../../../components/tSidebar/TSidebar";
-import TReferenceWriteCss from "./TReferenceWriteCss";
+import TNoticeFixCss from "./TNoticeFixCss";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../reducer/store";
-import { IClassList } from "../../TNotice/TNoticeWrite/TNoticeWrite";
+import { IClassList } from "../TNoticeWrite/TNoticeWrite";
 
 // React-Quill
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const TReferenceWrite = () => {
+const TNoticeFix = () => {
+    const { state } = useLocation();
     const navigate = useNavigate();
     const QuillRef = useRef<ReactQuill>();
     const user = useSelector((state: RootState) => state.user);
 
     const [classList, setClassList] = useState<IClassList[]>([]);
 
-    const [title, setTtitle] = useState("");
-    const [contents, setContents] = useState("");
-    const [files, setFiles] = useState<File[]>([]);
-    const [cate, setCate] = useState("");
+    const [title, setTtitle] = useState(state.title);
+    const [contents, setContents] = useState(state.contents);
+    const [files, setFiles] = useState<File[]>(
+        Array.isArray(state.files) ? state.files : [state.files],
+    );
+    const [cate, setCate] = useState(state.category);
     const [classNo, setClassNo] = useState("");
 
     const contentTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -40,12 +43,13 @@ const TReferenceWrite = () => {
 
     const classChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setClassNo(e.target.value);
-        console.log(classNo);
     };
 
     const goBack = () => {
         navigate(-1);
     };
+
+    console.log(state);
 
     const modules = useMemo(
         () => ({
@@ -92,32 +96,27 @@ const TReferenceWrite = () => {
         }
     };
 
-    console.log(classList);
-
     useEffect(() => {
         fetchData();
     }, []);
 
-    const writeRef = async () => {
+    const fixRef = async () => {
         try {
-
-            
-
             const arr = new Array();
 
             for (let i = 0; i < files.length; i++) {
                 arr.push(files[i]);
             }
 
-            const response = await axios.put(
-                `http://192.168.0.62:9988/api/bbs`,
+            const response = await axios.patch(
+                `http://192.168.0.62:9988/api/bbs/${state.no}`,
                 {
                     category: cate,
-                    classNo: 1,
+                    classNo: state.classNo,
                     content: contents,
                     teacherNo: user.no,
-                    files: arr,
                     title: title,
+                    files: arr,
                 },
                 {
                     headers: {
@@ -126,6 +125,8 @@ const TReferenceWrite = () => {
                 },
             );
             console.log(response.data);
+            alert(response.data.message);
+            navigate("/teacher/notice?page=1");
         } catch (error) {
             console.log(error);
         }
@@ -134,20 +135,21 @@ const TReferenceWrite = () => {
     return (
         <>
             <TSidebar />
-            <TReferenceWriteCss>
+            <TNoticeFixCss>
                 <div className="section">
                     <div className="sectionTop">
-                        <p>자료실 작성</p>
+                        <p>공지사항 수정</p>
                     </div>
                     <div className="sectionMain">
                         <form className="title-area">
                             <textarea
                                 placeholder="제목을 입력해주세요."
+                                value={title}
                                 onChange={contentTitle}
                             />
                             <select
                                 placeholder="카테고리 선택"
-                                defaultValue="category"
+                                defaultValue={state.category}
                                 onChange={cateChange}
                             >
                                 <option value="category" disabled>
@@ -196,20 +198,25 @@ const TReferenceWrite = () => {
                                 multiple={true}
                                 onChange={fileUpload}
                             />
+                            {files &&
+                                Array.isArray(files) &&
+                                files.map((file, index) => (
+                                    <div key={index}>{file.name}</div>
+                                ))}
                         </form>
                     </div>
                     <div className="sectionBt">
                         <button className="cancleBt" onClick={goBack}>
                             취소
                         </button>
-                        <button className="completeBt" onClick={writeRef}>
+                        <button className="fixBt" onClick={fixRef}>
                             완료
                         </button>
                     </div>
                 </div>
-            </TReferenceWriteCss>
+            </TNoticeFixCss>
         </>
     );
 };
 
-export default TReferenceWrite;
+export default TNoticeFix;

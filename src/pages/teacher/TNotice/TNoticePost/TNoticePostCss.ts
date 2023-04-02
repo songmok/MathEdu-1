@@ -48,6 +48,7 @@ const TNoticePostCss = styled.div`
             }
             .content-area {
                 padding: 30px 10px;
+                height: 400px;
                 p {
                     font-size: 16px;
                     color: #000;
