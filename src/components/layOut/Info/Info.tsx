@@ -1,5 +1,7 @@
 import { SImypage } from "../../../pages/student/SMypage/SMypage";
+import TClassGradeGraph from "../../../pages/teacher/TClass/TClassDetail/TStudentInfo/TClassGradeGraph/TClassGradeGraph";
 import { TStudentInfo } from "../../../pages/teacher/TClass/TClassDetail/TStudentInfo/TStudentInfo";
+import TGrade from "../../../pages/teacher/TGrade/TGrade";
 
 import { InfoCss } from "./InfoCss";
 
@@ -112,6 +114,7 @@ const Info = (props: StudentInfoProps) => {
                         </ul>
                     </div>
                 </div>
+                <TClassGradeGraph />
             </InfoCss>
         </>
     );
