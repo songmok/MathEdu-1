@@ -1,19 +1,20 @@
-import SSidebar from "../../../../components/sSidebar/SSidebar";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
-import SGradeCss from "../SGradeCss";
-import { useRef, useState } from "react";
-
-import highchartsMore from "highcharts/highcharts-more.js";
-import solidGauge from "highcharts/modules/solid-gauge.js";
-// 더미데이터
-import dummyData from "../gradedummy.json";
-import infodata from "../infodummy.json";
-import { examType } from "../SGrade";
 
 interface Iprops {
     examType: {
         typeName: string;
+    };
+    gColors: {
+        mainCol: string;
+        backCol: string;
+    };
+    testResult: {
+        score: number;
+        srank: number;
+        tieCnt: number;
+        totalStudents: number;
+        testDt: string;
     };
 }
 
@@ -65,7 +66,7 @@ const SGaugeChart = (props: Iprops) => {
                     // Track for Move
                     outerRadius: "87%",
                     innerRadius: "63%",
-                    backgroundColor: "#d9d9d9",
+                    backgroundColor: props.gColors.backCol,
                 },
             ],
         },
@@ -93,15 +94,18 @@ const SGaugeChart = (props: Iprops) => {
                 name: "상위",
                 data: [
                     {
-                        color: "#00A49A",
+                        color: props.gColors.mainCol,
                         radius: "87%",
                         innerRadius: "63%",
-                        y: 45,
+                        y: props.testResult.score,
                     },
                 ],
             },
         ],
     };
+
+    const percentage =
+        (props.testResult.srank / props.testResult.totalStudents) * 100;
 
     return (
         <div className="testType">
@@ -113,7 +117,11 @@ const SGaugeChart = (props: Iprops) => {
                         options={GaugeChart}
                     />
                     <span className="percentage">
-                        65<span className="percent">%</span>
+                        <span>상위</span>
+                        <p>
+                            {percentage}
+                            <span className="percent">%</span>
+                        </p>
                     </span>
                 </div>
 
@@ -121,31 +129,32 @@ const SGaugeChart = (props: Iprops) => {
                     <li className="gradeLR">
                         <span className="gradeLRC">점수</span>
                         <span className="gradeLRCI">
-                            {infodata.weeklyTest.scor}
+                            {props.testResult.score}
                         </span>
                     </li>
+
                     <li className="gradeLR">
                         <span className="gradeLRC">석차</span>
                         <span className="gradeLRCI">
-                            {infodata.weeklyTest.rank}
+                            {props.testResult.srank}
                         </span>
                     </li>
                     <li className="gradeLR">
                         <span className="gradeLRC">동차석수</span>
                         <span className="gradeLRCI">
-                            {infodata.weeklyTest.tieCnt}
+                            {props.testResult.tieCnt}
                         </span>
                     </li>
                     <li className="gradeLR">
                         <span className="gradeLRC">수강인원</span>
                         <span className="gradeLRCI">
-                            {infodata.weeklyTest.totalStudents}
+                            {props.testResult.totalStudents}
                         </span>
                     </li>
                     <li className="gradeLR">
                         <span className="gradeLRC">시험일자</span>
                         <span className="gradeLRCI">
-                            {infodata.weeklyTest.testDt}
+                            {props.testResult.testDt}
                         </span>
                     </li>
                 </ul>

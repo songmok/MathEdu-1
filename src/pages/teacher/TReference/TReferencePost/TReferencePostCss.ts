@@ -48,6 +48,7 @@ const TReferencePostCss = styled.div`
             }
             .content-area {
                 padding: 30px 10px;
+                height: 400px;
                 p {
                     font-size: 16px;
                     color: #000;
@@ -83,6 +84,15 @@ const TReferencePostCss = styled.div`
                         font-size: 16px;
                         color: #000;
                         margin-left: 10px;
+                        cursor: pointer;
+                        :hover {
+                            text-decoration: underline;
+                        }
+                    }
+                    .prev-titleNo {
+                        font-size: 16px;
+                        color: #000;
+                        margin-left: 10px;
                     }
                 }
                 .next {
@@ -91,6 +101,15 @@ const TReferencePostCss = styled.div`
                     font-size: 14px;
                     color: #777;
                     .next-title {
+                        font-size: 16px;
+                        color: #000;
+                        margin-left: 10px;
+                        cursor: pointer;
+                        :hover {
+                            text-decoration: underline;
+                        }
+                    }
+                    .next-titleNo {
                         font-size: 16px;
                         color: #000;
                         margin-left: 10px;

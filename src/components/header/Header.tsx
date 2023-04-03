@@ -48,7 +48,7 @@ const Header = () => {
             );
             setUserData(response.data);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     };
     useEffect(() => {

@@ -5,19 +5,14 @@ import TNoticePostCss from "./TNoticePostCss";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-//  임시 데이터
-import noticePost from "./noticePost.json";
-
 interface INotice {
     no: number;
     category: string;
     title: string;
     regDt: string;
     contents: string;
-    author: {
-        no: number;
-        name: string;
-    };
+    authorName: string;
+    authorno: number;
     files: {
         fileName: string;
         fileType: string;
@@ -36,19 +31,17 @@ interface INotice {
 const TNoticePost = () => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
-    const no = searchParams.get("no");
+    const noticeNo = searchParams.get("no");
 
     const [notice, setNotice] = useState<INotice>();
 
     const fetchData = async () => {
         try {
-            // const response = await axios.get(
-            //     `https://example.com/api/notice/${no}`,
-            // );
-            // console.log(response.data);
-            // setNotice(response.data);
-            console.log(noticePost);
-            const fetchedNotice = noticePost;
+            const response = await axios.get(
+                `http://192.168.0.62:9988/api/notice/detail/${noticeNo}`,
+            );
+            console.log(response.data);
+            const fetchedNotice = response.data;
             fetchedNotice.contents = fetchedNotice.contents ?? "";
             setNotice(fetchedNotice);
         } catch (error) {
@@ -58,10 +51,21 @@ const TNoticePost = () => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [noticeNo]);
 
     const goNotice = () => {
-        navigate("/teacher/notice");
+        navigate("/teacher/notice?page=1");
+    };
+
+    const goPrev = () => {
+        navigate(`/teacher/notice/post?no=${notice?.prevPost?.no}`);
+    };
+    const goNext = () => {
+        navigate(`/teacher/notice/post?no=${notice?.nextPost?.no}`);
+    };
+
+    const goFix = () => {
+        navigate(`/teacher/notice/fix`, { state: notice });
     };
 
     return (
@@ -78,11 +82,13 @@ const TNoticePost = () => {
                         <div className="info-area">
                             <p>
                                 <strong>작성자</strong>
-                                <span>{notice?.author.name} 선생님</span>
+                                <span>{notice?.authorName} 선생님</span>
                             </p>
                             <p>
                                 <strong>등록일</strong>
-                                <span>{notice?.regDt}</span>
+                                <span>
+                                    {notice?.regDt.toString().slice(0, 10)}
+                                </span>
                             </p>
                         </div>
 
@@ -97,26 +103,55 @@ const TNoticePost = () => {
                         </div>
 
                         <div className="file-area">
-                            <a href="" title="파일 다운로드">
-                                <span className="iconset ico-file">
-                                    첨부파일
-                                </span>
-                                &nbsp;2022년_공공데이터_활용기업_실태조사_보고서_(배포용).pdf
-                            </a>
+                            <span className="file">첨부파일</span>
+                            {notice?.files ? (
+                                <div className="file-list">
+                                    {notice.files.map(file => (
+                                        <div key={file.fileName}>
+                                            <a
+                                                href={`http://192.168.0.62:9988${file.downloadURL}`}
+                                                download
+                                                title="파일 다운로드"
+                                            >
+                                                {file.fileName}
+                                            </a>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <span>없음</span>
+                            )}
                         </div>
-
                         <div className="prevnext-area">
                             <p className="prev">
                                 <span>이전</span>
-                                <span className="prev-title">
-                                    {notice?.prevPost?.title}
-                                </span>
+                                {notice?.prevPost ? (
+                                    <span
+                                        className="prev-title"
+                                        onClick={goPrev}
+                                    >
+                                        {notice?.prevPost?.title}
+                                    </span>
+                                ) : (
+                                    <span className="prev-titleNo">
+                                        이전글이 없습니다.
+                                    </span>
+                                )}
                             </p>
                             <p className="next">
                                 <span>다음</span>
-                                <span className="next-title">
-                                    {notice?.nextPost?.title}
-                                </span>
+                                {notice?.nextPost ? (
+                                    <span
+                                        className="next-title"
+                                        onClick={goNext}
+                                    >
+                                        {notice?.nextPost?.title}
+                                    </span>
+                                ) : (
+                                    <span className="next-titleNo">
+                                        다음글이 없습니다.
+                                    </span>
+                                )}
                             </p>
                         </div>
 
@@ -128,7 +163,9 @@ const TNoticePost = () => {
                             </div>
                             <div className="button-right">
                                 <button className="deleteBt">삭제</button>
-                                <button className="modifyBt">수정</button>
+                                <button className="modifyBt" onClick={goFix}>
+                                    수정
+                                </button>
                             </div>
                         </div>
                     </div>

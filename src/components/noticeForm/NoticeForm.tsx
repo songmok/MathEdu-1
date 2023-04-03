@@ -9,6 +9,8 @@ interface IProps {
     notice: INotice;
     checkedList: number[];
     setCheckedList: React.Dispatch<React.SetStateAction<number[]>>;
+    setSearchKeyword: React.Dispatch<React.SetStateAction<string>>;
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const NoticeForm = (props: IProps) => {
@@ -51,9 +53,17 @@ const NoticeForm = (props: IProps) => {
             <div className="sectionTop">
                 <p>{props.sectionTitle}</p>
                 <div className="search">
-                    <form>
-                        <input className="searchBox" />
-                        <button className="searchBt">검색</button>
+                    <form onSubmit={props.handleSubmit}>
+                        <input
+                            type="text"
+                            className="searchBox"
+                            onChange={e =>
+                                props.setSearchKeyword(e.target.value)
+                            }
+                        />
+                        <button type="submit" className="searchBt">
+                            검색
+                        </button>
                     </form>
                 </div>
             </div>
@@ -61,7 +71,7 @@ const NoticeForm = (props: IProps) => {
                 <table className="table">
                     <thead>
                         <tr className="tableHeader">
-                            <th>
+                            <th style={{ width: "5%" }}>
                                 <input
                                     type="checkbox"
                                     checked={
@@ -72,11 +82,11 @@ const NoticeForm = (props: IProps) => {
                                     onChange={allCheckHandler}
                                 />
                             </th>
-                            <th>번호</th>
-                            <th>카테고리</th>
-                            <th>제목</th>
-                            <th>작성일</th>
-                            <th>작성자</th>
+                            <th style={{ width: "5%" }}>번호</th>
+                            <th style={{ width: "10%" }}>카테고리</th>
+                            <th style={{ width: "50%" }}>제목</th>
+                            <th style={{ width: "15%" }}>작성일</th>
+                            <th style={{ width: "15%" }}>작성자</th>
                         </tr>
                     </thead>
                     {props.notice.list && props.notice.list.length > 0 ? (
@@ -100,15 +110,13 @@ const NoticeForm = (props: IProps) => {
                                         <td>
                                             <span>{ele.category}</span>
                                         </td>
-                                        <td>
-                                            <span
-                                                className="referenceName"
-                                                onClick={() => {
-                                                    goNoticePost(ele.no);
-                                                }}
-                                            >
-                                                {ele.title}
-                                            </span>
+                                        <td
+                                            className="noticeName"
+                                            onClick={() => {
+                                                goNoticePost(ele.no);
+                                            }}
+                                        >
+                                            <span>{ele.title}</span>
                                         </td>
                                         <td>
                                             <span>

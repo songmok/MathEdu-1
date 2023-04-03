@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { TfontCol, TmainCol } from "../../../../utils/Color";
 import { Button, mainContainer } from "../../../../utils/Layout";
 
-const TReferenceWriteCss = styled.div`
+const TNoticeWriteCss = styled.div`
     ${mainContainer}
     .section {
         background: #fff;
@@ -78,4 +78,4 @@ const TReferenceWriteCss = styled.div`
     }
 `;
 
-export default TReferenceWriteCss;
+export default TNoticeWriteCss;

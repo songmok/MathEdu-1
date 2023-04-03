@@ -1,29 +1,28 @@
 import TSidebar from "../../../../components/tSidebar/TSidebar";
-import TReferenceWriteCss from "./TReferenceWriteCss";
+import TReferenceFixCss from "./TReferenceFixCss";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useNavigate } from "react-router";
+import { useMemo, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../reducer/store";
-import { IClassList } from "../../TNotice/TNoticeWrite/TNoticeWrite";
 
 // React-Quill
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const TReferenceWrite = () => {
+const TReferenceFix = () => {
+    const { state } = useLocation();
     const navigate = useNavigate();
     const QuillRef = useRef<ReactQuill>();
     const user = useSelector((state: RootState) => state.user);
 
-    const [classList, setClassList] = useState<IClassList[]>([]);
-
-    const [title, setTtitle] = useState("");
-    const [contents, setContents] = useState("");
-    const [files, setFiles] = useState<File[]>([]);
-    const [cate, setCate] = useState("");
-    const [classNo, setClassNo] = useState("");
+    const [title, setTtitle] = useState(state.title);
+    const [contents, setContents] = useState(state.contents);
+    const [files, setFiles] = useState<File[]>(
+        Array.isArray(state.files) ? state.files : [state.files],
+    );
+    const [cate, setCate] = useState(state.category);
 
     const contentTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setTtitle(e.target.value);
@@ -38,14 +37,11 @@ const TReferenceWrite = () => {
         setCate(e.target.value);
     };
 
-    const classChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setClassNo(e.target.value);
-        console.log(classNo);
-    };
-
     const goBack = () => {
         navigate(-1);
     };
+
+    console.log(state);
 
     const modules = useMemo(
         () => ({
@@ -80,37 +76,16 @@ const TReferenceWrite = () => {
         [],
     );
 
-    const fetchData = async () => {
+    const fixRef = async () => {
         try {
-            const response = await axios.get(
-                `http://192.168.0.62:9988/api/teacher/classList/${user.id}`,
-            );
-            console.log(response.data);
-            setClassList(response.data.classList);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    console.log(classList);
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    const writeRef = async () => {
-        try {
-
-            
-
             const arr = new Array();
 
             for (let i = 0; i < files.length; i++) {
                 arr.push(files[i]);
             }
 
-            const response = await axios.put(
-                `http://192.168.0.62:9988/api/bbs`,
+            const response = await axios.patch(
+                `http://192.168.0.62:9988/api/bbs/${state.no}`,
                 {
                     category: cate,
                     classNo: 1,
@@ -134,7 +109,7 @@ const TReferenceWrite = () => {
     return (
         <>
             <TSidebar />
-            <TReferenceWriteCss>
+            <TReferenceFixCss>
                 <div className="section">
                     <div className="sectionTop">
                         <p>자료실 작성</p>
@@ -143,11 +118,12 @@ const TReferenceWrite = () => {
                         <form className="title-area">
                             <textarea
                                 placeholder="제목을 입력해주세요."
+                                value={title}
                                 onChange={contentTitle}
                             />
                             <select
                                 placeholder="카테고리 선택"
-                                defaultValue="category"
+                                defaultValue={state.category}
                                 onChange={cateChange}
                             >
                                 <option value="category" disabled>
@@ -158,22 +134,6 @@ const TReferenceWrite = () => {
                                 <option value="문제풀이">문제풀이</option>
                                 <option value="과제">과제</option>
                             </select>
-                            {classList && (
-                                <select
-                                    placeholder="반 선택"
-                                    defaultValue="class-list"
-                                    onChange={classChange}
-                                >
-                                    <option value="class-list" disabled>
-                                        반 목록
-                                    </option>
-                                    {classList.map(ele => (
-                                        <option key={ele.no} value={ele.no}>
-                                            {ele.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            )}
                         </form>
                         <div className="content-area">
                             <ReactQuill
@@ -196,20 +156,25 @@ const TReferenceWrite = () => {
                                 multiple={true}
                                 onChange={fileUpload}
                             />
+                            {files &&
+                                Array.isArray(files) &&
+                                files.map((file, index) => (
+                                    <div key={index}>{file.name}</div>
+                                ))}
                         </form>
                     </div>
                     <div className="sectionBt">
                         <button className="cancleBt" onClick={goBack}>
                             취소
                         </button>
-                        <button className="completeBt" onClick={writeRef}>
+                        <button className="fixBt" onClick={fixRef}>
                             완료
                         </button>
                     </div>
                 </div>
-            </TReferenceWriteCss>
+            </TReferenceFixCss>
         </>
     );
 };
 
-export default TReferenceWrite;
+export default TReferenceFix;
