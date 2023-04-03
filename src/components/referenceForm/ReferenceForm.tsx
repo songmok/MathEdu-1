@@ -59,7 +59,9 @@ const ReferenceForm = (props: IProps) => {
     return (
         <ReferenceFormCss>
             <div className="sectionTop">
-                <p>{props.sectionTitle}</p>
+                <p className={user.user === "teacher" ? "pt" : "ps"}>
+                    {props.sectionTitle}
+                </p>
                 <div className="search">
                     <form onSubmit={props.handleSubmit}>
                         <input

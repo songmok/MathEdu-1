@@ -1,4 +1,4 @@
-import { SmainCol, TfontCol, TmainCol } from "./../../utils/Color";
+import { SfontCol, SmainCol, TfontCol, TmainCol } from "./../../utils/Color";
 import styled from "styled-components";
 import { Button } from "../../utils/Layout";
 
@@ -7,7 +7,11 @@ const NoticeFormCss = styled.div`
         display: flex;
         justify-content: space-between;
         margin-bottom: 10px;
-        p {
+        .ps {
+            color: ${SfontCol};
+            font-size: 18px;
+        }
+        .pt {
             color: ${TfontCol};
             font-size: 18px;
         }
