@@ -16,7 +16,6 @@ const TLoginCss = styled.div`
         color: ${TfontCol};
     }
     form {
-        margin-bottom: 50px;
         display: flex;
         flex-direction: column;
         .id-form {
@@ -27,22 +26,20 @@ const TLoginCss = styled.div`
             padding: 5px 10px;
         }
         .pass-form {
+            margin-bottom: 50px;
             border-radius: 5px;
             width: 350px;
             height: 40px;
             padding: 5px 10px;
         }
-    }
-    .loginBt {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 350px;
-        height: 50px;
-        background: ${TmainCol};
-        color: #fff;
-        border-radius: 5px;
-        cursor: pointer;
+        .loginBt {
+            width: 350px;
+            height: 50px;
+            background: ${TmainCol};
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     }
 `;
 

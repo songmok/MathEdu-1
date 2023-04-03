@@ -19,7 +19,8 @@ const TLogin = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const login = async () => {
+    const login = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         try {
             const response = await axios.post(
                 "http://192.168.0.62:9988/api/teacher/login",
@@ -53,7 +54,7 @@ const TLogin = () => {
             <TLoginCss>
                 <img src={`${process.env.PUBLIC_URL}/images/logo_p.png`} />
                 <p>- 선생님용 -</p>
-                <form>
+                <form onSubmit={login}>
                     <input
                         placeholder="아이디"
                         className="id-form"
@@ -64,10 +65,10 @@ const TLogin = () => {
                         className="pass-form"
                         onChange={pwdHandler}
                     />
+                    <button type="submit" className="loginBt">
+                        로그인
+                    </button>
                 </form>
-                <div onClick={login} className="loginBt">
-                    로그인
-                </div>
             </TLoginCss>
         </>
     );

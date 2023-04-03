@@ -9,6 +9,8 @@ interface IProps {
     reference: IReference;
     checkedList: number[];
     setCheckedList: React.Dispatch<React.SetStateAction<number[]>>;
+    setSearchKeyword: React.Dispatch<React.SetStateAction<string>>;
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const ReferenceForm = (props: IProps) => {
@@ -51,8 +53,14 @@ const ReferenceForm = (props: IProps) => {
             <div className="sectionTop">
                 <p>{props.sectionTitle}</p>
                 <div className="search">
-                    <form>
-                        <input className="searchBox" />
+                    <form onSubmit={props.handleSubmit}>
+                        <input
+                            type="text"
+                            className="searchBox"
+                            onChange={e =>
+                                props.setSearchKeyword(e.target.value)
+                            }
+                        />
                         <button className="searchBt">검색</button>
                     </form>
                 </div>

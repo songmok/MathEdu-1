@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import TSidebarCss from "./TSidebarCss";
 
 const TSidebar = () => {
@@ -8,6 +8,12 @@ const TSidebar = () => {
         { name: "자 료 실", path: "/teacher/reference?page=1" },
         { name: "공 지 사 항", path: "/teacher/notice?page=1" },
     ];
+
+    const navigate = useNavigate();
+
+    const goSignup = () => {
+        navigate("/teacher/signup");
+    };
 
     return (
         <TSidebarCss>
@@ -31,6 +37,17 @@ const TSidebar = () => {
                         </NavLink>
                     );
                 })}
+                <NavLink
+                    to="/teacher/signup"
+                    className={({ isActive }) =>
+                        isActive ? "active signup" : "signup"
+                    }
+                >
+                    <span className="menuTitle">학 생 등 록</span>
+                    <img
+                        src={`${process.env.PUBLIC_URL}/images/menu_arrow.png`}
+                    />
+                </NavLink>
             </div>
         </TSidebarCss>
     );

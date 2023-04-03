@@ -4,7 +4,6 @@ import TNoticeCss from "./TNoticeCss";
 
 import Pagination from "@mui/material/Pagination";
 
-import notice from "./notice.json";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { PaginationItem } from "@mui/material";
 import { Link } from "react-router-dom";

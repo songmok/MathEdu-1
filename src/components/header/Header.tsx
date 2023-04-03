@@ -48,13 +48,29 @@ const Header = () => {
             );
             setUserData(response.data);
         } catch (error) {
-            // console.log(error);
+            console.log(error);
         }
     };
 
     useEffect(() => {
         fetchData();
     }, []);
+
+    // const fetchData = async () => {
+    //     try {
+    //         const response = await axios.get(
+    //             `http://192.168.0.62:9988/api/student/${user.id}`,
+    //         );
+    //         setUserData(response.data);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
+    // useEffect(() => {
+    //     fetchData();
+    // }, []);
+
+    console.log(userData);
 
     return (
         <HeaderCss>

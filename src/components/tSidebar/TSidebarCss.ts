@@ -61,6 +61,22 @@ const TSidebarCss = styled.div`
             height: 8px;
         }
     }
+    .signup {
+        width: 100%;
+        position: absolute;
+        bottom: -450px;
+        cursor: pointer;
+        color: white;
+        padding: 0 70px 0 60px;
+        img {
+            position: absolute;
+            top: 49%;
+            transform: translateY(-50%);
+            right: 50px;
+            width: 8px;
+            height: 8px;
+        }
+    }
 `;
 
 export default TSidebarCss;

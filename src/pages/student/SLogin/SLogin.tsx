@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import SLoginCss from "./SLoginCss";
+import { loginUser } from "../../../reducer/userSlice";
+import { useDispatch } from "react-redux";
 
 const SLogin = () => {
     const [id, setId] = useState<string>("");
@@ -15,6 +17,7 @@ const SLogin = () => {
     };
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const login = async () => {
         try {
@@ -26,9 +29,19 @@ const SLogin = () => {
                 },
             );
             console.log(response.data.message);
-            response.data.status === true
-                ? navigate("/student/grade")
-                : alert(response.data.message);
+            if (response.data.status) {
+                navigate("/student/grade");
+                const user = response.data.login;
+                dispatch(
+                    loginUser({
+                        id: user.id,
+                        name: user.name,
+                        no: user.no,
+                    }),
+                );
+            } else {
+                alert(response.data.message);
+            }
         } catch (error) {
             console.error(error);
         }

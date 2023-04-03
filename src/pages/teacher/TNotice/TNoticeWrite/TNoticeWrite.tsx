@@ -150,7 +150,6 @@ const TNoticeWrite = () => {
                                 onChange={contentTitle}
                             />
                             <select
-                                placeholder="카테고리 선택"
                                 defaultValue="category"
                                 onChange={cateChange}
                             >
@@ -164,7 +163,6 @@ const TNoticeWrite = () => {
                             </select>
                             {classList && (
                                 <select
-                                    placeholder="반 선택"
                                     defaultValue="class-list"
                                     onChange={classChange}
                                 >

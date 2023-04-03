@@ -35,6 +35,8 @@ const TReference = () => {
     const page = searchParams.get("page");
     const keyword = searchParams.get("keyword");
 
+    const [searchKeyword, setSearchKeyword] = useState<string>("");
+
     const user = useSelector((state: RootState) => state.user);
     const teacherNo = user.no;
 
@@ -43,13 +45,22 @@ const TReference = () => {
 
     const [refLIst, setRefList] = useState<IReference>();
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+        e.preventDefault();
+        const params = new URLSearchParams({
+            page: refLIst?.currentPage.toString() ?? "",
+            keyword: searchKeyword,
+        });
+        setSearchParams(params);
+    };
+
     const fetchData = async () => {
         try {
             const response = await axios.get(
                 `http://192.168.0.62:9988/api/bbs/${classNo}/${teacherNo}/${order}`,
                 {
                     params: {
-                        keyword: keyword,
+                        keyword: searchKeyword,
                         page: page,
                     },
                 },
@@ -62,7 +73,7 @@ const TReference = () => {
 
     useEffect(() => {
         fetchData();
-    }, [page]);
+    }, [page, keyword]);
 
     const deleteRef = async () => {
         try {
@@ -95,6 +106,8 @@ const TReference = () => {
                             reference={refLIst}
                             checkedList={checkedList}
                             setCheckedList={setCheckedList}
+                            setSearchKeyword={setSearchKeyword}
+                            handleSubmit={handleSubmit}
                         />
 
                         <div className="sectionBt">
