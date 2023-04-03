@@ -1,6 +1,8 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import styled from "styled-components";
 import Select from "./pages/select/Select";
+import Header from "./components/header/Header";
 
 //Student
 import SLogin from "./pages/student/SLogin/SLogin";
@@ -8,6 +10,8 @@ import SGrade from "./pages/student/SGrade/SGrade";
 import SNotice from "./pages/student/SNotice/SNotice";
 import SReference from "./pages/student/SReference/SReference";
 import SMypage from "./pages/student/SMypage/SMypage";
+import SNoticePost from "./pages/student/SNotice/SNoticePost/SNoitcePost";
+import SReferencePost from "./pages/student/SReference/SReferencePost/SReferencePost";
 
 //Teacher
 import TLogin from "./pages/teacher/TLogin/TLogin";
@@ -15,14 +19,9 @@ import TSignup from "./pages/teacher/TSignup/TSignup";
 import TClass from "./pages/teacher/TClass/TClass";
 import TNotice from "./pages/teacher/TNotice/TNotice";
 import TReference from "./pages/teacher/TReference/TReference";
-
-import styled from "styled-components";
 import TGrade from "./pages/teacher/TGrade/TGrade";
-
 import TNoticePost from "./pages/teacher/TNotice/TNoticePost/TNoticePost";
-import Header from "./components/header/Header";
 import TClassDetail from "./pages/teacher/TClass/TClassDetail/TClassDetail";
-
 import TReferencePost from "./pages/teacher/TReference/TReferencePost/TReferencePost";
 import TReferenceWrite from "./pages/teacher/TReference/TReferenceWrite/TReferenceWrite";
 import TStudentInfo from "./pages/teacher/TClass/TClassDetail/TStudentInfo/TStudentInfo";
@@ -30,8 +29,7 @@ import TStudentTestList from "./pages/teacher/TClass/TClassDetail/TStudentTestLi
 import TNoticeWrite from "./pages/teacher/TNotice/TNoticeWrite/TNoticeWrite";
 import TReferenceFix from "./pages/teacher/TReference/TReferenceFix/TReferenceFix";
 import TNoticeFix from "./pages/teacher/TNotice/TNoticeFix/TNoticeFix";
-import SNoticePost from "./pages/student/SNotice/SNoticePost/SNoitcePost";
-import SReferencePost from "./pages/student/SReference/SReferencePost/SReferencePost";
+import TStudentTestDetail from "./pages/teacher/TClass/TClassDetail/TStudentTestList/TStudentTestDetail/TStudentTestDetail";
 
 function App() {
     return (
@@ -67,10 +65,16 @@ function App() {
                                     path="studentinfo/:studentId"
                                     element={<TStudentInfo />}
                                 />
-                                <Route
-                                    path="test"
-                                    element={<TStudentTestList />}
-                                />
+                                <Route path="test">
+                                    <Route
+                                        path=""
+                                        element={<TStudentTestList />}
+                                    />
+                                    <Route
+                                        path="testdetail"
+                                        element={<TStudentTestDetail />}
+                                    />
+                                </Route>
                             </Route>
                         </Route>
                         <Route path="notice">

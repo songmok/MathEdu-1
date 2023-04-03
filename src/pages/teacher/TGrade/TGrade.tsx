@@ -1,4 +1,4 @@
-import TSidebar from "../../../components/tSidebar/TSidebar";
+import TSidebar from "./../../../components/tSidebar/TSidebar";
 import TGradeCss from "./TGradeCss";
 
 import Highcharts from "highcharts/highstock";
@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
 
-import SGaugeChart from "../../../components/SGaugeChart/SGaugeChart";
+import SGaugeChart from "./../../../components/SGaugeChart/SGaugeChart";
 import axios from "axios";
-import TestAnalysis from "../../../components/testAnalysis/TestAnalysis";
+import TestAnalysis from "./../../../components/testAnalysis/TestAnalysis";
 
 highchartsMore(Highcharts);
 solidGauge(Highcharts);
@@ -33,21 +33,21 @@ export interface testResult {
     totalStudents: number;
     testDt: string;
 }
-export interface studentInfo {
-    address: string;
-    alternatePhone: string;
-    birth: string;
-    classDays: string;
-    className: string;
-    endtime: string;
-    grade: number;
-    id: number;
+export interface TStudentInfo {
     name: string;
-    phone: string;
     profileImgURL: string;
-    regDt: string;
+    birth: string;
+    phone: string;
+    class: string;
     school: string;
-    starttime: string;
+    id: number;
+    alternatePhone: string;
+    classDays: string;
+    startTime: string;
+    endTime: string;
+    address: string;
+    grade: number;
+    regDt: string;
     teacher: string;
 }
 export interface testAnalysis {
@@ -78,21 +78,21 @@ const TGrade = () => {
         totalStudents: 0,
         testDt: "",
     });
-    const [sInfo, setSInfo] = useState<studentInfo>({
-        address: "",
-        alternatePhone: "",
-        birth: "",
-        classDays: "",
-        className: "",
-        endtime: "",
-        grade: 0,
-        id: 0,
+    const [sInfo, setSInfo] = useState<TStudentInfo>({
         name: "",
-        phone: "",
         profileImgURL: "",
-        regDt: "",
+        birth: "",
+        phone: "",
+        class: "",
         school: "",
-        starttime: "",
+        id: 0,
+        alternatePhone: "",
+        classDays: "",
+        startTime: "",
+        endTime: "",
+        address: "",
+        grade: 0,
+        regDt: "",
         teacher: "",
     });
     const [monthTest, setMonthTest] = useState<testAnalysis>({
@@ -134,8 +134,15 @@ const TGrade = () => {
     const nowMonth = now.getMonth(); // 월
     console.log("월 : ", nowMonth, "연도 : ", nowYear);
 
-    const [scMunth, setScMunth] = useState<number>(nowMonth);
-    const [scYear, setScYear] = useState<number>(nowYear);
+    const [scMunth, setScMunth] = useState(nowMonth);
+    const [scYear, setScYear] = useState(nowYear);
+
+    const cM = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setScMunth(Number(e.target.value));
+    };
+    const cY = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setScYear(Number(e.target.value));
+    };
     // 년도 월 select option 생성
     const month = () => {
         let months = [];
@@ -171,6 +178,7 @@ const TGrade = () => {
         typeName: "주간",
         type: "week",
     });
+    const id = "23030004";
 
     // 월간 주간 성적 그래프
     const sWeeklyTest = () => {
@@ -182,12 +190,12 @@ const TGrade = () => {
         } = {
             order: "desc",
             month: scMunth,
-            stuId: "23030004",
+            stuId: id,
             year: scYear,
         };
         axios
             .get(
-                " http://192.168.0.62:9988/api/student/exam/weekly/23030004/2023/3/desc",
+                `http://192.168.0.62:9988/api/student/exam/weekly/${id}/${scYear}/${scMunth}/desc`,
                 { params: params },
             )
             .then(res => {
@@ -199,14 +207,14 @@ const TGrade = () => {
             });
     };
     const sMonthlyTest = () => {
-        let params: { order: string; stuId: string; year: string } = {
+        let params: { order: string; stuId: string; year: number } = {
             order: "desc",
-            stuId: "23030004",
-            year: "2023",
+            stuId: id,
+            year: scYear,
         };
         axios
             .get(
-                " http://192.168.0.62:9988/api/student/exam/monthly/23030004/2023/desc",
+                `http://192.168.0.62:9988/api/student/exam/monthly/${id}/${scYear}/desc`,
                 { params: params },
             )
             .then(res => {
@@ -214,15 +222,17 @@ const TGrade = () => {
                 setMonthTest(res.data.data);
             })
             .catch(err => {
-                // console.log(err);
+                console.log(err);
             });
     };
     useEffect(() => {
-        sWeeklyTest();
-        sMonthlyTest();
+        if (scMunth === nowMonth) {
+            sWeeklyTest();
+            sMonthlyTest();
+        }
     }, []);
     // 월간 주간 변경 버튼
-    const wmchange = () => {
+    const wmChange = () => {
         if (wmBtn.typeName === "주간") {
             setWmBtn({ typeName: "월간", type: "month" });
             sMonthlyTest();
@@ -231,6 +241,9 @@ const TGrade = () => {
             sWeeklyTest();
         }
     };
+
+    //확인버튼
+    const wMcheck = () => {};
 
     return (
         <>
@@ -259,28 +272,18 @@ const TGrade = () => {
                         <p className="subTitle">
                             {`${wmBtn.typeName}`} 성적 분석
                         </p>
-                        <button className="chbt subtitle" onClick={wmchange}>
+                        <button className="chbt subtitle" onClick={wmChange}>
                             {`${wmBtn.typeName}` === "주간" ? "월간" : "주간"}
                             성적 분석
                         </button>
                     </div>
                     {wmBtn.typeName === "주간" ? (
                         <form className="subTitle flexForm">
-                            <select
-                                value={scYear}
-                                onChange={e =>
-                                    setScYear(Number(e.target.value))
-                                }
-                            >
+                            <select value={scYear} onChange={e => cY(e)}>
                                 {year()}
                             </select>
                             <span>년</span>
-                            <select
-                                value={scMunth}
-                                onChange={e =>
-                                    setScMunth(Number(e.target.value))
-                                }
-                            >
+                            <select value={scMunth} onChange={e => cM(e)}>
                                 {month()}
                             </select>
                             <span>월</span>
@@ -290,17 +293,16 @@ const TGrade = () => {
                         </form>
                     ) : (
                         <form className="subTitle flexForm">
-                            <select
-                                value={scYear}
-                                onChange={e =>
-                                    setScYear(Number(e.target.value))
-                                }
-                            >
+                            <select value={scYear} onChange={e => cY(e)}>
                                 {year()}
                             </select>
                             <span>년</span>
 
-                            <button type="submit" className="submitBt">
+                            <button
+                                type="submit"
+                                className="submitBt"
+                                onClick={wMcheck}
+                            >
                                 확인
                             </button>
                         </form>

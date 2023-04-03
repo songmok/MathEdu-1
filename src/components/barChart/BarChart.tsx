@@ -1,11 +1,10 @@
-import { TStudentTestDetailCss } from "./TStudentTestDetailCss";
-import { useRef } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts/highstock";
 import highchartsMore from "highcharts/highcharts-more.js";
-import TSidebar from "../../../../../../components/tSidebar/TSidebar";
+import { useRef } from "react";
 highchartsMore(Highcharts);
-const TStudentTestDetail = () => {
+
+const BarChart = () => {
     const chartRef = useRef(null);
     const options = {
         chart: {
@@ -67,22 +66,15 @@ const TStudentTestDetail = () => {
         ],
     };
     return (
-        <>
-            <TSidebar />
-            <TStudentTestDetailCss>
-                return (
-                <div>
-                    <HighchartsReact
-                        ref={chartRef}
-                        highcharts={Highcharts}
-                        oneToOne={true}
-                        options={options}
-                    />
-                </div>
-                );
-            </TStudentTestDetailCss>
-        </>
+        <div>
+            <HighchartsReact
+                ref={chartRef}
+                highcharts={Highcharts}
+                oneToOne={true}
+                options={options}
+            />
+        </div>
     );
 };
 
-export default TStudentTestDetail;
+export default BarChart;

@@ -8,11 +8,10 @@ import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
 // 더미데이터
 import dummyData from "./gradedummy.json";
-import infodata from "./infodummy.json";
 import SGaugeChart from "../../../components/SGaugeChart/SGaugeChart";
 import HeaderCss from "../../../components/header/HeaderCss";
 import Header from "../../../components/header/Header";
-import axios from "axios";
+
 
 highchartsMore(Highcharts);
 solidGauge(Highcharts);
@@ -196,7 +195,6 @@ const SGrade = () => {
         ],
     };
 
-
     return (
         <>
             <SSidebar />
@@ -208,25 +206,29 @@ const SGrade = () => {
                         gColors={{
                             mainCol: "#4543A0",
                             backCol: "#d9d9d9",
-                        }} testResult={{
+                        }}
+                        testResult={{
                             score: 0,
                             srank: 0,
                             tieCnt: 0,
                             totalStudents: 0,
-                            testDt: ''
-                        }}                    />
+                            testDt: "",
+                        }}
+                    />
                     <SGaugeChart
                         examType={{ typeName: "월간" }}
                         gColors={{
                             mainCol: "#4543A0",
                             backCol: "#d9d9d9",
-                        }} testResult={{
+                        }}
+                        testResult={{
                             score: 0,
                             srank: 0,
                             tieCnt: 0,
                             totalStudents: 0,
-                            testDt: ''
-                        }}                    />
+                            testDt: "",
+                        }}
+                    />
                 </div>
                 <div className="analysis">
                     <div className="chtitle">
