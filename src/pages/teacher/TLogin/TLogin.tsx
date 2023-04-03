@@ -39,6 +39,7 @@ const TLogin = () => {
                         imageURL: user.imageURL,
                         name: user.name,
                         no: user.no,
+                        user: "teacher",
                     }),
                 );
             } else {

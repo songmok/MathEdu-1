@@ -9,12 +9,6 @@ const TSidebar = () => {
         { name: "공 지 사 항", path: "/teacher/notice?page=1" },
     ];
 
-    const navigate = useNavigate();
-
-    const goSignup = () => {
-        navigate("/teacher/signup");
-    };
-
     return (
         <TSidebarCss>
             <div className="logo">

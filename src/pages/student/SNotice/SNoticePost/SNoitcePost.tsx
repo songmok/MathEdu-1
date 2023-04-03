@@ -1,34 +1,12 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
-import TSidebar from "../../../../components/tSidebar/TSidebar";
-import TNoticePostCss from "./TNoticePostCss";
+import SSidebar from "../../../../components/sSidebar/SSidebar";
+import SNoticePostCss from "./SNoticePostCss";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { INotice } from "../../../teacher/TNotice/TNoticePost/TNoticePost";
 
-export interface INotice {
-    no: number;
-    category: string;
-    title: string;
-    regDt: string;
-    contents: string;
-    authorName: string;
-    authorno: number;
-    files: {
-        fileName: string;
-        fileType: string;
-        downloadURL: string;
-    }[];
-    prevPost?: {
-        no: number;
-        title: string;
-    };
-    nextPost?: {
-        no: number;
-        title: string;
-    };
-}
-
-const TNoticePost = () => {
+const SNoticePost = () => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const noticeNo = searchParams.get("no");
@@ -54,26 +32,22 @@ const TNoticePost = () => {
     }, [noticeNo]);
 
     const goNotice = () => {
-        navigate("/teacher/notice?page=1");
+        navigate("/student/notice?page=1");
     };
 
     const goPrev = () => {
-        navigate(`/teacher/notice/post?no=${notice?.prevPost?.no}`);
+        navigate(`/student/notice/post?no=${notice?.prevPost?.no}`);
     };
     const goNext = () => {
-        navigate(`/teacher/notice/post?no=${notice?.nextPost?.no}`);
-    };
-
-    const goFix = () => {
-        navigate(`/teacher/notice/fix`, { state: notice });
+        navigate(`/student/notice/post?no=${notice?.nextPost?.no}`);
     };
 
     return (
         <>
-            <TSidebar />
-            <TNoticePostCss>
+            <SSidebar />
+            <SNoticePostCss>
                 <section className="section">
-                    <p className="section-title">공지사항</p>
+                    <p className="section-title">자료실</p>
                     <div className="notice-board">
                         <div className="title-area">
                             <span>{notice?.category}</span>
@@ -82,7 +56,7 @@ const TNoticePost = () => {
                         <div className="info-area">
                             <p>
                                 <strong>작성자</strong>
-                                <span>{notice?.authorName} 선생님</span>
+                                <span>{notice?.authorName} </span>
                             </p>
                             <p>
                                 <strong>등록일</strong>
@@ -122,6 +96,7 @@ const TNoticePost = () => {
                                 <span>없음</span>
                             )}
                         </div>
+
                         <div className="prevnext-area">
                             <p className="prev">
                                 <span>이전</span>
@@ -161,18 +136,12 @@ const TNoticePost = () => {
                                     목록
                                 </button>
                             </div>
-                            <div className="button-right">
-                                <button className="deleteBt">삭제</button>
-                                <button className="modifyBt" onClick={goFix}>
-                                    수정
-                                </button>
-                            </div>
                         </div>
                     </div>
                 </section>
-            </TNoticePostCss>
+            </SNoticePostCss>
         </>
     );
 };
 
-export default TNoticePost;
+export default SNoticePost;

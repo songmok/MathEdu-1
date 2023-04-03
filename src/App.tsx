@@ -30,7 +30,8 @@ import TStudentTestList from "./pages/teacher/TClass/TClassDetail/TStudentTestLi
 import TNoticeWrite from "./pages/teacher/TNotice/TNoticeWrite/TNoticeWrite";
 import TReferenceFix from "./pages/teacher/TReference/TReferenceFix/TReferenceFix";
 import TNoticeFix from "./pages/teacher/TNotice/TNoticeFix/TNoticeFix";
-
+import SNoticePost from "./pages/student/SNotice/SNoticePost/SNoitcePost";
+import SReferencePost from "./pages/student/SReference/SReferencePost/SReferencePost";
 
 function App() {
     return (
@@ -43,10 +44,13 @@ function App() {
                     <Route path="/student/*">
                         <Route path="login" element={<SLogin />} />
                         <Route path="grade" element={<SGrade />} />
-                        <Route path="notice" element={<SNotice />} />
+                        <Route path="notice">
+                            <Route path="" element={<SNotice />} />
+                            <Route path="post" element={<SNoticePost />} />
+                        </Route>
                         <Route path="reference">
                             <Route path="" element={<SReference />} />
-                            <Route path="reference" element={<SReference />} />
+                            <Route path="post" element={<SReferencePost />} />
                         </Route>
                         <Route path="mypage" element={<SMypage />} />
                     </Route>

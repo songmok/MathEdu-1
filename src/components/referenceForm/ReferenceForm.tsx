@@ -3,6 +3,8 @@ import ReferenceFormCss from "./ReferenceFormCss";
 import { IReference } from "../../pages/teacher/TReference/TReference";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { RootState } from "../../reducer/store";
+import { useSelector } from "react-redux";
 
 interface IProps {
     sectionTitle: string;
@@ -15,8 +17,14 @@ interface IProps {
 
 const ReferenceForm = (props: IProps) => {
     const navigate = useNavigate();
+    const user = useSelector((state: RootState) => state.user);
+
     const goReferencePost = (no: number) => {
-        navigate(`/teacher/reference/post?no=${no}`);
+        if (user.user === "teacher") {
+            navigate(`/teacher/reference/post?no=${no}`);
+        } else if (user.user === "student") {
+            navigate(`/student/reference/post?no=${no}`);
+        }
     };
 
     const checkedItem = (value: number, isChecked: boolean) => {
@@ -61,25 +69,41 @@ const ReferenceForm = (props: IProps) => {
                                 props.setSearchKeyword(e.target.value)
                             }
                         />
-                        <button className="searchBt">검색</button>
+                        <button
+                            className={
+                                user.user === "teacher"
+                                    ? "seacrhBt"
+                                    : "searchBtS"
+                            }
+                        >
+                            검색
+                        </button>
                     </form>
                 </div>
             </div>
             <div className="sectionMain">
                 <table className="table">
                     <thead>
-                        <tr className="tableHeader">
-                            <th style={{ width: "5%" }}>
-                                <input
-                                    type="checkbox"
-                                    checked={
-                                        props.reference.list.length ===
-                                            props.checkedList.length &&
-                                        props.reference.list.length !== 0
-                                    }
-                                    onChange={allCheckHandler}
-                                />
-                            </th>
+                        <tr
+                            className={
+                                user.user === "teacher"
+                                    ? "tableHeader"
+                                    : "tableHeaderS"
+                            }
+                        >
+                            {user.user === "teacher" ? (
+                                <th style={{ width: "5%" }}>
+                                    <input
+                                        type="checkbox"
+                                        checked={
+                                            props.reference.list.length ===
+                                                props.checkedList.length &&
+                                            props.reference.list.length !== 0
+                                        }
+                                        onChange={allCheckHandler}
+                                    />
+                                </th>
+                            ) : null}
                             <th style={{ width: "5%" }}>번호</th>
                             <th style={{ width: "10%" }}>카테고리</th>
                             <th style={{ width: "50%" }}>제목</th>
@@ -93,16 +117,18 @@ const ReferenceForm = (props: IProps) => {
                             return (
                                 <tbody key={ele.no}>
                                     <tr className="tableMain">
-                                        <td>
-                                            <input
-                                                type="checkbox"
-                                                value={ele.no}
-                                                onChange={checkHandler}
-                                                checked={props.checkedList.includes(
-                                                    ele.no,
-                                                )}
-                                            />
-                                        </td>
+                                        {user.user === "teacher" ? (
+                                            <td>
+                                                <input
+                                                    type="checkbox"
+                                                    value={ele.no}
+                                                    onChange={checkHandler}
+                                                    checked={props.checkedList.includes(
+                                                        ele.no,
+                                                    )}
+                                                />
+                                            </td>
+                                        ) : null}
                                         <td>
                                             <span>{ele.no}</span>
                                         </td>

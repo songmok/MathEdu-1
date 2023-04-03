@@ -37,6 +37,7 @@ const SLogin = () => {
                         id: user.id,
                         name: user.name,
                         no: user.no,
+                        user : "student"
                     }),
                 );
             } else {

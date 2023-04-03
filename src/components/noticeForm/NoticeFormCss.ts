@@ -1,4 +1,4 @@
-import { TfontCol, TmainCol } from "./../../utils/Color";
+import { SmainCol, TfontCol, TmainCol } from "./../../utils/Color";
 import styled from "styled-components";
 import { Button } from "../../utils/Layout";
 
@@ -24,9 +24,15 @@ const NoticeFormCss = styled.div`
                     background: ${TmainCol};
                     margin-left: 15px;
                 }
+                .searchBtS {
+                    ${Button}
+                    background: ${SmainCol};
+                    margin-left: 15px;
+                }
             }
         }
     }
+
     .sectionMain {
         margin-bottom: 10px;
         .table {
@@ -35,6 +41,12 @@ const NoticeFormCss = styled.div`
             text-align: center;
             .tableHeader {
                 background: ${TmainCol};
+                color: #fff;
+                border: none;
+                height: 50px;
+            }
+            .tableHeaderS {
+                background: ${SmainCol};
                 color: #fff;
                 border: none;
                 height: 50px;

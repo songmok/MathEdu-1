@@ -18,7 +18,7 @@ const TSignup = () => {
     const [parentPhone, setParentPhone] = useState("");
     const [address, setAddress] = useState("");
     const [classNo, setClassNo] = useState("");
-    const [file, setFile] = useState([]);
+    const [file, setFile] = useState<File>();
 
     const [classList, setClassList] = useState<IClassList[]>([]);
 
@@ -40,9 +40,12 @@ const TSignup = () => {
         fetchData();
     }, []);
 
-    // const fileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setFile(e.target.files[0]);
-    // };
+    const fileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = e.target.files?.[0];
+        if (selectedFile) {
+            setFile(selectedFile);
+        }
+    };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -58,7 +61,7 @@ const TSignup = () => {
                     birthYear: year,
                     classNo: classNo,
                     id: username,
-                    // image: file,
+                    image: file,
                     name: name,
                     phoneNo: phone,
                     pwd: "1234",
@@ -277,16 +280,16 @@ const TSignup = () => {
                             </div>
 
                             <div>
-                                <label htmlFor="classroom">사진</label>
+                                <label htmlFor="image">사진</label>
                                 <input
                                     type="file"
                                     multiple={true}
-                                    // onChange={fileUpload}
+                                    onChange={fileUpload}
                                 />
                             </div>
 
                             <button type="submit" className="signBt">
-                                회원가입
+                                등 록
                             </button>
                         </form>
                     </div>

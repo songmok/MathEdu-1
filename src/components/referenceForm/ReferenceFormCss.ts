@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TfontCol, TmainCol } from "../../utils/Color";
+import { SfontCol, SmainCol, TfontCol, TmainCol } from "../../utils/Color";
 import { Button } from "../../utils/Layout";
 
 const ReferenceFormCss = styled.div`
@@ -7,7 +7,11 @@ const ReferenceFormCss = styled.div`
         display: flex;
         justify-content: space-between;
         margin-bottom: 10px;
-        p {
+        .ps {
+            color: ${SfontCol};
+            font-size: 18px;
+        }
+        .pt {
             color: ${TfontCol};
             font-size: 18px;
         }
@@ -24,6 +28,11 @@ const ReferenceFormCss = styled.div`
                     background: ${TmainCol};
                     margin-left: 15px;
                 }
+                .searchBtS {
+                    ${Button}
+                    background: ${SmainCol};
+                    margin-left: 15px;
+                }
             }
         }
     }
@@ -35,6 +44,12 @@ const ReferenceFormCss = styled.div`
             text-align: center;
             .tableHeader {
                 background: ${TmainCol};
+                color: #fff;
+                border: none;
+                height: 50px;
+            }
+            .tableHeaderS {
+                background: ${SmainCol};
                 color: #fff;
                 border: none;
                 height: 50px;

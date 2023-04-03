@@ -11,12 +11,14 @@ export interface IUserData {
     currentStuPage: number;
     id: string;
     imageURL: string;
+    imgURL: string;
     name: string;
     regdt: string;
     status: number;
     stuList: IStudentData[];
     totalStuCount: number;
     totalStuPage: number;
+    className: string;
 }
 
 interface IStudentData {
@@ -30,6 +32,7 @@ interface IStudentData {
 
 const Header = () => {
     const location = useLocation();
+
     if (
         location.pathname === "/" ||
         location.pathname === "/student/login" ||
@@ -42,32 +45,29 @@ const Header = () => {
     const [userData, setUserData] = useState<IUserData>();
 
     const fetchData = async () => {
-        try {
-            const response = await axios.get(
-                `http://192.168.0.62:9988/api/teacher/${user.id}`,
-            );
-            setUserData(response.data);
-        } catch (error) {
-            console.log(error);
+        if (user.user === "teacher") {
+            try {
+                const response = await axios.get(
+                    `http://192.168.0.62:9988/api/teacher/${user.id}`,
+                );
+                setUserData(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+        } else if (user.user === "student") {
+            try {
+                const response = await axios.get(
+                    `http://192.168.0.62:9988/api/student/${user.id}`,
+                );
+                setUserData(response.data.info.basicInfo);
+            } catch (error) {
+                console.log(error);
+            }
         }
     };
     useEffect(() => {
         fetchData();
     }, []);
-
-    // const fetchData = async () => {
-    //     try {
-    //         const response = await axios.get(
-    //             `http://192.168.0.62:9988/api/student/${user.id}`,
-    //         );
-    //         setUserData(response.data);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-    // useEffect(() => {
-    //     fetchData();
-    // }, []);
 
     console.log(userData);
 
@@ -75,7 +75,7 @@ const Header = () => {
         <HeaderCss>
             {userData ? (
                 <header className="header">
-                    <p className="Stitle">반 이름이 들어갈 자리입니다</p>
+                    <p className="Stitle">{userData.className}</p>
                     <LogoutBt userData={userData} />
                 </header>
             ) : (

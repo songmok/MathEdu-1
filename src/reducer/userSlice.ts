@@ -5,9 +5,16 @@ export interface userType {
     imageURL: string;
     name: string;
     no: number;
+    user: string;
 }
 
-const initialState: userType = { id: "", imageURL: "", name: "", no: 0 };
+const initialState: userType = {
+    id: "",
+    imageURL: "",
+    name: "",
+    no: 0,
+    user: "",
+};
 
 const userSlice = createSlice({
     name: "user",
@@ -18,12 +25,14 @@ const userSlice = createSlice({
             state.imageURL = action.payload.imageURL;
             state.name = action.payload.name;
             state.no = action.payload.no;
+            state.user = action.payload.user;
         },
         logoutUser(state) {
             state.id = "";
             state.imageURL = "";
             state.name = "";
             state.no = 0;
+            state.user = "";
         },
     },
 });
