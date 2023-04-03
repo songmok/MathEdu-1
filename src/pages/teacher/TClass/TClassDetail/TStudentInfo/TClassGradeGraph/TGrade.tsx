@@ -256,6 +256,7 @@ const TGrade = () => {
             <TSidebar />
             <TGradeCss>
                 <div className="tests">
+                 
                     <SGaugeChart
                         examType={{ typeName: "주간" }}
                         gColors={{
