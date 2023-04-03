@@ -26,8 +26,8 @@ export const InfoCss = styled.div`
             .profileImg {
                 width: 135px;
                 height: 175px;
-                background-color: pink;
-                .img {
+                img {
+                    display: block;
                     width: 100%;
                 }
             }

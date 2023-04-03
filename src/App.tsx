@@ -30,7 +30,7 @@ import TStudentTestList from "./pages/teacher/TClass/TClassDetail/TStudentTestLi
 import TNoticeWrite from "./pages/teacher/TNotice/TNoticeWrite/TNoticeWrite";
 import TReferenceFix from "./pages/teacher/TReference/TReferenceFix/TReferenceFix";
 import TNoticeFix from "./pages/teacher/TNotice/TNoticeFix/TNoticeFix";
-
+import TStudentTestDetail from "./pages/teacher/TClass/TClassDetail/TStudentTestList/TStudentTestDetail/TStudentTestDetail";
 
 function App() {
     return (
@@ -63,10 +63,16 @@ function App() {
                                     path="studentinfo/:studentId"
                                     element={<TStudentInfo />}
                                 />
-                                <Route
-                                    path="test"
-                                    element={<TStudentTestList />}
-                                />
+                                <Route path="test">
+                                    <Route
+                                        path=""
+                                        element={<TStudentTestList />}
+                                    />
+                                    <Route
+                                        path="testdetail"
+                                        element={<TStudentTestDetail />}
+                                    />
+                                </Route>
                             </Route>
                         </Route>
                         <Route path="notice">
