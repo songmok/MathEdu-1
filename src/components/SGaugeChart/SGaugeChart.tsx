@@ -9,7 +9,7 @@ interface Iprops {
         mainCol: string;
         backCol: string;
     };
-    testResult: {
+    testResult?: {
         score: number;
         srank: number;
         tieCnt: number;
@@ -19,6 +19,8 @@ interface Iprops {
 }
 
 const SGaugeChart = (props: Iprops) => {
+    const score = props.testResult?.score ?? 0;
+
     const GaugeChart = {
         chart: {
             type: "solidgauge",
@@ -97,16 +99,20 @@ const SGaugeChart = (props: Iprops) => {
                         color: props.gColors.mainCol,
                         radius: "87%",
                         innerRadius: "63%",
-                        y: props.testResult.score,
+                        y: score,
                     },
                 ],
             },
         ],
     };
 
-    const percentage = Math.floor(
-        (props.testResult.srank / props.testResult.totalStudents) * 100,
-    );
+    const percentage = props.testResult?.totalStudents
+        ? Math.floor(
+              ((props.testResult?.srank ?? 0) /
+                  props.testResult.totalStudents) *
+                  100,
+          )
+        : 0;
 
     return (
         <div className="testType">
@@ -129,33 +135,32 @@ const SGaugeChart = (props: Iprops) => {
                 <ul className="gradeList">
                     <li className="gradeLR">
                         <span className="gradeLRC">점수</span>
-                        <span className="gradeLRCI">
-                            {props.testResult.score}
-                        </span>
+                        <span className="gradeLRCI">{score}</span>
                     </li>
 
                     <li className="gradeLR">
                         <span className="gradeLRC">석차</span>
                         <span className="gradeLRCI">
-                            {props.testResult.srank}
+                            {props.testResult?.srank ?? 0}
                         </span>
                     </li>
                     <li className="gradeLR">
                         <span className="gradeLRC">동차석수</span>
                         <span className="gradeLRCI">
-                            {props.testResult.tieCnt}
+                            {props.testResult?.srank ?? 0}
                         </span>
                     </li>
                     <li className="gradeLR">
                         <span className="gradeLRC">수강인원</span>
                         <span className="gradeLRCI">
-                            {props.testResult.totalStudents}
+                            {props.testResult?.srank ?? 0}
                         </span>
                     </li>
                     <li className="gradeLR">
                         <span className="gradeLRC">시험일자</span>
                         <span className="gradeLRCI">
-                            {props.testResult.testDt}
+                            {props.testResult?.srank ?? 0}
+                            {props.testResult?.testDt}
                         </span>
                     </li>
                 </ul>

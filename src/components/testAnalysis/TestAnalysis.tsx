@@ -2,7 +2,7 @@ import React from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts/highstock";
 import highchartsMore from "highcharts/highcharts-more.js";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 highchartsMore(Highcharts);
 
 interface Iprops {
@@ -29,6 +29,19 @@ interface Iprops {
 }
 const TestAnalysis = (props: Iprops) => {
     const chartRef = useRef(null);
+
+    const personalScores =
+        props.testAnalysis.personalScores.length === null
+            ? [0]
+            : props.testAnalysis.personalScores;
+    const classAvgScores =
+        props.testAnalysis.classAvgScores.length === null
+            ? [0]
+            : props.testAnalysis.classAvgScores;
+    const top30pAvgScores =
+        props.testAnalysis.top30pAvgScores.length === null
+            ? [0]
+            : props.testAnalysis.top30pAvgScores;
 
     // 차트 옵션 주차
     const testNum = props.testAnalysis.personalScores.length;
@@ -63,7 +76,7 @@ const TestAnalysis = (props: Iprops) => {
         series: [
             {
                 name: "내 점수",
-                data: props.testAnalysis.personalScores,
+                data: personalScores,
                 lineColor: props.gLineColors.mainCol,
                 lineWidth: 3,
                 marker: {
@@ -75,7 +88,7 @@ const TestAnalysis = (props: Iprops) => {
             },
             {
                 name: "반 평균",
-                data: props.testAnalysis.classAvgScores,
+                data: classAvgScores,
                 lineColor: props.gLineColors.pointCol,
                 lineWidth: 3,
                 marker: {
@@ -87,7 +100,7 @@ const TestAnalysis = (props: Iprops) => {
             },
             {
                 name: "최고점수",
-                data: props.testAnalysis.top30pAvgScores,
+                data: top30pAvgScores,
                 lineColor: props.gLineColors.subCol,
                 lineWidth: 3,
                 marker: {

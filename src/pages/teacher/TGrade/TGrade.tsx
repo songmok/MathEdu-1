@@ -1,14 +1,13 @@
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import TSidebar from "./../../../components/tSidebar/TSidebar";
 import TGradeCss from "./TGradeCss";
-
 import Highcharts from "highcharts/highstock";
-import { useEffect, useState } from "react";
 import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
-
 import SGaugeChart from "./../../../components/SGaugeChart/SGaugeChart";
-import axios from "axios";
 import TestAnalysis from "./../../../components/testAnalysis/TestAnalysis";
+import axios from "axios";
 
 highchartsMore(Highcharts);
 solidGauge(Highcharts);
@@ -108,15 +107,18 @@ const TGrade = () => {
         top30pAvgScores: [],
         tableData: [],
     });
+    const location = useLocation();
+    const path = location.pathname;
+    const stuId = path.split("/").pop(); // "23030004"
 
     // 학생 정보 데이터연동
+
     useEffect(() => {
-        const stuid = "23030004";
-        let params: { stuId: string } = {
-            stuId: stuid,
+        let params: { stuId?: string } = {
+            stuId: stuId,
         };
         axios
-            .get(`http://192.168.0.62:9988/api/student/${stuid}`, {
+            .get(`http://192.168.0.62:9988/api/student/${stuId}`, {
                 params: params,
             })
             .then(res => {
@@ -178,24 +180,23 @@ const TGrade = () => {
         typeName: "주간",
         type: "week",
     });
-    const id = "23030004";
 
     // 월간 주간 성적 그래프
     const sWeeklyTest = () => {
         let params: {
             order: string;
-            stuId: string;
+            stuId?: string;
             year: number;
             month: number;
         } = {
             order: "desc",
             month: scMunth,
-            stuId: id,
+            stuId: stuId,
             year: scYear,
         };
         axios
             .get(
-                `http://192.168.0.62:9988/api/student/exam/weekly/${id}/${scYear}/${scMunth}/desc`,
+                `http://192.168.0.62:9988/api/student/exam/weekly/${stuId}/${scYear}/${scMunth}/desc`,
                 { params: params },
             )
             .then(res => {
@@ -207,14 +208,14 @@ const TGrade = () => {
             });
     };
     const sMonthlyTest = () => {
-        let params: { order: string; stuId: string; year: number } = {
+        let params: { order: string; stuId?: string; year: number } = {
             order: "desc",
-            stuId: id,
+            stuId: stuId,
             year: scYear,
         };
         axios
             .get(
-                `http://192.168.0.62:9988/api/student/exam/monthly/${id}/${scYear}/desc`,
+                `http://192.168.0.62:9988/api/student/exam/monthly/${stuId}/${scYear}/desc`,
                 { params: params },
             )
             .then(res => {
@@ -244,6 +245,8 @@ const TGrade = () => {
 
     //확인버튼
     const wMcheck = () => {};
+
+    console.log(stuId);
 
     return (
         <>
