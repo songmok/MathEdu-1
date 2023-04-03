@@ -28,6 +28,7 @@ export const InfoCss = styled.div`
                 height: 175px;
                 background-color: pink;
                 .img {
+                    width: 100%;
                 }
             }
             .infoGrid {
@@ -52,6 +53,7 @@ export const InfoCss = styled.div`
                     .data {
                         position: absolute;
                         left: 130px;
+                        white-space: nowrap;
                     }
                 }
             }

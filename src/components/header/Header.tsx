@@ -51,7 +51,6 @@ const Header = () => {
             console.log(error);
         }
     };
-
     useEffect(() => {
         fetchData();
     }, []);

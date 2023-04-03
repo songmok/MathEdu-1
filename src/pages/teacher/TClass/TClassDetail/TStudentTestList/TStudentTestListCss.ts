@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import { TfontCol, TmainCol } from "../../../utils/Color";
+import { TfontCol, TmainCol } from "../../../../../utils/Color";
+import { mainContainer } from "../../../../../utils/Layout";
 
-export const TClassTestCss = styled.div`
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 15px;
+export const TStudentTestListCss = styled.section`
+    ${mainContainer}
+
+    /* Header */
     .header {
         display: flex;
         justify-content: space-between;
@@ -23,7 +24,6 @@ export const TClassTestCss = styled.div`
             height: 30px;
             border: medium none;
             border-radius: 5px;
-            cursor: pointer;
             background: rgb(32, 30, 89);
             margin-left: 15px;
             span {
@@ -32,37 +32,26 @@ export const TClassTestCss = styled.div`
             }
         }
     }
+
+    /* Main Section */
     .sectionMain {
         .table {
             border-radius: 5px;
+            width: 100%;
             text-align: center;
-            position: relative;
 
+            /* Table Header */
             .tableHeader {
-                background: ${TmainCol};
-                color: #fff;
-                border: none;
-                overflow: hidden;
-                th {
-                    padding: 5px 76px;
-                }
-            }
-            /* 선생님 - 반 학생 헤더 */
-            .teacherTableHeader {
                 background: ${TmainCol};
                 color: #fff;
                 border: none;
                 height: 50px;
             }
+
+            /* Table Rows */
             .tableMain {
-                overflow: hidden;
+                height: 40px;
                 > td {
-                    max-width: 50px;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    font-size: 20px;
-                    padding: 15px 0;
                     .linkname {
                         cursor: pointer;
                         &:hover {
@@ -72,6 +61,28 @@ export const TClassTestCss = styled.div`
                         }
                     }
                 }
+            }
+        }
+        .select {
+            text-align: right;
+            select {
+                margin-right: 10px;
+                margin-top: 20px;
+                padding: 8px;
+                border: 1px solid ${TmainCol};
+                border-radius: 5px;
+                background-color: transparent;
+                color: ${TmainCol};
+                cursor: pointer;
+            }
+        }
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+
+            .css-19micn4-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+                background: ${TmainCol};
             }
         }
     }

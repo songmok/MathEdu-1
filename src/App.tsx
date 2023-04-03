@@ -26,9 +26,11 @@ import TClassDetail from "./pages/teacher/TClass/TClassDetail/TClassDetail";
 import TReferencePost from "./pages/teacher/TReference/TReferencePost/TReferencePost";
 import TReferenceWrite from "./pages/teacher/TReference/TReferenceWrite/TReferenceWrite";
 import TStudentInfo from "./pages/teacher/TClass/TClassDetail/TStudentInfo/TStudentInfo";
+import TStudentTestList from "./pages/teacher/TClass/TClassDetail/TStudentTestList/TStudentTestList";
 import TNoticeWrite from "./pages/teacher/TNotice/TNoticeWrite/TNoticeWrite";
 import TReferenceFix from "./pages/teacher/TReference/TReferenceFix/TReferenceFix";
 import TNoticeFix from "./pages/teacher/TNotice/TNoticeFix/TNoticeFix";
+
 
 function App() {
     return (
@@ -58,8 +60,12 @@ function App() {
                             <Route path="detail">
                                 <Route path="" element={<TClassDetail />} />
                                 <Route
-                                    path="studentinfo"
+                                    path="studentinfo/:studentId"
                                     element={<TStudentInfo />}
+                                />
+                                <Route
+                                    path="test"
+                                    element={<TStudentTestList />}
                                 />
                             </Route>
                         </Route>

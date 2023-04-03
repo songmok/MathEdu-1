@@ -1,8 +1,41 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { TClassInfoCss } from "./TClassInfoCss";
 
-type Props = {};
+interface IClassNumber {
+    classQuNo: string | null;
+}
+interface IClassInfo {
+    no: number;
+    name: string;
+    grade: number;
+    teacher: string;
+    days: string;
+    opendt: string;
+    closedt: string;
+    totaldate: number;
+    starttime: string;
+    endtime: string;
+}
 
-const TClassInfo = (props: Props) => {
+const TClassInfo = (props: IClassNumber) => {
+    const { classQuNo } = props;
+    const [classInfo, setClassInfo] = useState<IClassInfo>();
+
+    const classDetailApi = async () => {
+        try {
+            const response = await axios.get(
+                `http://192.168.0.62:9988/api/class/detail/${classQuNo}`,
+            );
+            setClassInfo(response.data.info);
+        } catch (error) {
+            console.error("err", error);
+        }
+    };
+    useEffect(() => {
+        classDetailApi();
+    }, []);
+
     return (
         <>
             <TClassInfoCss>
@@ -18,11 +51,16 @@ const TClassInfo = (props: Props) => {
                                 </span>
                             </div>
                             <div className="right">
-                                <span>2020-02-01</span>
+                                <span>
+                                    {classInfo?.opendt.toString().slice(0, 10)}
+                                </span>
                                 <span className="wave">-</span>
-                                <span>2023-02-02</span>
+                                <span>
+                                    {classInfo?.closedt.toString().slice(0, 10)}
+                                </span>
                             </div>
                         </li>
+                        {/* 아래와 같이 코드를 수정 */}
                         <li>
                             <div className="left">
                                 <span>
@@ -30,7 +68,7 @@ const TClassInfo = (props: Props) => {
                                 </span>
                             </div>
                             <div className="right">
-                                <span>김 채 원</span>
+                                <span>{classInfo?.teacher}</span>
                             </div>
                         </li>
                         <li>
@@ -40,7 +78,7 @@ const TClassInfo = (props: Props) => {
                                 </span>
                             </div>
                             <div className="right">
-                                <span>중학교 3학년</span>
+                                <span>{`${classInfo?.grade}학년`}</span>
                             </div>
                         </li>
                         <li>
@@ -50,7 +88,7 @@ const TClassInfo = (props: Props) => {
                                 </span>
                             </div>
                             <div className="right">
-                                <span>기초 강화 학습 A반</span>
+                                <span>{classInfo?.name}</span>
                             </div>
                         </li>
                         <li>
@@ -60,12 +98,12 @@ const TClassInfo = (props: Props) => {
                                 </span>
                             </div>
                             <div className="right">
-                                <span>월,수,금</span>
+                                <span>{classInfo?.days}</span>
                                 <span>/</span>
                                 <span>
-                                    <span>18:30</span>
+                                    <span>{classInfo?.starttime}</span>
                                     <span>~</span>
-                                    <span>18:30</span>
+                                    <span>{classInfo?.endtime}</span>
                                 </span>
                             </div>
                         </li>

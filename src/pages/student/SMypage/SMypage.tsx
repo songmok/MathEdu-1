@@ -44,9 +44,9 @@ const SMypage = () => {
             <Info
                 headerName="마이 페이지"
                 color="student"
-                basicInfo={student}
-                weeklyTest={weekly}
-                monthlyTest={monthly}
+                // basicInfo={student}
+                // weeklyTest={weekly}
+                // monthlyTest={monthly}
             />
         </>
     );
