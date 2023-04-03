@@ -71,7 +71,7 @@ function App() {
                                         element={<TStudentTestList />}
                                     />
                                     <Route
-                                        path="testdetail"
+                                        path="testdetail/:testId"
                                         element={<TStudentTestDetail />}
                                     />
                                 </Route>

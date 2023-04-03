@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import TGrade from "../../../pages/teacher/TGrade/TGrade";
 import { TClassInfoCss } from "./TClassInfoCss";
 
 interface IClassNumber {

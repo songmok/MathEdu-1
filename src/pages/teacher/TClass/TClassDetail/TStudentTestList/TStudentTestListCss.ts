@@ -4,7 +4,6 @@ import { mainContainer } from "../../../../../utils/Layout";
 
 export const TStudentTestListCss = styled.section`
     ${mainContainer}
-
     /* Header */
     .header {
         display: flex;
