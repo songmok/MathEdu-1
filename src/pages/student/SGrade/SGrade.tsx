@@ -8,11 +8,10 @@ import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
 // 더미데이터
 import dummyData from "./gradedummy.json";
-import infodata from "./infodummy.json";
 import SGaugeChart from "../../../components/SGaugeChart/SGaugeChart";
 import HeaderCss from "../../../components/header/HeaderCss";
 import Header from "../../../components/header/Header";
-import axios from "axios";
+
 
 highchartsMore(Highcharts);
 solidGauge(Highcharts);
