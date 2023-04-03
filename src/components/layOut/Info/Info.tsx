@@ -29,7 +29,10 @@ const Info = (props: StudentInfoProps) => {
                     <h5 className={color}>{headerName}</h5>
                     <div className="info">
                         <div className="profileImg">
-                            <img src={basicInfo?.profileImgURL} alt="" />
+                            {/* <img src={basicInfo?.profileImgURL} alt="" /> */}
+                            <img
+                                src={`${process.env.PUBLIC_URL}/images/profile.jpg`}
+                            />
                         </div>
                         <ul className="infoGrid">
                             <li className="infoText">
