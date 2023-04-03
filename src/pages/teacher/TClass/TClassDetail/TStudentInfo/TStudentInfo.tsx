@@ -1,31 +1,33 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Info from "../../../../../components/layOut/Info/Info";
 import TSidebar from "../../../../../components/tSidebar/TSidebar";
-import tstudentinfo from "./data/tstudentinfo.json";
 
 export interface TStudentInfo {
     name: string;
     profileImgURL: string;
     birth: string;
     phone: string;
-    class: string;
+    className: string;
     school: string;
     id: number;
     alternatePhone: string;
     classDays: string;
-    startTime: string;
-    endTime: string;
+    starttime: string;
+    endtime: string;
     address: string;
     grade: number;
     regDt: string;
     teacher: string;
-    weeklyTest?: {
+    weeklyTest: {
         score: number;
         rank: number;
         tieCnt: number;
         totalStudents: number;
         testDt: string;
     };
-    monthlyTest?: {
+    monthlyTest: {
         score: number;
         rank: number;
         tieCnt: number;
@@ -35,16 +37,29 @@ export interface TStudentInfo {
 }
 
 const TStudentInfo = () => {
-    const student: TStudentInfo = JSON.parse(
-        JSON.stringify(tstudentinfo.basicInfo),
-    );
-    const weekly: TStudentInfo = JSON.parse(
-        JSON.stringify(tstudentinfo.weeklyTest),
-    );
-    const monthly: TStudentInfo = JSON.parse(
-        JSON.stringify(tstudentinfo.weeklyTest),
-    );
+    const location = useLocation();
+    const pathname = location.pathname;
+    const stuId = pathname.split("/").pop();
 
+    const [student, setStudent] = useState();
+    const [weekly, setWeekly] = useState();
+    const [monthly, setMonthly] = useState();
+    const classStudentInfoApi = async () => {
+        try {
+            const response = await axios.get(
+                `http://192.168.0.62:9988/api/student/${stuId}`,
+            );
+            setStudent(response.data.info.basicInfo);
+            setWeekly(response.data.info);
+            console.log("시험정보", response.data.info);
+            console.log("상세정보", response.data.info.basicInfo);
+        } catch (error) {
+            console.error("학생정보를 찾을 수 없습니다.", error);
+        }
+    };
+    useEffect(() => {
+        classStudentInfoApi();
+    }, []);
     return (
         <>
             <TSidebar />

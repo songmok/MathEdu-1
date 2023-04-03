@@ -1,25 +1,19 @@
-import LogoutBt from "../../../components/logoutBt/LogoutBt";
 import TSidebar from "../../../components/tSidebar/TSidebar";
 import TClassCss from "./TClassCss";
 
-import classList from "./ClassList.json";
-
 import Pagination from "@mui/material/Pagination";
+
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
 import { RootState } from "../../../reducer/store";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { PaginationItem } from "@mui/material";
+import { Link } from "react-router-dom";
 
-interface IList {
-    name: string;
-    grade: number;
-    days: string;
-    opendt: string;
-    closedt: string;
-}
-interface CLassData {
+interface IClassData {
     currentPage: number;
     keyword: string;
     list: {
@@ -38,33 +32,42 @@ const TClass = () => {
     const navigate = useNavigate();
     const goClassDetail = (no: number) => {
         console.log(no);
-        navigate(`/teacher/class/detail?no=${no}`);
+        navigate(`/teacher/class/detail?classno=${no}`);
     };
     const teacherId = useSelector((state: RootState) => state.user.id);
-    const [classData, setClassData] = useState<CLassData["list"]>([]);
+    const [classData, setClassData] = useState<IClassData["list"]>([]);
+    const [classpages, setClasspages] = useState();
+    const [currentPage, setCurrentPage] = useState("");
     const [searchKeyword, setSearchKeyword] = useState<string>("");
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    const page = searchParams.get("page") || 1;
+    const keyword = searchParams.get("keyword") || "";
+
     const classListApi = async () => {
-        const params: { page: number; keyword: string } = {
-            page: 1,
-            keyword: searchKeyword,
-        };
         try {
-            const response = await axios.get<CLassData>(
+            const response = await axios.get(
                 `http://192.168.0.62:9988/api/class/${teacherId}`,
-                { params: params },
+                { params: { page, keyword } },
             );
             setClassData(response.data.list);
+            setClasspages(response.data.totalPage);
+            console.log("page", response.data.currentPage);
+            setCurrentPage(response.data.currentPage);
         } catch (error) {
             console.error("err", error);
         }
     };
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
-        classListApi();
+        setSearchParams({
+            page: currentPage.toString(),
+            keyword: searchKeyword,
+        });
     };
     useEffect(() => {
         classListApi();
-    }, []);
+    }, [keyword, page]);
     return (
         <>
             <TSidebar />
@@ -101,64 +104,59 @@ const TClass = () => {
                                     <th>종강일</th>
                                 </tr>
                             </thead>
-                            {classData?.map(
-                                (
-                                    ele: {
-                                        classNo: number;
-                                        name: string;
-                                        grade: number;
-                                        days: string;
-                                        opendt: string;
-                                        closedt: string;
-                                    },
-                                    idx: number,
-                                ) => {
-                                    return (
-                                        <tbody key={ele.classNo}>
-                                            <tr className="tableMain">
-                                                <td>
-                                                    <span>{ele.classNo}</span>
-                                                </td>
-                                                <td>
-                                                    <span
-                                                        className="className"
-                                                        onClick={() => {
-                                                            goClassDetail(
-                                                                ele.classNo,
-                                                            );
-                                                        }}
-                                                    >
-                                                        {ele.name}
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span>{ele.grade}</span>
-                                                </td>
-                                                <td>
-                                                    <span>{ele.days}</span>
-                                                </td>
-                                                <td>
-                                                    <span>
-                                                        {ele.opendt
-                                                            .toString()
-                                                            .slice(0, 10)}
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span>
-                                                        {ele.closedt
-                                                            .toString()
-                                                            .slice(0, 10)}
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    );
-                                },
-                            )}
+                            {classData.map(ele => {
+                                return (
+                                    <tbody key={ele.classNo}>
+                                        <tr className="tableMain">
+                                            <td>
+                                                <span>{ele.classNo}</span>
+                                            </td>
+                                            <td>
+                                                <span
+                                                    className="className"
+                                                    onClick={() => {
+                                                        goClassDetail(
+                                                            ele.classNo,
+                                                        );
+                                                    }}
+                                                >
+                                                    {ele.name}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>{ele.grade}</span>
+                                            </td>
+                                            <td>
+                                                <span>{ele.days}</span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    {ele.opendt
+                                                        .toString()
+                                                        .slice(0, 10)}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    {ele.closedt
+                                                        .toString()
+                                                        .slice(0, 10)}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                );
+                            })}
                         </table>
                         <Pagination
-                            count={10}
+                            renderItem={item => (
+                                <PaginationItem
+                                    component={Link}
+                                    to={`/teacher/class?page=${item.page}`}
+                                    {...item}
+                                />
+                            )}
+                            count={classpages}
                             color="secondary"
                             className="pagination"
                         />

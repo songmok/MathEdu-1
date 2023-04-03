@@ -1,10 +1,13 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import tclassdetail from "./tclassdetail.json";
+
 import { TClassStudentDetailCss } from "./TClassStudentDetailCss";
 
 export interface ITlist {
     no: string;
     img: string;
+    id: string;
     name: string;
     phone: string;
     alternatephone: string;
@@ -18,16 +21,32 @@ export interface ITheader {
     parentPhone: string;
     address: string;
 }
-
-const TClassStudentDetail = () => {
+interface IClassNumber {
+    classQuNo: string | null;
+}
+const TClassStudentDetail = (props: IClassNumber) => {
+    const { classQuNo } = props;
     const navigate = useNavigate();
     const goClassStudent = (no: number) => {
-        navigate(`/teacher/class/detail/studentinfo`);
+        navigate(`/teacher/class/detail/studentinfo/${no}`);
     };
 
-    const tclassstudentList: ITlist[] = JSON.parse(
-        JSON.stringify(tclassdetail),
-    ); //반 학생 리스트 data json
+    const [classStudent, setClassStudent] = useState<ITlist[]>();
+
+    const classStudentListApi = async () => {
+        try {
+            const response = await axios.get(
+                `http://192.168.0.62:9988/api/class/student/${classQuNo}`,
+            );
+            console.log("학생리스트", response.data.stuList);
+            setClassStudent(response.data.stuList);
+        } catch (error) {
+            console.error("err", error);
+        }
+    };
+    useEffect(() => {
+        classStudentListApi();
+    }, []);
     const headerList: ITheader = {
         number: "번호",
         picture: "사진",
@@ -55,10 +74,13 @@ const TClassStudentDetail = () => {
                                 </th>
                                 <th>{headerList.address}</th>
                             </tr>
-                            {tclassstudentList.map((ele, idx) => (
+
+                            {classStudent?.map((ele, idx) => (
                                 <tr key={ele.no} className="tableMain">
                                     {/* <Link></Link> */}
-                                    <td>{ele.no}</td>
+                                    <td>
+                                        <span>{ele.no}</span>
+                                    </td>
                                     <td>
                                         <img
                                             src={`${process.env.PUBLIC_URL}/images/profile.jpg`}
@@ -66,8 +88,11 @@ const TClassStudentDetail = () => {
                                     </td>
                                     <td>
                                         <span
+                                            className="linkname"
                                             onClick={() => {
-                                                goClassStudent(idx);
+                                                goClassStudent(
+                                                    parseInt(ele.id),
+                                                );
                                             }}
                                         >
                                             {ele.name}
