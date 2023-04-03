@@ -11,26 +11,37 @@ import { TStudentChartCss } from "./TStudentChartCss";
 
 highchartsMore(Highcharts);
 const TStudentTestDetail = () => {
-    const location = useLocation();
-    const params = new URLSearchParams(location.search);
-    const examNo = params.get("examNo");
-    const classNo = params.get("classNo");
-    console.log("ex",examNo)
-    console.log("ex",examNo)
     const chartRef = useRef(null);
+    const { pathname } = useLocation();
+    const examNo = pathname.split("examNo=")[1].split("&")[0];
+    const classNo = pathname.split("classNo=")[1];
 
-    // const classStudentTestApi = async () => {
-    //     try {
-    //         const res = await axios.get(
-    //             `http://192.168.0.62:9988/api/exam/detail/${classNo}/${examNo}`,
-    //         );
-    //         console.log("testssss", res.data);
-    //     } catch (error) {
-    //         console.error("시험리스트를 찾아올 수 없습니다.", error);
-    //     }
-    // };
+    // 학생 점수 리스트 api
+    const classStudentTestApi = async () => {
+        try {
+            const res = await axios.get(
+                `http://192.168.0.62:9988/api/exam/detail/${classNo}/${examNo}`,
+            );
+            console.log("testssss", res.data);
+        } catch (error) {
+            console.error("학생리스트를 찾아올 수 없습니다.", error);
+        }
+    };
+    // 시험 통계 api
+    const classTestSummaryApi = async () => {
+        try {
+            const res = await axios.get(
+                `http://192.168.0.62:9988/api/class/exam/summary/${examNo}`,
+            );
+            console.log("통계", res.data);
+        } catch (error) {
+            console.error("통계를 찾아올 수 없습니다.", error);
+        }
+    };
+
     useEffect(() => {
-        // classStudentTestApi();
+        classStudentTestApi();
+        classTestSummaryApi();
     }, []);
 
     const options = {

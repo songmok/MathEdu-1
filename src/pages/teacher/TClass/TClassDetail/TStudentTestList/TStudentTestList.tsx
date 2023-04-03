@@ -24,7 +24,7 @@ const TStudentTestList = () => {
     const classQuNo = location.search.split("classno=")[1];
     const goClassTest = (no: number) => {
         Navigate(
-            `/teacher/class/detail/test/testdetail/examNo=${no}classNo=${classQuNo}`,
+            `/teacher/class/detail/test/testdetail/examNo=${no}&classNo=${classQuNo}`,
         );
     };
 
