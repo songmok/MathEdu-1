@@ -78,7 +78,9 @@ const TClassStudentDetail = (props: IClassNumber) => {
                             {classStudent?.map((ele, idx) => (
                                 <tr key={ele.no} className="tableMain">
                                     {/* <Link></Link> */}
-                                    <td>{ele.no}</td>
+                                    <td>
+                                        <span>{ele.no}</span>
+                                    </td>
                                     <td>
                                         <img
                                             src={`${process.env.PUBLIC_URL}/images/profile.jpg`}
@@ -86,6 +88,7 @@ const TClassStudentDetail = (props: IClassNumber) => {
                                     </td>
                                     <td>
                                         <span
+                                            className="linkname"
                                             onClick={() => {
                                                 goClassStudent(
                                                     parseInt(ele.id),

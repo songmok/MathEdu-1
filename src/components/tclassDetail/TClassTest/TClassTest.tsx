@@ -80,17 +80,27 @@ const TClassTest = (props: IClassNumber) => {
                         </tr>
                         {testList.slice(0, 5).map((ele, idx) => (
                             <tr key={idx} className="tableMain">
-                                <td>{ele.examNo}</td>
+                                <td>
+                                    <span>{ele.examNo}</span>
+                                </td>
                                 <td
                                     onClick={() => {
                                         goClassTest(ele.examNo);
                                     }}
                                 >
-                                    {ele.examName}
+                                    <span className="linkname">
+                                        {ele.examName}
+                                    </span>
                                 </td>
-                                <td>{ele.attendCount}</td>
-                                <td>{ele.avgScore}</td>
-                                <td>{ele.examDt}</td>
+                                <td>
+                                    <span>{ele.attendCount}</span>
+                                </td>
+                                <td>
+                                    <span>{ele.avgScore}</span>
+                                </td>
+                                <td>
+                                    <span>{ele.examDt}</span>
+                                </td>
                             </tr>
                         ))}
                     </table>

@@ -23,6 +23,7 @@ export const TClassTestCss = styled.div`
             height: 30px;
             border: medium none;
             border-radius: 5px;
+            cursor: pointer;
             background: rgb(32, 30, 89);
             margin-left: 15px;
             span {
@@ -62,6 +63,14 @@ export const TClassTestCss = styled.div`
                     white-space: nowrap;
                     font-size: 20px;
                     padding: 15px 0;
+                    .linkname {
+                        cursor: pointer;
+                        &:hover {
+                            border-bottom: 1px solid;
+                            padding-bottom: 1px;
+                            color: ${TfontCol};
+                        }
+                    }
                 }
             }
         }

@@ -1,9 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Info from "../../../../../components/layOut/Info/Info";
 import TSidebar from "../../../../../components/tSidebar/TSidebar";
-import tstudentinfo from "./data/tstudentinfo.json";
 
 export interface TStudentInfo {
     name: string;

@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { TfontCol, TmainCol } from "../../../../../utils/Color";
 import { mainContainer } from "../../../../../utils/Layout";
 
@@ -10,12 +10,10 @@ export const TStudentTestListCss = styled.section`
         display: flex;
         justify-content: space-between;
         padding-bottom: 15px;
-
         > span {
             color: ${TfontCol};
             font-size: 18px;
         }
-
         button {
             background: transparent;
             border: 0;
@@ -28,7 +26,6 @@ export const TStudentTestListCss = styled.section`
             border-radius: 5px;
             background: rgb(32, 30, 89);
             margin-left: 15px;
-
             span {
                 color: white;
                 display: block;
@@ -54,13 +51,14 @@ export const TStudentTestListCss = styled.section`
             /* Table Rows */
             .tableMain {
                 height: 40px;
-
-                .className {
-                    cursor: pointer;
-                    &:hover {
-                        border-bottom: 1px solid;
-                        padding-bottom: 1px;
-                        color: ${TfontCol};
+                > td {
+                    .linkname {
+                        cursor: pointer;
+                        &:hover {
+                            border-bottom: 1px solid;
+                            padding-bottom: 1px;
+                            color: ${TfontCol};
+                        }
                     }
                 }
             }
