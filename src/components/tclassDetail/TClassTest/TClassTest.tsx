@@ -35,7 +35,7 @@ const TClassTest = (props: IClassNumber) => {
     }; //반 학생 헤더
     const Navigate = useNavigate();
     const goClassTest = (no: number) => {
-        Navigate(`/teacher/class/detail/test/${no}`);
+        Navigate(`/teacher/class/detail/test/testdetail/${no}`);
     };
     const goClassTestList = (no: string | null) => {
         Navigate(`/teacher/class/detail/test?classno=${no}`);

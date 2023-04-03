@@ -1,21 +1,47 @@
 import { TStudentTestDetailCss } from "./TStudentTestDetailCss";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useLocation } from "react-router";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts/highstock";
 import highchartsMore from "highcharts/highcharts-more.js";
 import TSidebar from "../../../../../../components/tSidebar/TSidebar";
+import TClassTestDetail from "../../../../../../components/tclassDetail/TClassTest/TClassTestDetail/TClassTestDetail";
+import axios from "axios";
+import { TStudentChartCss } from "./TStudentChartCss";
+
 highchartsMore(Highcharts);
 const TStudentTestDetail = () => {
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const examNo = params.get("examNo");
+    const classNo = params.get("classNo");
+    console.log("ex",examNo)
+    console.log("ex",examNo)
     const chartRef = useRef(null);
+
+    // const classStudentTestApi = async () => {
+    //     try {
+    //         const res = await axios.get(
+    //             `http://192.168.0.62:9988/api/exam/detail/${classNo}/${examNo}`,
+    //         );
+    //         console.log("testssss", res.data);
+    //     } catch (error) {
+    //         console.error("시험리스트를 찾아올 수 없습니다.", error);
+    //     }
+    // };
+    useEffect(() => {
+        // classStudentTestApi();
+    }, []);
+
     const options = {
         chart: {
             type: "column",
+            width: 800, // 원하는 너비값으로 설정
         },
         title: {
             align: "center",
             text: "",
         },
-
         accessibility: {
             announceNewData: {
                 enabled: true,
@@ -41,7 +67,6 @@ const TStudentTestDetail = () => {
                 },
             },
         },
-
         series: [
             {
                 name: "점수",
@@ -70,16 +95,51 @@ const TStudentTestDetail = () => {
         <>
             <TSidebar />
             <TStudentTestDetailCss>
-                return (
-                <div>
-                    <HighchartsReact
-                        ref={chartRef}
-                        highcharts={Highcharts}
-                        oneToOne={true}
-                        options={options}
-                    />
+                <div className="testWrap">
+                    <TStudentChartCss>
+                        <div className="sectionChart">
+                            <div className="headerChart">
+                                <span>시험성적 통계</span>
+                            </div>
+                            <div className="chartWrap">
+                                <HighchartsReact
+                                    ref={chartRef}
+                                    highcharts={Highcharts}
+                                    oneToOne={true}
+                                    options={options}
+                                />
+                                <ul>
+                                    <li>
+                                        <span>반 평균</span>
+                                        <span className="score">753점</span>
+                                    </li>
+                                    <li>
+                                        <span>최고</span>
+                                        <span className="score">95점</span>
+                                    </li>
+                                    <li>
+                                        <span>최저</span>
+                                        <span className="score">35점</span>
+                                    </li>
+                                    <li className="seat">
+                                        <span>석차</span>
+                                        <ul>
+                                            <li>
+                                                <span>1등</span>
+                                                <span>모모</span>
+                                            </li>
+                                            <li>
+                                                <span>10등</span>
+                                                <span>모모</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </TStudentChartCss>
+                    <TClassTestDetail />
                 </div>
-                );
             </TStudentTestDetailCss>
         </>
     );

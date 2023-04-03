@@ -1,14 +1,13 @@
-import TSidebar from "../../../../../../components/tSidebar/TSidebar";
-import TGradeCss from "./TGradeCss";
-
-import Highcharts from "highcharts/highstock";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import TSidebar from "../../../../../../components/tSidebar/TSidebar";
+import TClassGradeGraphCss from "./TClassGradeGraphCss";
+import Highcharts from "highcharts/highstock";
 import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
-
 import SGaugeChart from "../../../../../../components/SGaugeChart/SGaugeChart";
-import axios from "axios";
 import TestAnalysis from "../../../../../../components/testAnalysis/TestAnalysis";
+import axios from "axios";
 
 highchartsMore(Highcharts);
 solidGauge(Highcharts);
@@ -63,7 +62,7 @@ export interface testAnalysis {
     top30pAvgScores: Array<number>;
 }
 
-const TGrade = () => {
+const TClassGradeGraph = () => {
     const [weekTR, setWeekTR] = useState<testResult>({
         score: 0,
         srank: 0,
@@ -108,15 +107,18 @@ const TGrade = () => {
         top30pAvgScores: [],
         tableData: [],
     });
+    const location = useLocation();
+    const path = location.pathname;
+    const stuId = path.split("/").pop(); // "23030004"
 
     // 학생 정보 데이터연동
+
     useEffect(() => {
-        const stuid = "23030004";
-        let params: { stuId: string } = {
-            stuId: stuid,
+        let params: { stuId?: string } = {
+            stuId: stuId,
         };
         axios
-            .get(`http://192.168.0.62:9988/api/student/${stuid}`, {
+            .get(`http://192.168.0.62:9988/api/student/${stuId}`, {
                 params: params,
             })
             .then(res => {
@@ -173,30 +175,28 @@ const TGrade = () => {
         ));
     };
 
-    console.log(scMunth, scYear);
-
     // 주간 월간 변경
     const [wmBtn, setWmBtn] = useState<examType>({
         typeName: "주간",
         type: "week",
     });
-    const id = "23030004";
+
     // 월간 주간 성적 그래프
     const sWeeklyTest = () => {
         let params: {
             order: string;
-            stuId: string;
+            stuId?: string;
             year: number;
             month: number;
         } = {
             order: "desc",
             month: scMunth,
-            stuId: "23030004",
+            stuId: stuId,
             year: scYear,
         };
         axios
             .get(
-                `http://192.168.0.62:9988/api/student/exam/weekly/23030004/${scYear}/${scMunth}/desc`,
+                `http://192.168.0.62:9988/api/student/exam/weekly/${stuId}/${scYear}/${scMunth}/desc`,
                 { params: params },
             )
             .then(res => {
@@ -208,14 +208,14 @@ const TGrade = () => {
             });
     };
     const sMonthlyTest = () => {
-        let params: { order: string; stuId: string; year: number } = {
+        let params: { order: string; stuId?: string; year: number } = {
             order: "desc",
-            stuId: id,
+            stuId: stuId,
             year: scYear,
         };
         axios
             .get(
-                `http://192.168.0.62:9988/api/student/exam/monthly/${id}/2023/desc`,
+                `http://192.168.0.62:9988/api/student/exam/monthly/${stuId}/${scYear}/desc`,
                 { params: params },
             )
             .then(res => {
@@ -227,11 +227,13 @@ const TGrade = () => {
             });
     };
     useEffect(() => {
-        sWeeklyTest();
-        sMonthlyTest();
+        if (scMunth === nowMonth) {
+            sWeeklyTest();
+            sMonthlyTest();
+        }
     }, []);
     // 월간 주간 변경 버튼
-    const wmchange = () => {
+    const wmChange = () => {
         if (wmBtn.typeName === "주간") {
             setWmBtn({ typeName: "월간", type: "month" });
             sMonthlyTest();
@@ -240,105 +242,94 @@ const TGrade = () => {
             sWeeklyTest();
         }
     };
-    console.log(123, scYear, scMunth);
 
     //확인버튼
-    const wMcheck = () => {
-        if (wmBtn.typeName === "주간") {
-            sWeeklyTest();
-        } else {
-            sMonthlyTest();
-        }
-    };
+    const wMcheck = () => {};
+
+    console.log(stuId);
 
     return (
-        <>
-            <TSidebar />
-            <TGradeCss>
-                <div className="tests">
-                 
-                    <SGaugeChart
-                        examType={{ typeName: "주간" }}
-                        gColors={{
-                            mainCol: "#4543A0",
-                            backCol: "#d9d9d9",
-                        }}
-                        testResult={weekTR}
-                    />
-                    <SGaugeChart
-                        examType={{ typeName: "월간" }}
-                        gColors={{
-                            mainCol: "#4543A0",
-                            backCol: "#d9d9d9",
-                        }}
-                        testResult={monthTR}
-                    />
+        <TClassGradeGraphCss>
+            <div className="tests">
+                <SGaugeChart
+                    examType={{ typeName: "주간" }}
+                    gColors={{
+                        mainCol: "#4543A0",
+                        backCol: "#d9d9d9",
+                    }}
+                    testResult={weekTR}
+                />
+                <SGaugeChart
+                    examType={{ typeName: "월간" }}
+                    gColors={{
+                        mainCol: "#4543A0",
+                        backCol: "#d9d9d9",
+                    }}
+                    testResult={monthTR}
+                />
+            </div>
+            <div className="analysis">
+                <div className="chtitle">
+                    <p className="subTitle">{`${wmBtn.typeName}`} 성적 분석</p>
+                    <button className="chbt subtitle" onClick={wmChange}>
+                        {`${wmBtn.typeName}` === "주간" ? "월간" : "주간"}
+                        성적 분석
+                    </button>
                 </div>
-                <div className="analysis">
-                    <div className="chtitle">
-                        <p className="subTitle">
-                            {`${wmBtn.typeName}`} 성적 분석
-                        </p>
-                        <button className="chbt subtitle" onClick={wmchange}>
-                            {`${wmBtn.typeName}` === "주간" ? "월간" : "주간"}
-                            성적 분석
+                {wmBtn.typeName === "주간" ? (
+                    <form className="subTitle flexForm">
+                        <select value={scYear} onChange={e => cY(e)}>
+                            {year()}
+                        </select>
+                        <span>년</span>
+                        <select value={scMunth} onChange={e => cM(e)}>
+                            {month()}
+                        </select>
+                        <span>월</span>
+                        <button type="submit" className="submitBt">
+                            확인
                         </button>
-                    </div>
-                    {wmBtn.typeName === "주간" ? (
-                        <form className="subTitle flexForm">
-                            <select value={scYear} onChange={e => cY(e)}>
-                                {year()}
-                            </select>
-                            <span>년</span>
-                            <select value={scMunth} onChange={e => cM(e)}>
-                                {month()}
-                            </select>
-                            <span>월</span>
-                            <button type="submit" className="submitBt">
-                                확인
-                            </button>
-                        </form>
-                    ) : (
-                        <form className="subTitle flexForm">
-                            <select value={scYear} onChange={e => cY(e)}>
-                                {year()}
-                            </select>
-                            <span>년</span>
+                    </form>
+                ) : (
+                    <form className="subTitle flexForm">
+                        <select value={scYear} onChange={e => cY(e)}>
+                            {year()}
+                        </select>
+                        <span>년</span>
 
-                            <button
-                                type="submit"
-                                className="submitBt"
-                                onClick={wMcheck}
-                            >
-                                확인
-                            </button>
-                        </form>
-                    )}
-                    {wmBtn.typeName === "주간" ? (
-                        <TestAnalysis
-                            testAnalysis={weekTest}
-                            examType={{ typeName: "주간" }}
-                            gLineColors={{
-                                mainCol: "#005853",
-                                subCol: "#00A49A",
-                                pointCol: "#4543A0",
-                            }}
-                        />
-                    ) : (
-                        <TestAnalysis
-                            testAnalysis={monthTest}
-                            examType={{ typeName: "월간" }}
-                            gLineColors={{
-                                mainCol: "#005853",
-                                subCol: "#00A49A",
-                                pointCol: "#4543A0",
-                            }}
-                        />
-                    )}
-                </div>
-            </TGradeCss>
-        </>
+                        <button
+                            type="submit"
+                            className="submitBt"
+                            onClick={wMcheck}
+                        >
+                            확인
+                        </button>
+                    </form>
+                )}
+                {wmBtn.typeName === "주간" ? (
+                    <TestAnalysis
+                        testAnalysis={weekTest}
+                        examType={{ typeName: "주간" }}
+                        gLineColors={{
+                            mainCol: "#005853",
+                            subCol: "#00A49A",
+                            pointCol: "#4543A0",
+                        }}
+                    />
+                ) : (
+                    <TestAnalysis
+                        testAnalysis={monthTest}
+                        examType={{ typeName: "월간" }}
+                        gLineColors={{
+                            mainCol: "#005853",
+                            subCol: "#00A49A",
+                            pointCol: "#4543A0",
+                        }}
+                    />
+                )}
+            </div>
+        </TClassGradeGraphCss>
     );
 };
 
-export default TGrade;
+export default TClassGradeGraph;

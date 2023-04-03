@@ -1,4 +1,5 @@
 import { IStudentInfo } from "../../../pages/teacher/TClass/TClassDetail/TStudentInfo/TStudentInfo";
+import TClassGradeGraph from "../../../pages/teacher/TClass/TClassDetail/TStudentInfo/TClassGradeGraph/TClassGradeGraph";
 import { InfoCss } from "./InfoCss";
 
 interface InfoProps {
@@ -103,6 +104,7 @@ const Info = (props: InfoProps) => {
                         </ul>
                     </div>
                 </div>
+                <TClassGradeGraph />
             </InfoCss>
         </>
     );

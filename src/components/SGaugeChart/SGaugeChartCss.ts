@@ -1,44 +1,19 @@
+import { mainContainer } from "../../utils/Layout";
 import styled from "styled-components";
-import { TfontCol } from "../../../../../../utils/Color";
-import { Button, mainContainer } from "../../../../../../utils/Layout";
-const TGradeCss = styled.div`
-    ${mainContainer}
-    .header {
-        display: flex;
-        justify-content: space-between;
-        .title {
-            color: ${TfontCol};
-            font-size: 25px;
-        }
-    }
-    .subTitle {
-        color: ${TfontCol};
-        font-size: 18px;
-    }
-    .flexForm {
-        display: flex;
-        align-items: center;
-        justify-content: end;
-        margin-bottom: 30px;
-        select {
-            margin: 0 10px;
-            height: 30px;
-            font-size: 14px;
-            padding: 0 5px;
-            border: 1px solid #d9d9d9;
-            border-radius: 5px;
-            ::selection {
-                border: none;
-            }
-        }
-    }
+import { TfontCol } from "../../utils/Color";
+import { Button } from "../../utils/Layout";
+const SGaugeChartCss = styled.div`
     .tests {
+        .subTitle {
+            color: ${TfontCol};
+            font-size: 18px;
+        }
         display: flex;
         gap: 30px;
         .testType {
             padding: 30px;
-            width: 520px;
-            height: 320px;
+            width: 50%;
+            height: 100%;
             border-radius: 15px;
             background: #fff;
             .newTest {
@@ -102,54 +77,6 @@ const TGradeCss = styled.div`
             }
         }
     }
-    .analysis {
-        margin-top: 30px;
-        padding: 30px;
-        width: calc(520px * 2 + 30px);
-        border-radius: 15px;
-        background: #fff;
-        .chtitle {
-            display: flex;
-            gap: 15px;
-            .chbt {
-                background: none;
-                border: none;
-                cursor: pointer;
-                color: #d9d9d9;
-
-                :hover {
-                    color: #c3c3c3;
-                }
-            }
-        }
-    }
-
-    .table {
-        margin-top: 30px;
-        border-radius: 5px;
-        width: 100%;
-        text-align: center;
-        .tableHeader {
-            background: ${TfontCol};
-            color: #fff;
-            border: none;
-            height: 50px;
-            border-radius: 20px;
-        }
-        .tableMain {
-            height: 40px;
-        }
-    }
-    /* .pagination {
-                display: flex;
-                justify-content: center;
-            } */
-
-    .submitBt {
-        ${Button}
-        background: ${TfontCol};
-        margin-left: 15px;
-    }
 `;
 
-export default TGradeCss;
+export default SGaugeChartCss;
