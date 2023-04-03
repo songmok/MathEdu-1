@@ -104,8 +104,9 @@ const SGaugeChart = (props: Iprops) => {
         ],
     };
 
-    const percentage =
-        (props.testResult.srank / props.testResult.totalStudents) * 100;
+    const percentage = Math.floor(
+        (props.testResult.srank / props.testResult.totalStudents) * 100,
+    );
 
     return (
         <div className="testType">

@@ -47,7 +47,7 @@ const TestAnalysis = (props: Iprops) => {
             type: "spline",
         },
         title: {
-            text: "",
+            text: `${props.examType.typeName} 성적 그래프`,
         },
         xAxis: {
             title: {
