@@ -196,7 +196,6 @@ const SGrade = () => {
         ],
     };
 
-
     return (
         <>
             <SSidebar />
@@ -208,25 +207,29 @@ const SGrade = () => {
                         gColors={{
                             mainCol: "#4543A0",
                             backCol: "#d9d9d9",
-                        }} testResult={{
+                        }}
+                        testResult={{
                             score: 0,
                             srank: 0,
                             tieCnt: 0,
                             totalStudents: 0,
-                            testDt: ''
-                        }}                    />
+                            testDt: "",
+                        }}
+                    />
                     <SGaugeChart
                         examType={{ typeName: "월간" }}
                         gColors={{
                             mainCol: "#4543A0",
                             backCol: "#d9d9d9",
-                        }} testResult={{
+                        }}
+                        testResult={{
                             score: 0,
                             srank: 0,
                             tieCnt: 0,
                             totalStudents: 0,
-                            testDt: ''
-                        }}                    />
+                            testDt: "",
+                        }}
+                    />
                 </div>
                 <div className="analysis">
                     <div className="chtitle">
