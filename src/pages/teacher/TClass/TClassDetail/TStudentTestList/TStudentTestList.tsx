@@ -21,10 +21,12 @@ export interface ITheader {
 const TStudentTestList = () => {
     const location = useLocation();
     const Navigate = useNavigate();
-    const goClassTest = (no: number) => {
-        Navigate(`/teacher/class/detail/test/${no}`);
-    };
     const classQuNo = location.search.split("classno=")[1];
+    const goClassTest = (no: number) => {
+        Navigate(
+            `/teacher/class/detail/test/testdetail/examNo=${no}classNo=${classQuNo}`,
+        );
+    };
 
     const [testList, setTestList] = useState<TExamInfo[]>([]);
     const [examType, setExamType] = useState<string>("all");
@@ -94,12 +96,13 @@ const TStudentTestList = () => {
                                 <td>
                                     <span>{ele.examNo}</span>
                                 </td>
-                                <td
-                                    onClick={() => {
-                                        goClassTest(ele.examNo);
-                                    }}
-                                >
-                                    <span className="linkname">
+                                <td>
+                                    <span
+                                        className="linkname"
+                                        onClick={() => {
+                                            goClassTest(ele.examNo);
+                                        }}
+                                    >
                                         {ele.examName}
                                     </span>
                                 </td>
