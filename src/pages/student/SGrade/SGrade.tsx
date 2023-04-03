@@ -12,7 +12,6 @@ import SGaugeChart from "../../../components/SGaugeChart/SGaugeChart";
 import HeaderCss from "../../../components/header/HeaderCss";
 import Header from "../../../components/header/Header";
 
-
 highchartsMore(Highcharts);
 solidGauge(Highcharts);
 
@@ -198,7 +197,6 @@ const SGrade = () => {
     return (
         <>
             <SSidebar />
-            <Header />
             <SGradeCss>
                 <div className="tests">
                     <SGaugeChart

@@ -58,6 +58,16 @@ const TNoticePostCss = styled.div`
                 padding: 10px;
                 border-top: 1px solid lightgray;
                 font-size: 14px;
+                display: flex;
+                .file {
+                    display: flex;
+                    align-items: center;
+                    margin-right: 10px;
+                }
+                .file-list {
+                    display: flex;
+                    flex-direction: column;
+                }
             }
 
             .prevnext-area {
@@ -74,6 +84,15 @@ const TNoticePostCss = styled.div`
                         font-size: 16px;
                         color: #000;
                         margin-left: 10px;
+                        cursor: pointer;
+                        :hover {
+                            text-decoration: underline;
+                        }
+                    }
+                    .prev-titleNo {
+                        font-size: 16px;
+                        color: #000;
+                        margin-left: 10px;
                     }
                 }
                 .next {
@@ -82,6 +101,15 @@ const TNoticePostCss = styled.div`
                     font-size: 14px;
                     color: #777;
                     .next-title {
+                        font-size: 16px;
+                        color: #000;
+                        margin-left: 10px;
+                        cursor: pointer;
+                        :hover {
+                            text-decoration: underline;
+                        }
+                    }
+                    .next-titleNo {
                         font-size: 16px;
                         color: #000;
                         margin-left: 10px;

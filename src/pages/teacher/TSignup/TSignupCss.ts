@@ -16,25 +16,60 @@ const TSignupCss = styled.div`
             }
         }
         .sectionMain {
+            padding: 30px 0;
+            display: flex;
+            justify-content: center;
             form {
                 display: flex;
                 flex-direction: column;
                 div {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+                    align-items: center;
+                    position: relative;
                     label {
                         display: inline-block;
-                        font-size: 16px;
+                        line-height: 40px;
+                        font-size: 20px;
                         width: 150px;
                         color: ${TfontCol};
                     }
+                    input {
+                        width: 300px;
+                        height: 40px;
+                        padding: 5px 10px;
+                        border: 1px solid #d8d8d8;
+                    }
+                    select {
+                        height: 40px;
+                        padding: 5px 10px;
+                        border: 1px solid #d8d8d8;
+                    }
                     .nameBt {
+                        position: absolute;
+                        right: -5px;
                         ${Button}
                         background: ${TmainCol};
                     }
-                }
-                .username {
-                    display: flex;
+                    .userCheck {
+                        width: 300px;
+                        .username {
+                            width: 220px;
+                        }
+                    }
+                    .birthday {
+                        width: 300px;
+                    }
+                    .school {
+                        width: 300px;
+                    }
+                    .classroom {
+                        width: 300px;
+                    }
                 }
                 .signBt {
+                    margin: 0 auto;
                     color: white;
                     background: ${TmainCol};
                     width: 350px;

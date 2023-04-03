@@ -25,24 +25,24 @@ const SLoginCss = styled.div`
             width: 350px;
             height: 40px;
             padding: 5px 10px;
+            outline: none;
         }
         .pass-form {
+            margin-bottom: 50px;
             border-radius: 5px;
             width: 350px;
             height: 40px;
             padding: 5px 10px;
+            outline: none;
         }
-    }
-    .loginBt {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 350px;
-        height: 50px;
-        background: ${SmainCol};
-        color: #fff;
-        border-radius: 5px;
-        cursor: pointer;
+        .loginBt {
+            width: 350px;
+            height: 50px;
+            background: ${SmainCol};
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     }
 `;
 

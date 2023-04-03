@@ -9,6 +9,7 @@ const HeaderCss = styled.div`
     .header {
         display: flex;
         justify-content: space-between;
+        align-itmes: center;
         margin-bottom: 10px;
         .Ttitle {
             color: ${TfontCol};

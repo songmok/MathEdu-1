@@ -75,7 +75,7 @@ const NoticeForm = (props: IProps) => {
                             type="submit"
                             className={
                                 user.user === "teacher"
-                                    ? "seacrhBt"
+                                    ? "searchBt"
                                     : "searchBtS"
                             }
                         >

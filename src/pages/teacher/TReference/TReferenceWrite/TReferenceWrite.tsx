@@ -99,10 +99,11 @@ const TReferenceWrite = () => {
     }, []);
 
     const writeRef = async () => {
+        if (!title) return alert("제목을 입력해주세요.");
+        if (!contents) return alert("내용을 입력해주세요.");
+        if (!cate) return alert("카테고리를 선택해주세요.");
+        if (!classNo) return alert("반을 선택해주세요.");
         try {
-
-            
-
             const arr = new Array();
 
             for (let i = 0; i < files.length; i++) {
@@ -113,7 +114,7 @@ const TReferenceWrite = () => {
                 `http://192.168.0.62:9988/api/bbs`,
                 {
                     category: cate,
-                    classNo: 1,
+                    classNo: classNo,
                     content: contents,
                     teacherNo: user.no,
                     files: arr,
@@ -126,6 +127,8 @@ const TReferenceWrite = () => {
                 },
             );
             console.log(response.data);
+            alert(response.data.message);
+            navigate("/teacher/reference?page=1");
         } catch (error) {
             console.log(error);
         }

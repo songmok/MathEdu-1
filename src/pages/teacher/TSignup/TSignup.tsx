@@ -9,6 +9,7 @@ import { IClassList } from "../TNotice/TNoticeWrite/TNoticeWrite";
 const TSignup = () => {
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
+    const [check, setCheck] = useState(false);
     const [year, setYear] = useState("");
     const [month, setMonth] = useState("");
     const [day, setDay] = useState("");
@@ -29,7 +30,6 @@ const TSignup = () => {
             const response = await axios.get(
                 `http://192.168.0.62:9988/api/teacher/classList/${user.id}`,
             );
-            console.log(response.data);
             setClassList(response.data.classList);
         } catch (error) {
             console.log(error);
@@ -47,8 +47,36 @@ const TSignup = () => {
         }
     };
 
+    const checkID = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        if (!username) return alert("아이디를 입력해주세요.");
+        try {
+            const response = await axios.get(
+                `http://192.168.0.62:9988/api/student/check/${username}`,
+            );
+            alert(response.data.message);
+            response.data.status && setCheck(true);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    console.log(check);
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (!name) return alert("이름을 입력해주세요.");
+        if (!username) return alert("아이디를 입력해주세요.");
+        if (!check) return alert("아이디를 중복확인해주세요.");
+        if (!year) return alert("연도를 선택해주세요.");
+        if (!month) return alert("월을 선택해주세요.");
+        if (!day) return alert("일를 선택해주세요.");
+        if (!school) return alert("학교를 선택해주세요.");
+        if (!grade) return alert("학년을 선택해주세요.");
+        if (!address) return alert("주소를 입력해주세요.");
+        if (!phone) return alert("연락처를 입력해주세요.");
+        if (!parentPhone) return alert("보호자 연락처를 입력해주세요.");
+        if (!classNo) return alert("반을 선택해주세요.");
+        if (!file) return alert("사진을 첨부해주세요.");
 
         try {
             const response = await axios.put(
@@ -76,6 +104,8 @@ const TSignup = () => {
             );
             console.log(response.data);
             alert(response.data.message);
+            setCheck(false);
+            window.location.reload();
         } catch (error) {
             console.log(error);
         }
@@ -103,109 +133,117 @@ const TSignup = () => {
                                     className="name"
                                     value={name}
                                     onChange={e => setName(e.target.value)}
-                                    required
                                 />
                             </div>
 
-                            <div className="username">
+                            <div>
                                 <label htmlFor="username">아이디</label>
-                                <input
-                                    type="text"
-                                    className="username"
-                                    value={username}
-                                    onChange={e => setUsername(e.target.value)}
-                                    required
-                                />
-                                <button className="nameBt">중복확인</button>
+                                <div className="userCheck">
+                                    <input
+                                        type="text"
+                                        className="username"
+                                        value={username}
+                                        onChange={e =>
+                                            setUsername(e.target.value)
+                                        }
+                                    />
+                                    <button
+                                        className="nameBt"
+                                        onClick={checkID}
+                                    >
+                                        중복확인
+                                    </button>
+                                </div>
                             </div>
 
                             <div>
                                 <label htmlFor="birthday">생년월일</label>
-                                <select
-                                    name="year"
-                                    value={year}
-                                    onChange={e => setYear(e.target.value)}
-                                    required
-                                >
-                                    <option value="" disabled>
-                                        연도
-                                    </option>
-                                    {years.map(year => (
-                                        <option key={year} value={year}>
-                                            {year}
+                                <div className="birthday">
+                                    <select
+                                        name="year"
+                                        value={year}
+                                        onChange={e => setYear(e.target.value)}
+                                    >
+                                        <option value="" disabled>
+                                            연도
                                         </option>
-                                    ))}
-                                </select>
-                                <span> 년</span>
-                                <select
-                                    id="month"
-                                    name="month"
-                                    value={month}
-                                    onChange={e => setMonth(e.target.value)}
-                                    required
-                                >
-                                    <option value="" disabled>
-                                        월
-                                    </option>
-                                    {months.map(month => (
-                                        <option key={month} value={month}>
-                                            {month}
+                                        {years.map(year => (
+                                            <option key={year} value={year}>
+                                                {year}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <span> 년</span>
+
+                                    <select
+                                        id="month"
+                                        name="month"
+                                        value={month}
+                                        onChange={e => setMonth(e.target.value)}
+                                    >
+                                        <option value="" disabled>
+                                            월
                                         </option>
-                                    ))}
-                                </select>
-                                <span> 월</span>
-                                <select
-                                    id="day"
-                                    name="day"
-                                    value={day}
-                                    onChange={e => setDay(e.target.value)}
-                                    required
-                                >
-                                    <option value="" disabled>
-                                        일
-                                    </option>
-                                    {days.map(day => (
-                                        <option key={day} value={day}>
-                                            {day}
+                                        {months.map(month => (
+                                            <option key={month} value={month}>
+                                                {month}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <span> 월</span>
+
+                                    <select
+                                        name="day"
+                                        value={day}
+                                        onChange={e => setDay(e.target.value)}
+                                    >
+                                        <option value="" disabled>
+                                            일
                                         </option>
-                                    ))}
-                                </select>
-                                <span> 일</span>
+                                        {days.map(day => (
+                                            <option key={day} value={day}>
+                                                {day}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <span> 일</span>
+                                </div>
                             </div>
 
                             <div>
                                 <label htmlFor="school">학교</label>
-                                <select
-                                    name="school"
-                                    value={school}
-                                    onChange={e => setSchool(e.target.value)}
-                                    required
-                                >
-                                    <option value="" disabled>
-                                        학교
-                                    </option>
-                                    <option value="1">한수</option>
-                                    <option value="2">두수</option>
-                                    <option value="3">세수</option>
-                                </select>
-                                <span> 초등학교</span>
-
-                                <select
-                                    name="grade"
-                                    value={grade}
-                                    onChange={e => setGrade(e.target.value)}
-                                    required
-                                >
-                                    <option value="" disabled>
-                                        학년
-                                    </option>
-                                    {grades.map(grade => (
-                                        <option key={grade} value={grade}>
-                                            {grade}
+                                <div className="school">
+                                    <select
+                                        name="school"
+                                        value={school}
+                                        onChange={e =>
+                                            setSchool(e.target.value)
+                                        }
+                                    >
+                                        <option value="" disabled>
+                                            학교
                                         </option>
-                                    ))}
-                                </select>
-                                <span> 학년</span>
+                                        <option value="1">그린</option>
+                                        <option value="2">아트</option>
+                                    </select>
+                                    <span> 초등학교</span>
+
+                                    <select
+                                        name="grade"
+                                        value={grade}
+                                        onChange={e => setGrade(e.target.value)}
+                                    >
+                                        <option value="" disabled>
+                                            학년
+                                        </option>
+                                        {grades.map(grade => (
+                                            <option key={grade} value={grade}>
+                                                {grade}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <span> 학년</span>
+                                </div>
                             </div>
 
                             <div>
@@ -215,7 +253,6 @@ const TSignup = () => {
                                     name="address"
                                     value={address}
                                     onChange={e => setAddress(e.target.value)}
-                                    required
                                 />
                             </div>
 
@@ -235,7 +272,6 @@ const TSignup = () => {
                                                 ),
                                         )
                                     }
-                                    required
                                 />
                             </div>
 
@@ -257,7 +293,6 @@ const TSignup = () => {
                                                 ),
                                         )
                                     }
-                                    required
                                 />
                             </div>
 
@@ -266,11 +301,9 @@ const TSignup = () => {
                                 <select
                                     className="classroom"
                                     value={classNo}
-                                    defaultValue="class-list"
                                     onChange={e => setClassNo(e.target.value)}
-                                    required
                                 >
-                                    <option value="class-list">반 선택</option>
+                                    <option value="">반 선택</option>
                                     {classList.map(ele => (
                                         <option key={ele.no} value={ele.no}>
                                             {ele.name}

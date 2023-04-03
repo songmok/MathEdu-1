@@ -69,13 +69,19 @@ const Header = () => {
         fetchData();
     }, []);
 
-    console.log(userData);
-
     return (
         <HeaderCss>
             {userData ? (
                 <header className="header">
-                    <p className="Stitle">{userData.className}</p>
+                    <p
+                        className={
+                            user.user === "student" ? "Stitle" : "Ttitle"
+                        }
+                    >
+                        {user.user === "student"
+                            ? userData.className
+                            : "성적 관리 시스템"}
+                    </p>
                     <LogoutBt userData={userData} />
                 </header>
             ) : (

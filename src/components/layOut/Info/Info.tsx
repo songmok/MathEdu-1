@@ -1,25 +1,16 @@
-import { SImypage } from "../../../pages/student/SMypage/SMypage";
-import { TStudentInfo } from "../../../pages/teacher/TClass/TClassDetail/TStudentInfo/TStudentInfo";
-
+import { IStudentInfo } from "../../../pages/teacher/TClass/TClassDetail/TStudentInfo/TStudentInfo";
 import { InfoCss } from "./InfoCss";
 
-interface StudentInfoProps {
+interface InfoProps {
     title?: string;
     headerName?: string;
-    basicInfo?: TStudentInfo & SImypage; // basicInfo 속성의 타입을 TStudentInfo로 변경
-    weeklyTest?: TStudentInfo & SImypage;
-    monthlyTest?: TStudentInfo & SImypage;
+    basicInfo?: IStudentInfo;
+    weeklyTest?: IStudentInfo;
+    monthlyTest?: IStudentInfo;
     color: string;
 }
-// interface MYstudentInfoProps {
-//     title?: string;
-//     headerName?: string;
-//     basicInfo: SImypage; // basicInfo 속성의 타입을 TStudentInfo로 변경
-//     weeklyTest?: SImypage;
-//     monthlyTest?: SImypage;
-//     color: string;
-// }
-const Info = (props: StudentInfoProps) => {
+
+const Info = (props: InfoProps) => {
     const { basicInfo, headerName, color } = props;
 
     return (
@@ -29,9 +20,9 @@ const Info = (props: StudentInfoProps) => {
                     <h5 className={color}>{headerName}</h5>
                     <div className="info">
                         <div className="profileImg">
-                            {/* <img src={basicInfo?.profileImgURL} alt="" /> */}
                             <img
-                                src={`${process.env.PUBLIC_URL}/images/profile.jpg`}
+                                src={`http://192.168.0.62:9988/${basicInfo?.imgURL}`}
+                                alt=""
                             />
                         </div>
                         <ul className="infoGrid">
@@ -96,7 +87,7 @@ const Info = (props: StudentInfoProps) => {
                                 </span>
                             </li>
                             <li className="infoText">
-                                <span className={`key ${color}`}>담임 </span>
+                                <span className={`key ${color}`}>선생님 </span>
                                 <span className="data">
                                     {basicInfo?.teacher}
                                 </span>

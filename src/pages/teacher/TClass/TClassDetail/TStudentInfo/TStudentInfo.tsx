@@ -4,9 +4,9 @@ import { useLocation } from "react-router-dom";
 import Info from "../../../../../components/layOut/Info/Info";
 import TSidebar from "../../../../../components/tSidebar/TSidebar";
 
-export interface TStudentInfo {
+export interface IStudentInfo {
     name: string;
-    profileImgURL: string;
+    imgURL: string;
     birth: string;
     phone: string;
     className: string;

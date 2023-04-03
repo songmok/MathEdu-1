@@ -1,53 +1,58 @@
 import SSidebar from "../../../components/sSidebar/SSidebar";
 import Info from "../../../components/layOut/Info/Info";
-import studentpage from "./data/smypage.json";
-export interface SImypage {
-    name: string;
-    profileImgURL: string;
-    birth: string;
-    phone: string;
-    class: string;
-    school: string;
-    id: number;
-    alternatePhone: string;
-    classDays: string;
-    startTime: string;
-    endTime: string;
-    address: string;
-    grade: number;
-    regDt: string;
-    teacher: string;
-    weeklyTest?: {
-        score: number;
-        rank: number;
-        tieCnt: number;
-        totalStudents: number;
-        testDt: string;
-    };
-    monthlyTest?: {
-        score: number;
-        rank: number;
-        tieCnt: number;
-        totalStudents: number;
-        testDt: string;
-    };
-}
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/store";
+import { useEffect, useState } from "react";
+import Loading from "../../../components/loading/Loading";
+import { IStudentInfo } from "../../teacher/TClass/TClassDetail/TStudentInfo/TStudentInfo";
+import Modal from "../../../components/modal/Modal";
+import SMypageCss from "./SMypageCss";
+
 const SMypage = () => {
-    const student: SImypage = JSON.parse(JSON.stringify(studentpage.basicInfo));
-    const weekly: SImypage = JSON.parse(JSON.stringify(studentpage.weeklyTest));
-    const monthly: SImypage = JSON.parse(
-        JSON.stringify(studentpage.weeklyTest),
-    );
+    const user = useSelector((state: RootState) => state.user);
+
+    const [userData, setUserData] = useState<IStudentInfo>();
+
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(
+                `http://192.168.0.62:9988/api/student/${user.id}`,
+            );
+            setUserData(response.data.info.basicInfo);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    console.log(open);
+
     return (
         <>
             <SSidebar />
-            <Info
-                headerName="마이 페이지"
-                color="student"
-                // basicInfo={student}
-                // weeklyTest={weekly}
-                // monthlyTest={monthly}
-            />
+            {open && <Modal handleClose={handleClose} setOpen={setOpen} />}
+            {userData ? (
+                <>
+                    <Info
+                        headerName="마이 페이지"
+                        color="student"
+                        basicInfo={userData}
+                    />
+                    <SMypageCss>
+                        <button onClick={handleOpen}>비밀번호 변경</button>
+                    </SMypageCss>
+                </>
+            ) : (
+                <Loading />
+            )}
         </>
     );
 };

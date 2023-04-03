@@ -30,6 +30,7 @@ export interface IReference {
 }
 
 const TReference = () => {
+    const [handler, setHandler] = useState(false);
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const page = searchParams.get("page");
@@ -73,16 +74,19 @@ const TReference = () => {
 
     useEffect(() => {
         fetchData();
-    }, [page, keyword]);
+    }, [page, keyword, handler]);
 
     const deleteRef = async () => {
-        try {
-            const response = await axios.delete(
-                `http://192.168.0.62:9988/api/bbs/${bbsNos}/${teacherNo}`,
-            );
-            console.log(response.data);
-        } catch (error) {
-            console.error(error);
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+            try {
+                const response = await axios.delete(
+                    `http://192.168.0.62:9988/api/bbs/${bbsNos}/${teacherNo}`,
+                );
+                alert(response.data.message);
+                setHandler(!handler);
+            } catch (error) {
+                console.error(error);
+            }
         }
     };
 

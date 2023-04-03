@@ -26,7 +26,6 @@ const TNoticeFix = () => {
         Array.isArray(state.files) ? state.files : [state.files],
     );
     const [cate, setCate] = useState(state.category);
-    const [classNo, setClassNo] = useState("");
 
     const contentTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setTtitle(e.target.value);
@@ -39,10 +38,6 @@ const TNoticeFix = () => {
 
     const cateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setCate(e.target.value);
-    };
-
-    const classChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setClassNo(e.target.value);
     };
 
     const goBack = () => {
@@ -109,7 +104,7 @@ const TNoticeFix = () => {
             }
 
             const response = await axios.patch(
-                `http://192.168.0.62:9988/api/bbs/${state.no}`,
+                `http://192.168.0.62:9988/api/notice/${state.no}`,
                 {
                     category: cate,
                     classNo: state.classNo,
@@ -126,7 +121,7 @@ const TNoticeFix = () => {
             );
             console.log(response.data);
             alert(response.data.message);
-            navigate("/teacher/notice?page=1");
+            navigate(`/teacher/notice/post?no=${state.no}`);
         } catch (error) {
             console.log(error);
         }
@@ -160,22 +155,6 @@ const TNoticeFix = () => {
                                 <option value="문제풀이">문제풀이</option>
                                 <option value="과제">과제</option>
                             </select>
-                            {classList && (
-                                <select
-                                    placeholder="반 선택"
-                                    defaultValue="class-list"
-                                    onChange={classChange}
-                                >
-                                    <option value="class-list" disabled>
-                                        반 목록
-                                    </option>
-                                    {classList.map(ele => (
-                                        <option key={ele.no} value={ele.no}>
-                                            {ele.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            )}
                         </form>
                         <div className="content-area">
                             <ReactQuill
@@ -198,11 +177,11 @@ const TNoticeFix = () => {
                                 multiple={true}
                                 onChange={fileUpload}
                             />
-                            {files &&
+                            {/* {files &&
                                 Array.isArray(files) &&
                                 files.map((file, index) => (
                                     <div key={index}>{file.name}</div>
-                                ))}
+                                ))} */}
                         </form>
                     </div>
                     <div className="sectionBt">

@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import SLoginCss from "./SLoginCss";
 import { loginUser } from "../../../reducer/userSlice";
 import { useDispatch } from "react-redux";
+import SLoginCss from "./SLoginCss";
 
 const SLogin = () => {
     const [id, setId] = useState<string>("");
@@ -19,7 +19,8 @@ const SLogin = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const login = async () => {
+    const login = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         try {
             const response = await axios.post(
                 "http://192.168.0.62:9988/api/student/login",
@@ -28,7 +29,7 @@ const SLogin = () => {
                     pwd: pwd,
                 },
             );
-            console.log(response.data.message);
+
             if (response.data.status) {
                 navigate("/student/grade");
                 const user = response.data.login;
@@ -37,14 +38,14 @@ const SLogin = () => {
                         id: user.id,
                         name: user.name,
                         no: user.no,
-                        user : "student"
+                        user: "student",
                     }),
                 );
             } else {
                 alert(response.data.message);
             }
-        } catch (error) {
-            console.error(error);
+        } catch (error: any) {
+            alert(error.response.data.message);
         }
     };
 
@@ -52,21 +53,23 @@ const SLogin = () => {
         <SLoginCss>
             <img src={`${process.env.PUBLIC_URL}/images/logo_p.png`} />
             <p>- 학생용 -</p>
-            <form>
+            <form onSubmit={login}>
                 <input
                     placeholder="아이디"
+                    type="text"
                     className="id-form"
                     onChange={idHandler}
                 />
                 <input
                     placeholder="비밀번호"
+                    type="password"
                     className="pass-form"
                     onChange={pwdHandler}
                 />
+                <button type="submit" className="loginBt">
+                    로그인
+                </button>
             </form>
-            <div onClick={login} className="loginBt">
-                로그인
-            </div>
         </SLoginCss>
     );
 };

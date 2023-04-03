@@ -29,7 +29,7 @@ const TLogin = () => {
                     pwd: pwd,
                 },
             );
-            console.log(response.data);
+
             if (response.data.status) {
                 navigate("/teacher/class");
                 const user = response.data.teacher;
@@ -45,8 +45,8 @@ const TLogin = () => {
             } else {
                 alert(response.data.message);
             }
-        } catch (error) {
-            console.error(error);
+        } catch (error: any) {
+            alert(error.response.data.message);
         }
     };
 
@@ -58,11 +58,13 @@ const TLogin = () => {
                 <form onSubmit={login}>
                     <input
                         placeholder="아이디"
+                        type="text"
                         className="id-form"
                         onChange={idHandler}
                     />
                     <input
                         placeholder="비밀번호"
+                        type="password"
                         className="pass-form"
                         onChange={pwdHandler}
                     />

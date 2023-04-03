@@ -24,6 +24,7 @@ const TLoginCss = styled.div`
             width: 350px;
             height: 40px;
             padding: 5px 10px;
+            outline: none;
         }
         .pass-form {
             margin-bottom: 50px;
@@ -31,6 +32,7 @@ const TLoginCss = styled.div`
             width: 350px;
             height: 40px;
             padding: 5px 10px;
+            outline: none;
         }
         .loginBt {
             width: 350px;

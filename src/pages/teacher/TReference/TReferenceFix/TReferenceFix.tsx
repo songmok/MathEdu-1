@@ -88,7 +88,7 @@ const TReferenceFix = () => {
                 `http://192.168.0.62:9988/api/bbs/${state.no}`,
                 {
                     category: cate,
-                    classNo: 1,
+                    classNo: state.classNo,
                     content: contents,
                     teacherNo: user.no,
                     files: arr,
@@ -101,6 +101,8 @@ const TReferenceFix = () => {
                 },
             );
             console.log(response.data);
+            alert(response.data.message);
+            navigate(`/teacher/reference/post?no=${state.no}`);
         } catch (error) {
             console.log(error);
         }

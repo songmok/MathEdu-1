@@ -74,7 +74,7 @@ const ReferenceForm = (props: IProps) => {
                         <button
                             className={
                                 user.user === "teacher"
-                                    ? "seacrhBt"
+                                    ? "searchBt"
                                     : "searchBtS"
                             }
                         >

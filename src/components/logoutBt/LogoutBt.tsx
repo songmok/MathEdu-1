@@ -32,10 +32,6 @@ const LogoutBt = (props: IProps) => {
                     src={`http://192.168.0.62:9988${props.userData.imageURL} `}
                 />
             )}
-            {/* <img
-                className="profileImg"
-                src={`http://192.168.0.62:9988${props.userData.imageURL} `}
-            /> */}
             <span>{props.userData.name}</span>
             <img
                 className="outImg"

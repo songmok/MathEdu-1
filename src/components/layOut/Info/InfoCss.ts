@@ -18,7 +18,6 @@ export const InfoCss = styled.div`
         h5 {
             font-weight: normal;
             font-size: 18px;
-
             margin-bottom: 30px;
         }
         .info {
@@ -26,8 +25,10 @@ export const InfoCss = styled.div`
             .profileImg {
                 width: 135px;
                 height: 175px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 img {
-                    display: block;
                     width: 100%;
                 }
             }
