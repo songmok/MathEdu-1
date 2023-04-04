@@ -6,7 +6,7 @@ const NoticeFormCss = styled.div`
     .sectionTop {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         .ps {
             color: ${SfontCol};
             font-size: 18px;
@@ -44,7 +44,7 @@ const NoticeFormCss = styled.div`
     }
 
     .sectionMain {
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         .table {
             border-radius: 5px;
             width: 100%;

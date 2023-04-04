@@ -3,7 +3,9 @@ import { TfontCol, TmainCol } from "../../../utils/Color";
 
 export const TClassTestCss = styled.div`
     background-color: #fff;
-    padding: 15px;
+    padding: 30px;
+    padding-right: 15px;
+    padding-bottom: 15px;
     border-radius: 15px;
     .header {
         display: flex;
@@ -11,7 +13,7 @@ export const TClassTestCss = styled.div`
         padding-bottom: 15px;
         > span {
             color: ${TfontCol};
-            font-size: 18px;
+            font-size: 20px;
         }
         button {
             background: transparent;

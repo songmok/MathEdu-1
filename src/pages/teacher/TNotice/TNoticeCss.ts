@@ -8,6 +8,7 @@ const TNoticeCss = styled.div`
         background: #fff;
         padding: 30px;
         border-radius: 15px;
+        height: 632px;
         .sectionBt {
             display: flex;
             justify-content: end;

@@ -98,8 +98,8 @@ const TClass = () => {
                                 <tr className="tableHeader">
                                     <th>번호</th>
                                     <th>반</th>
-                                    <th>학년</th>
                                     <th>요일</th>
+                                    <th>학년</th>
                                     <th>개강일</th>
                                     <th>종강일</th>
                                 </tr>
@@ -108,10 +108,10 @@ const TClass = () => {
                                 return (
                                     <tbody key={ele.classNo}>
                                         <tr className="tableMain">
-                                            <td>
+                                            <td style={{ width: "5%" }}>
                                                 <span>{ele.classNo}</span>
                                             </td>
-                                            <td>
+                                            <td style={{ width: "25%" }}>
                                                 <span
                                                     className="className"
                                                     onClick={() => {
@@ -126,7 +126,7 @@ const TClass = () => {
                                             <td>
                                                 <span>{ele.grade}</span>
                                             </td>
-                                            <td>
+                                            <td style={{ width: "15%" }}>
                                                 <span>{ele.days}</span>
                                             </td>
                                             <td>

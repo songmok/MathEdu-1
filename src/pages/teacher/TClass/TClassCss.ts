@@ -53,20 +53,30 @@ const TClassCss = styled.div`
                 border-radius: 5px;
                 width: 100%;
                 text-align: center;
-                .tableHeader {
-                    background: ${TmainCol};
-                    color: #fff;
-                    border: none;
-                    height: 50px;
+                thead {
+                    .tableHeader {
+                        background: ${TmainCol};
+                        color: #fff;
+                        border: none;
+                        height: 50px;
+                    }
                 }
-                .tableMain {
-                    height: 40px;
-                    .className {
-                        cursor: pointer;
+                tbody {
+                    .tableMain {
+                        height: 40px;
                         &:hover {
-                            border-bottom: 1px solid;
-                            padding-bottom: 1px;
-                            color: ${TfontCol};
+                            background: #f8f9fa;
+                        }
+                        td {
+                            border-bottom: 1px solid rgb(216, 216, 216);
+                            .className {
+                                cursor: pointer;
+                                &:hover {
+                                    border-bottom: 1px solid;
+                                    padding-bottom: 1px;
+                                    color: ${TfontCol};
+                                }
+                            }
                         }
                     }
                 }

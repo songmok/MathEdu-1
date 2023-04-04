@@ -3,14 +3,15 @@ import { TfontCol } from "../../../utils/Color";
 
 export const TClassInfoCss = styled.div`
     background-color: #fff;
-    padding: 15px;
+    padding: 30px;
+    padding-right: 15px;
     border-radius: 15px;
     .header {
         display: flex;
         justify-content: space-between;
         > span {
             color: ${TfontCol};
-            font-size: 18px;
+            font-size: 20px;
         }
     }
     .wrap {
@@ -33,10 +34,9 @@ export const TClassInfoCss = styled.div`
                         position: relative;
                         em {
                             color: ${TfontCol};
-                            font-weight: bold;
                             white-space: nowrap;
                             font-style: normal;
-                            font-size: 1rem;
+                            font-size: 15px;
                         }
                     }
                     > span::after {
@@ -56,15 +56,12 @@ export const TClassInfoCss = styled.div`
                     text-align: center;
                     overflow: hidden;
                     width: 50%;
-                    font-size: 15px;
-                    letter-spacing: 1px;
+                    letter-spacing: 0.5px;
                     .wave {
                         margin: 0 10px;
                     }
                     span {
-                        text-overflow: ellipsis;
-
-                        font-weight: bold;
+                        font-size: 15px;
                     }
                 }
             }
