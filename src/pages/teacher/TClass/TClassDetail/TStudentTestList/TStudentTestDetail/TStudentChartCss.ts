@@ -19,7 +19,7 @@ export const TStudentChartCss = styled.div`
             justify-content: space-between;
             width: 100%;
             ul {
-                width: 50%;
+                width: 33%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;

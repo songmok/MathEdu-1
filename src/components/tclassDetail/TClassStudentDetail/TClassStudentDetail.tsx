@@ -27,7 +27,7 @@ interface IClassNumber {
 const TClassStudentDetail = (props: IClassNumber) => {
     const { classQuNo } = props;
     const navigate = useNavigate();
-    const goClassStudent = (no: number) => {
+    const goClassStudent = (no: string) => {
         navigate(`/teacher/class/detail/studentinfo/${no}`);
     };
 
@@ -90,9 +90,7 @@ const TClassStudentDetail = (props: IClassNumber) => {
                                         <span
                                             className="linkname"
                                             onClick={() => {
-                                                goClassStudent(
-                                                    parseInt(ele.id),
-                                                );
+                                                goClassStudent(ele.id);
                                             }}
                                         >
                                             {ele.name}

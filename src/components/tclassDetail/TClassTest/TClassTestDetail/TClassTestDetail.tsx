@@ -1,46 +1,59 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { TClassTestDetailCss } from "./TClassTestDetailCss";
-export interface ITlist {
-    no: string;
-    img: string;
-    id: string;
-    name: string;
-    phone: string;
-    alternatephone: string;
-    address: string;
+
+export interface ITexstudentlist {
+    list: ITexstudentListItem[];
 }
-export interface ITheader {
-    number: string;
-    picture: string;
-    student: string;
-    phone: string;
-    parentPhone: string;
-    address: string;
+
+export interface ITexstudentListItem {
+    className: string;
+    classNo: string;
+    examDt: string;
+    examName: string;
+    examNo: string;
+    imgURL: string;
+    score: string;
+    studentId: string;
+    studentName: string;
+    studentNo: string;
 }
-const TClassTestDetail = () => {
-    const [classStudent, setClassStudent] = useState<ITlist[]>();
-    const classStudentListApi = async () => {
+interface IPath {
+    classPaNo: string;
+    examPaNo: string;
+}
+const TClassTestDetail = (props: IPath) => {
+    const { classPaNo, examPaNo } = props;
+    const [exStudentList, setExStudentList] = useState<ITexstudentListItem[]>();
+
+    // 학생 점수 리스트 api
+
+    const classStudentTestApi = async () => {
         try {
-            const response = await axios.get(
-                `http://192.168.0.62:9988/api/class/student/1`,
+            const res = await axios.get(
+                `http://192.168.0.62:9988/api/exam/detail/${classPaNo}/${examPaNo}`,
             );
-            console.log("학생리스트", response.data.stuList);
-            setClassStudent(response.data.stuList);
+            console.log("학생 점수 리스트", res.data.list);
+            setExStudentList(res.data.list);
         } catch (error) {
-            console.error("err", error);
+            console.error("학생리스트를 찾아올 수 없습니다.", error);
         }
     };
-    const headerList: ITheader = {
-        number: "번호",
-        picture: "사진",
-        student: "학생",
-        phone: "전화번호",
-        parentPhone: "학부모전화번호",
-        address: "주소",
-    }; //반 학생 헤더
+    // 점수등록 api
+    const handleScoreInput = async (studentId: string) => {
+        const score = prompt("점수를 입력해주세요.");
+        const stuId = studentId;
+        const scoreNum = score;
+        try {
+            const res = await axios.put(
+                `http://192.168.0.62:9988/api/class/exam/${examPaNo}/${stuId}/${scoreNum}`,
+            );
+        } catch (error) {
+            console.error("점수 등록에 실패했습니다.", error);
+        }
+    };
     useEffect(() => {
-        classStudentListApi();
+        classStudentTestApi();
     }, []);
     return (
         <>
@@ -52,33 +65,47 @@ const TClassTestDetail = () => {
                     <div className="sectionMain">
                         <table className="table">
                             <tr className="tableHeader">
-                                <th>{headerList.number}</th>
-                                <th>{headerList.picture}</th>
-                                <th>{headerList.student}</th>
-                                <th>{headerList.phone}</th>
-                                <th style={{ letterSpacing: "-1px" }}>
-                                    {headerList.parentPhone}
-                                </th>
-                                <th>{headerList.address}</th>
+                                <th>번호</th>
+                                <th>사진</th>
+                                <th>이름</th>
+                                <th>반 이름</th>
+                                <th>시험 이름</th>
+                                <th>점수</th>
                             </tr>
 
-                            {classStudent?.map((ele, idx) => (
-                                <tr key={ele.no} className="tableMain">
-                                    {/* <Link></Link> */}
+                            {exStudentList?.map((ele, idx) => (
+                                <tr key={idx} className="tableMain">
                                     <td>
-                                        <span>{ele.no}</span>
+                                        <span>{ele.studentNo}</span>
                                     </td>
                                     <td>
-                                        <img
-                                            src={`${process.env.PUBLIC_URL}/images/profile.jpg`}
-                                        />
+                                        <img src={ele.imgURL} />
                                     </td>
                                     <td>
-                                        <span>{ele.name}</span>
+                                        <span>{ele.studentName}</span>
                                     </td>
-                                    <td>{ele.phone}</td>
-                                    <td>{ele.alternatephone}</td>
-                                    <td>{ele.address}</td>
+                                    <td>
+                                        <span>{ele.className}</span>
+                                    </td>
+                                    <td>
+                                        <span>{ele.examName}</span>
+                                    </td>
+                                    {ele.score !== null ? (
+                                        <td>
+                                            <span>{ele.score}</span>
+                                        </td>
+                                    ) : (
+                                        <td>
+                                            <span>ㅡ</span>
+                                        </td>
+                                    )}
+                                    <button
+                                        onClick={() =>
+                                            handleScoreInput(ele.studentId)
+                                        }
+                                    >
+                                        {ele.score || "미입력"}
+                                    </button>
                                 </tr>
                             ))}
                         </table>
