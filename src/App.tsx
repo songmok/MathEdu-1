@@ -55,7 +55,7 @@ function App() {
                     {/* 선생님 사이트 */}
                     <Route path="/teacher/*">
                         <Route path="login" element={<TLogin />} />
-                        <Route path="grade" element={<TGrade />} />
+                        {/* <Route path="grade" element={<TGrade />} /> */}
                         <Route path="signup" element={<TSignup />} />
                         <Route path="class">
                             <Route path="" element={<TClass />} />

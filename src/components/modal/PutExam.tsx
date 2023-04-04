@@ -1,17 +1,16 @@
 import { useState } from "react";
 import ModalCss from "./ModalCss";
 import axios from "axios";
-import { useNavigate } from "react-router";
 
 interface IProps {
     handler: boolean;
     handleClose: () => void;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setHandler: React.Dispatch<React.SetStateAction<boolean>>;
+    classno: number;
 }
 
 const PutExam = (props: IProps) => {
-    const navigate = useNavigate();
     const [date, setDate] = useState("");
     const [title, setTitle] = useState("");
     const [type, setType] = useState("");
@@ -42,13 +41,13 @@ const PutExam = (props: IProps) => {
             const response = await axios.put(
                 `http://192.168.0.62:9988/api/exam`,
                 {
-                    classNo: 1,
+                    classNo: props.classno,
                     date: date,
                     name: title,
                     type: type,
                 },
             );
-            console.log(response.data);
+            alert(response.data.message);
             props.setOpen(false);
             props.setHandler(!props.handler);
         } catch (error) {

@@ -64,7 +64,7 @@ const TSidebarCss = styled.div`
     .signup {
         width: 100%;
         position: absolute;
-        bottom: -450px;
+        bottom: -500px;
         cursor: pointer;
         color: white;
         padding: 0 70px 0 60px;

@@ -25,8 +25,8 @@ const TStudentTestList = () => {
     const Navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const page = searchParams.get("page");
-    const classno = searchParams.get("classno");
-
+    const classnoString = searchParams.get("classno");
+    const classno = classnoString ? parseInt(classnoString) : 0;
     const [searchKeyword, setSearchKeyword] = useState<string>("");
 
     const goClassTest = (no: number) => {
@@ -173,6 +173,7 @@ const TStudentTestList = () => {
                                 setOpen={setOpen}
                                 handler={handler}
                                 setHandler={setHandler}
+                                classno={classno}
                             />
                         )}
                         <Pagination

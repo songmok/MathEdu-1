@@ -39,12 +39,14 @@ const TSignupCss = styled.div`
                         width: 300px;
                         height: 40px;
                         padding: 5px 10px;
-                        border: 1px solid #d8d8d8;
+                        border: 2px solid #d9d9d9;
+                        border-radius: 5px;
                     }
                     select {
                         height: 40px;
                         padding: 5px 10px;
-                        border: 1px solid #d8d8d8;
+                        border: 2px solid #d9d9d9;
+                        border-radius: 5px;
                     }
                     .nameBt {
                         position: absolute;

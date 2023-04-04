@@ -20,6 +20,7 @@ const TLoginCss = styled.div`
         flex-direction: column;
         .id-form {
             margin-bottom: 10px;
+            border: 2px solid #d9d9d9;
             border-radius: 5px;
             width: 350px;
             height: 40px;
@@ -28,6 +29,7 @@ const TLoginCss = styled.div`
         }
         .pass-form {
             margin-bottom: 50px;
+            border: 2px solid #d9d9d9;
             border-radius: 5px;
             width: 350px;
             height: 40px;
