@@ -1,6 +1,9 @@
 import { IStudentInfo } from "../../../pages/teacher/TClass/TClassDetail/TStudentInfo/TStudentInfo";
 import TClassGradeGraph from "../../../pages/teacher/TClass/TClassDetail/TStudentInfo/TClassGradeGraph/TClassGradeGraph";
 import { InfoCss } from "./InfoCss";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/store";
+import SMypageCss from "../../../pages/student/SMypage/SMypageCss";
 
 interface InfoProps {
     title?: string;
@@ -10,15 +13,29 @@ interface InfoProps {
     monthlyTest?: IStudentInfo;
     color: string;
 }
-
-const Info = (props: InfoProps) => {
-    const { basicInfo, headerName, color } = props;
-
+interface IHbutton {
+    handleOpen?: () => void;
+}
+const Info = (props: InfoProps & IHbutton) => {
+    const { basicInfo, headerName, color, handleOpen } = props;
+    const user = useSelector((state: RootState) => state.user.user);
+    console.log("user", user);
     return (
         <>
             <InfoCss>
                 <div className="infoPage">
-                    <h5 className={color}>{headerName}</h5>
+                    <div>
+                        <h5 className={color}>{headerName}</h5>
+                        <SMypageCss>
+                            {user === "student" ? (
+                                <button onClick={handleOpen}>
+                                    비밀번호 변경
+                                </button>
+                            ) : (
+                                ""
+                            )}
+                        </SMypageCss>
+                    </div>
                     <div className="info">
                         <div className="profileImg">
                             <img
@@ -42,9 +59,7 @@ const Info = (props: InfoProps) => {
                                 <span className="data">{basicInfo?.grade}</span>
                             </li>
                             <li className="infoText">
-                                <span className={`key ${color}`}>
-                                    생년월일
-                                </span>
+                                <span className={`key ${color}`}>생년월일</span>
                                 <span className="data">{basicInfo?.birth}</span>
                             </li>
                             <li className="infoText">
