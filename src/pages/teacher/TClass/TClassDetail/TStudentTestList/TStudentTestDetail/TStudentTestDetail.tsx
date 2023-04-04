@@ -1,5 +1,5 @@
 import { TStudentTestDetailCss } from "./TStudentTestDetailCss";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts/highstock";
@@ -16,17 +16,6 @@ const TStudentTestDetail = () => {
     const examNo = pathname.split("examNo=")[1].split("&")[0];
     const classNo = pathname.split("classNo=")[1];
 
-    // 학생 점수 리스트 api
-    const classStudentTestApi = async () => {
-        try {
-            const res = await axios.get(
-                `http://192.168.0.62:9988/api/exam/detail/${classNo}/${examNo}`,
-            );
-            console.log("testssss", res.data);
-        } catch (error) {
-            console.error("학생리스트를 찾아올 수 없습니다.", error);
-        }
-    };
     // 시험 통계 api
     const classTestSummaryApi = async () => {
         try {
@@ -40,7 +29,6 @@ const TStudentTestDetail = () => {
     };
 
     useEffect(() => {
-        classStudentTestApi();
         classTestSummaryApi();
     }, []);
 
@@ -149,7 +137,11 @@ const TStudentTestDetail = () => {
                             </div>
                         </div>
                     </TStudentChartCss>
-                    <TClassTestDetail />
+                    <TClassTestDetail
+                        // classStudentTestApi={classStudentTestApi}
+                        classPaNo={classNo}
+                        examPaNo={examNo}
+                    />
                 </div>
             </TStudentTestDetailCss>
         </>
