@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import TSidebar from "../../../../../../components/tSidebar/TSidebar";
 import TClassGradeGraphCss from "./TClassGradeGraphCss";
 import Highcharts from "highcharts/highstock";
 import highchartsMore from "highcharts/highcharts-more.js";
@@ -61,6 +60,10 @@ export interface testAnalysis {
     }>;
     top30pAvgScores: Array<number>;
 }
+export interface selectDate{
+    month:number
+    week:number
+}
 
 const TClassGradeGraph = () => {
     const [weekTR, setWeekTR] = useState<testResult>({
@@ -107,12 +110,13 @@ const TClassGradeGraph = () => {
         top30pAvgScores: [],
         tableData: [],
     });
+    const [order, setOrder] = useState("asc");
+
     const location = useLocation();
     const path = location.pathname;
     const stuId = path.split("/").pop(); // "23030004"
 
     // 학생 정보 데이터연동
-
     useEffect(() => {
         let params: { stuId?: string } = {
             stuId: stuId,
@@ -157,7 +161,7 @@ const TClassGradeGraph = () => {
         }
 
         return months.map(item => (
-            <option key={item} value={item}>
+            <option key={item} value={item} selected={item === nowMonth}>
                 {item}월
             </option>
         ));
@@ -169,7 +173,7 @@ const TClassGradeGraph = () => {
         }
 
         return years.map(item => (
-            <option key={item} value={item}>
+            <option key={item} value={item} selected={item === nowYear}>
                 {item}년
             </option>
         ));
@@ -181,57 +185,48 @@ const TClassGradeGraph = () => {
         type: "week",
     });
 
-    // 월간 주간 성적 그래프
-    const sWeeklyTest = () => {
+    // 주간 월간 성적 그래프
+    const sWeeklyTest = async () => {
         let params: {
             order: string;
             stuId?: string;
             year: number;
             month: number;
         } = {
-            order: "desc",
+            order: order,
             month: scMunth,
             stuId: stuId,
             year: scYear,
         };
-        axios
-            .get(
-                `http://192.168.0.62:9988/api/student/exam/weekly/${stuId}/${scYear}/${scMunth}/desc`,
-                { params: params },
-            )
-            .then(res => {
-                // console.log(res.data.data);
-                setWeekTest(res.data.data);
-            })
-            .catch(err => {
-                // console.log(err);
-            });
+        try {
+            const res = await axios.get(
+                `http://192.168.0.62:9988/api/student/exam/weekly/${stuId}/${scYear}/${scMunth}/${order}`,
+                { params },
+            );
+            console.log("test", res.data);
+            setWeekTest(res.data.data);
+        } catch (error) {
+            console.error("주간시험 결과를 찾을 수 없습니다", error);
+        }
     };
-    const sMonthlyTest = () => {
+    const sMonthlyTest = async () => {
         let params: { order: string; stuId?: string; year: number } = {
-            order: "desc",
+            order: order,
             stuId: stuId,
             year: scYear,
         };
-        axios
-            .get(
-                `http://192.168.0.62:9988/api/student/exam/monthly/${stuId}/${scYear}/desc`,
+        try {
+            const res = await axios.get(
+                `http://192.168.0.62:9988/api/student/exam/monthly/${stuId}/${scYear}/${order}`,
                 { params: params },
-            )
-            .then(res => {
-                // console.log(res.data.data);
-                setMonthTest(res.data.data);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    };
-    useEffect(() => {
-        if (scMunth === nowMonth) {
-            sWeeklyTest();
-            sMonthlyTest();
+            );
+            console.log(res.data.data);
+            setMonthTest(res.data.data);
+        } catch (error) {
+            console.error("월간시험 결과를 찾을 수 없습니다", error);
         }
-    }, []);
+    };
+
     // 월간 주간 변경 버튼
     const wmChange = () => {
         if (wmBtn.typeName === "주간") {
@@ -243,10 +238,22 @@ const TClassGradeGraph = () => {
         }
     };
 
+    const handleOrderChange = (
+        event: React.ChangeEvent<{ value: unknown }>,
+    ) => {
+        console.log("order", order);
+        setOrder(event.target.value as string);
+    };
+
     //확인버튼
     const wMcheck = () => {};
 
-    console.log(stuId);
+    useEffect(() => {
+        sWeeklyTest();
+        sMonthlyTest();
+    }, [scMunth, scYear, order]);
+
+    console.log(scMunth, scYear, order);
 
     return (
         <TClassGradeGraphCss>
@@ -276,36 +283,34 @@ const TClassGradeGraph = () => {
                         성적 분석
                     </button>
                 </div>
-                {wmBtn.typeName === "주간" ? (
-                    <form className="subTitle flexForm">
-                        <select value={scYear} onChange={e => cY(e)}>
-                            {year()}
-                        </select>
-                        <span>년</span>
-                        <select value={scMunth} onChange={e => cM(e)}>
-                            {month()}
-                        </select>
-                        <span>월</span>
-                        <button type="submit" className="submitBt">
-                            확인
-                        </button>
-                    </form>
-                ) : (
-                    <form className="subTitle flexForm">
-                        <select value={scYear} onChange={e => cY(e)}>
-                            {year()}
-                        </select>
-                        <span>년</span>
 
-                        <button
-                            type="submit"
-                            className="submitBt"
-                            onClick={wMcheck}
-                        >
-                            확인
-                        </button>
-                    </form>
-                )}
+                <form className="subTitle flexForm">
+                    {wmBtn.typeName === "주간" ? (
+                        <>
+                            <select onChange={e => cY(e)}>{year()}</select>
+                            <span>년</span>
+                            <select onChange={e => cM(e)}>{month()}</select>
+                            <span>월</span>
+                        </>
+                    ) : (
+                        <>
+                            <select onChange={e => cY(e)}>{year()}</select>
+                            <span>년</span>
+                        </>
+                    )}
+                    <select value={order} onChange={handleOrderChange}>
+                        <option value="asc">오름차순</option>
+                        <option value="desc">내림차순</option>
+                    </select>
+                    {/* <button
+                        type="submit"
+                        className="submitBt"
+                        onClick={wMcheck}
+                    >
+                        확인
+                    </button> */}
+                </form>
+
                 {wmBtn.typeName === "주간" ? (
                     <TestAnalysis
                         testAnalysis={weekTest}
@@ -325,6 +330,7 @@ const TClassGradeGraph = () => {
                             subCol: "#00A49A",
                             pointCol: "#4543A0",
                         }}
+
                     />
                 )}
             </div>

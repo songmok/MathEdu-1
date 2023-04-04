@@ -43,17 +43,45 @@ const TestAnalysis = (props: Iprops) => {
             ? [0]
             : props.testAnalysis.top30pAvgScores;
 
-    // 차트 옵션 주차
-    const testNum = props.testAnalysis.personalScores.length;
+    //시험 월[] 추출
+    const testDate = props.testAnalysis.tableData.map(data => {
+        const month = data.examDt.split("-")[1]; // '-' 문자를 기준으로 분리해서 배열에서 두 번째 값 추출
+        return Number(month); // 추출한 월을 숫자형으로 변환하여 반환
+    });
+    console.log(112233, testDate); //[3, 3, 3, 3, 3]
 
-    let num = [];
-    for (let i = 0; i < testNum; i++) {
-        if (props.examType.typeName === "주간") {
-            num.push(i + 1 + "주");
+    const weekNums = props.testAnalysis.tableData.map(data => {
+        const examDt = data.examDt; // 날짜
+        const dateObj = new Date(examDt); //날짜로 변환
+        const firstDayOfMonth = new Date(
+            dateObj.getFullYear(),
+            dateObj.getMonth(),
+            1,
+        ); //월 구하기
+        const diffInDays = dateObj.getDate() - firstDayOfMonth.getDate();
+
+        const weekNum = Math.ceil(
+            (diffInDays + firstDayOfMonth.getDay() + 1) / 7,
+        );
+
+        return weekNum;
+    });
+
+    console.log(weekNums); // 출력 결과: [1, 4]
+
+    // 차트 옵션 주차/월차 횟수
+    // const testNum = testDate.length;
+
+    const newtestArr = [];
+    for (let i = 0; i < testDate.length; i++) {
+        if (props.examType.typeName === "월간") {
+            newtestArr.push(testDate[i] + "월");
         } else {
-            num.push(i + 1 + "월");
+            newtestArr.push(weekNums[i] + "주");
         }
     }
+    console.log(123, newtestArr); // ["3주", "4주", "3주", "6주", "2주"]
+
     // 그래프 옵션
     const options = {
         chart: {
@@ -66,7 +94,7 @@ const TestAnalysis = (props: Iprops) => {
             title: {
                 text: "",
             },
-            categories: num,
+            categories: newtestArr,
         },
         yAxis: {
             title: {
