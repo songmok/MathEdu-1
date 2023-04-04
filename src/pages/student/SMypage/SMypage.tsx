@@ -45,10 +45,8 @@ const SMypage = () => {
                         headerName="마이 페이지"
                         color="student"
                         basicInfo={userData}
+                        handleOpen={handleOpen}
                     />
-                    <SMypageCss>
-                        <button onClick={handleOpen}>비밀번호 변경</button>
-                    </SMypageCss>
                 </>
             ) : (
                 <Loading />

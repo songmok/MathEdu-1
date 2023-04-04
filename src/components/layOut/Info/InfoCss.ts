@@ -15,10 +15,15 @@ export const InfoCss = styled.div`
         height: 333px;
         border-radius: 30px;
         background-color: #fff;
-        h5 {
-            font-weight: normal;
-            font-size: 18px;
-            margin-bottom: 30px;
+        width: 100%;
+        > div {
+            display: flex;
+            justify-content: space-between;
+            h5 {
+                font-weight: normal;
+                font-size: 18px;
+                margin-bottom: 30px;
+            }
         }
         .info {
             display: flex;
