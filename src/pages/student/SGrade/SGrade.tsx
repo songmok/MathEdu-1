@@ -138,6 +138,7 @@ const SGrade = () => {
     const now = new Date(); // 현재 날짜 및 시간
     const nowYear = now.getFullYear(); // 연도
     const nowMonth = now.getMonth(); // 월
+    const mon = "0" + (nowMonth + 1);
 
     const [scMunth, setScMunth] = useState(nowMonth);
     const [scYear, setScYear] = useState(nowYear);
@@ -160,11 +161,16 @@ const SGrade = () => {
         }
 
         return months.map(item => (
-            <option key={item} value={item} selected={item === nowMonth}>
+            <option
+                key={item}
+                value={item}
+                // selected={item === nowMonth}
+            >
                 {item}월
             </option>
         ));
     };
+
     const year = () => {
         let years = [];
         for (let i = 2020; i < nowYear + 1; i += 1) {
@@ -289,7 +295,12 @@ const SGrade = () => {
                             <>
                                 <select onChange={e => cY(e)}>{year()}</select>
                                 <span>년</span>
-                                <select onChange={e => cM(e)}>{month()}</select>
+                                <select
+                                    defaultValue={mon}
+                                    onChange={e => cM(e)}
+                                >
+                                    {month()}
+                                </select>
                                 <span>월</span>
                             </>
                         ) : (

@@ -114,19 +114,14 @@ const TStudentTestDetail = () => {
     };
     const optionsArr = {
         chart: {
-            type: "line",
+            type: "spline",
         },
         title: {
             text: "점수 분포도",
         },
-        subtitle: {
-            text:
-                'Source: <a href="https://fas.org/issues/nuclear-weapons/status-world-nuclear-forces/" ' +
-                'target="_blank">FAS</a>',
-        },
         xAxis: {
             categories: [
-                "20미만",
+                "20점 미만",
                 "20점 ~ 39점",
                 "40점 ~ 59점",
                 "60점 ~ 79점",
@@ -140,11 +135,13 @@ const TStudentTestDetail = () => {
             max: 8,
         },
         tooltip: {
-            pointFormat:
-                "{series.name} had stockpiled <b>{point.y:,.0f}</b><br/>warheads in {point.x}",
+            pointFormat: "{point.x.name} {point.y}명 ",
         },
         plotOptions: {
             area: {
+                lineWidth: 2,
+                softThreshold: true,
+                linecap: "round",
                 pointStart: 0,
                 marker: {
                     enabled: false,

@@ -95,6 +95,8 @@ const TNoticeFix = () => {
         [],
     );
 
+    console.log(cate);
+
     const fixRef = async () => {
         try {
             const arr = new Array();
@@ -165,10 +167,9 @@ const TNoticeFix = () => {
                                     <option value="category" disabled>
                                         카테고리
                                     </option>
-                                    <option value="수업자료">수업자료</option>
-                                    <option value="시험자료">시험자료</option>
-                                    <option value="문제풀이">문제풀이</option>
-                                    <option value="과제">과제</option>
+                                    <option value="학원공지">학원공지</option>
+                                    <option value="수업공지">수업공지</option>
+                                    <option value="과제공지">과제공지</option>
                                 </select>
                             </form>
                             <div className="content-area">

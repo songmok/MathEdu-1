@@ -33,6 +33,7 @@ const SLogin = () => {
             if (response.data.status) {
                 navigate("/student/grade");
                 const user = response.data.login;
+                console.log(user);
                 dispatch(
                     loginUser({
                         id: user.id,
