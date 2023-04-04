@@ -35,7 +35,7 @@ const TStudentTestDetail = () => {
                 `http://192.168.0.62:9988/api/class/exam/summary/${examNo}`,
             );
             const data = res.data.summary;
-            setArrData(data.areaData);
+            setArrData(data.areaData.reverse());
             setAvg(parseInt(data.avgScore));
             setMaxValue(data.maxScore.score);
             setMinValue(data.minScore.score);

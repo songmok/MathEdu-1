@@ -76,7 +76,7 @@ const TNoticeWrite = () => {
                         { indent: "+1" },
                         { align: [] },
                     ],
-                    ["link", "image"],
+                    ["link"],
                 ],
             },
         }),

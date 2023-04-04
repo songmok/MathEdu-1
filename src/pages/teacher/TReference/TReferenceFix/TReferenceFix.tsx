@@ -85,7 +85,7 @@ const TReferenceFix = () => {
                         { indent: "+1" },
                         { align: [] },
                     ],
-                    ["link", "image"],
+                    ["link"],
                 ],
             },
         }),

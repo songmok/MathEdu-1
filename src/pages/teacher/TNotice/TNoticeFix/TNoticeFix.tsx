@@ -88,7 +88,7 @@ const TNoticeFix = () => {
                         { indent: "+1" },
                         { align: [] },
                     ],
-                    ["link", "image"],
+                    ["link"],
                 ],
             },
         }),

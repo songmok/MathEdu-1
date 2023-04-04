@@ -79,7 +79,9 @@ const TClassTestDetail = (props: IPath) => {
                                         <span>{ele.studentNo}</span>
                                     </td>
                                     <td>
-                                        <img src={ele.imgURL} />
+                                        <img
+                                            src={`http://192.168.0.62:9988${ele.imgURL}`}
+                                        />
                                     </td>
                                     <td>
                                         <span>{ele.studentName}</span>
