@@ -147,20 +147,19 @@ const SGaugeChart = (props: Iprops) => {
                     <li className="gradeLR">
                         <span className="gradeLRC">동차석수</span>
                         <span className="gradeLRCI">
-                            {props.testResult?.srank ?? 0}
+                            {props.testResult?.tieCnt ?? 0}
                         </span>
                     </li>
                     <li className="gradeLR">
                         <span className="gradeLRC">수강인원</span>
                         <span className="gradeLRCI">
-                            {props.testResult?.srank ?? 0}
+                            {props.testResult?.totalStudents ?? 0}
                         </span>
                     </li>
                     <li className="gradeLR">
                         <span className="gradeLRC">시험일자</span>
                         <span className="gradeLRCI">
-                            {props.testResult?.srank ?? 0}
-                            {props.testResult?.testDt}
+                            {props.testResult?.testDt ?? 0}
                         </span>
                     </li>
                 </ul>
