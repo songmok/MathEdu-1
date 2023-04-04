@@ -33,7 +33,7 @@ const SGradeCss = styled.div`
             padding: 30px;
             width: 50%;
             height: 100%;
-            border-radius: 30px;
+            border-radius: 15px;
             background: #fff;
             .newTest {
                 display: flex;
@@ -102,7 +102,7 @@ const SGradeCss = styled.div`
         margin-top: 30px;
         padding: 30px;
         width: 100%;
-        border-radius: 30px;
+        border-radius: 15px;
         background: #fff;
         .chtitle {
             display: flex;

@@ -8,7 +8,6 @@ import TSidebar from "../../../../../../components/tSidebar/TSidebar";
 import TClassTestDetail from "../../../../../../components/tclassDetail/TClassTest/TClassTestDetail/TClassTestDetail";
 import axios from "axios";
 import { TStudentChartCss } from "./TStudentChartCss";
-import { setConstantValue } from "typescript";
 
 highchartsMore(Highcharts);
 const TStudentTestDetail = () => {
@@ -24,9 +23,6 @@ const TStudentTestDetail = () => {
     const [minValue, setMinValue] = useState<number>();
     const [nameTop, setNameTop] = useState();
     const [nameLowest, setNameLowest] = useState();
-    const [numberTop, setNumberTop] = useState();
-    const [numberLowest, setNumberLowest] = useState();
-    const scoreRanges = ["20미만", "20~39", "40~59", "60~79", "80~100"];
 
     // 시험 통계 api
     const classTestSummaryApi = async () => {
@@ -41,8 +37,6 @@ const TStudentTestDetail = () => {
             setMinValue(data.minScore.score);
             setNameTop(data.maxScore.name);
             setNameLowest(data.minScore.name);
-            setNumberTop(data.maxScore.score);
-            setNumberLowest(data.minScore.score);
             console.log("통계", res.data.summary);
         } catch (error) {
             console.error("통계를 찾아올 수 없습니다.", error);
@@ -56,7 +50,6 @@ const TStudentTestDetail = () => {
     const options = {
         chart: {
             type: "column",
-            width: 400, // 원하는 너비값으로 설정
         },
         title: {
             align: "center",
@@ -219,11 +212,7 @@ const TStudentTestDetail = () => {
                             </div>
                         </div>
                     </TStudentChartCss>
-                    <TClassTestDetail
-                        // classStudentTestApi={classStudentTestApi}
-                        classPaNo={classNo}
-                        examPaNo={examNo}
-                    />
+                    <TClassTestDetail classPaNo={classNo} examPaNo={examNo} />
                 </div>
             </TStudentTestDetailCss>
         </>

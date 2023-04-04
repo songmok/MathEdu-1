@@ -27,7 +27,6 @@ const TClassTestDetail = (props: IPath) => {
     const [exStudentList, setExStudentList] = useState<ITexstudentListItem[]>();
 
     // 학생 점수 리스트 api
-
     const classStudentTestApi = async () => {
         try {
             const res = await axios.get(
@@ -64,54 +63,72 @@ const TClassTestDetail = (props: IPath) => {
                     </div>
                     <div className="sectionMain">
                         <table className="table">
-                            <tr className="tableHeader">
-                                <th>번호</th>
-                                <th>사진</th>
-                                <th>이름</th>
-                                <th>반 이름</th>
-                                <th>시험 이름</th>
-                                <th>점수</th>
-                            </tr>
-
-                            {exStudentList?.map((ele, idx) => (
-                                <tr key={idx} className="tableMain">
-                                    <td>
-                                        <span>{ele.studentNo}</span>
-                                    </td>
-                                    <td>
-                                        <img
-                                            src={`http://192.168.0.62:9988${ele.imgURL}`}
-                                        />
-                                    </td>
-                                    <td>
-                                        <span>{ele.studentName}</span>
-                                    </td>
-                                    <td>
-                                        <span>{ele.className}</span>
-                                    </td>
-                                    <td>
-                                        <span>{ele.examName}</span>
-                                    </td>
-                                    {ele.score !== null ? (
-                                        <td>
-                                            <span>{ele.score}</span>
-                                        </td>
-                                    ) : (
-                                        <td>
-                                            <form>
-                                                <input />
-                                            </form>
-                                        </td>
-                                    )}
-                                    <button
-                                        onClick={() =>
-                                            handleScoreInput(ele.studentId)
-                                        }
-                                    >
-                                        {ele.score || "미입력"}
-                                    </button>
+                            <thead className="tableHeader">
+                                <tr>
+                                    <th>번호</th>
+                                    <th>사진</th>
+                                    <th>이름</th>
+                                    <th>반 이름</th>
+                                    <th>시험 이름</th>
+                                    <th>점수</th>
+                                    <th></th>
                                 </tr>
-                            ))}
+                            </thead>
+                            <tbody>
+                                {exStudentList?.map((ele, idx) => (
+                                    <tr key={idx} className="tableMain">
+                                        <td>
+                                            <span>{ele.studentNo}</span>
+                                        </td>
+                                        <td>
+                                            <img
+                                                src={`http://192.168.0.62:9988/${ele.imgURL}`}
+                                            />
+                                        </td>
+                                        <td>
+                                            <span>{ele.studentName}</span>
+                                        </td>
+                                        <td>
+                                            <span>{ele.className}</span>
+                                        </td>
+                                        <td>
+                                            <span>{ele.examName}</span>
+                                        </td>
+                                        {ele.score !== null ? (
+                                            <td>
+                                                <span>{ele.score}</span>
+                                            </td>
+                                        ) : (
+                                            <td>ㅡ</td>
+                                        )}
+                                        <td>
+                                            {ele.score !== null ? (
+                                                <button
+                                                    className="re"
+                                                    onClick={() =>
+                                                        handleScoreInput(
+                                                            ele.studentId,
+                                                        )
+                                                    }
+                                                >
+                                                    수정
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    className="wr"
+                                                    onClick={() =>
+                                                        handleScoreInput(
+                                                            ele.studentId,
+                                                        )
+                                                    }
+                                                >
+                                                    입력
+                                                </button>
+                                            )}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
                         </table>
                     </div>
                 </div>

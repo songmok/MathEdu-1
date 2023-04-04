@@ -13,7 +13,7 @@ export const InfoCss = styled.div`
         position: relative;
         padding: 30px;
         height: 333px;
-        border-radius: 30px;
+        border-radius: 15px;
         background-color: #fff;
         width: 100%;
         > div {
