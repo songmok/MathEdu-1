@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Info from "../../../../../components/layOut/Info/Info";
 import TSidebar from "../../../../../components/tSidebar/TSidebar";
-import TGrade from "../../../TGrade/TGrade";
 
 export interface IStudentInfo {
     name: string;

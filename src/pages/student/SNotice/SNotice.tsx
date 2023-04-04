@@ -10,6 +10,8 @@ import { Pagination, PaginationItem } from "@mui/material";
 import Loading from "../../../components/loading/Loading";
 import NoticeForm from "../../../components/noticeForm/NoticeForm";
 import { Link } from "react-router-dom";
+import { RootState } from "../../../reducer/store";
+import { useSelector } from "react-redux";
 
 export interface SInotice {
     no: string;
@@ -29,6 +31,7 @@ export interface SInoticeHeader {
 }
 
 const SNotice = () => {
+    const user = useSelector((state: RootState) => state.user);
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const page = searchParams.get("page");
@@ -36,7 +39,6 @@ const SNotice = () => {
 
     const [searchKeyword, setSearchKeyword] = useState<string>("");
 
-    const [classNo, setClassNo] = useState(0);
     const [order, setOrder] = useState("desc");
 
     const [notiList, setNotiList] = useState<INotice>();
@@ -53,7 +55,7 @@ const SNotice = () => {
     const fetchData = async () => {
         try {
             const response = await axios.get(
-                `http://192.168.0.62:9988/api/notice/${classNo}/8/${order}`,
+                `http://192.168.0.62:9988/api/notice/${user.classNo}/${user.teacherNo}/${order}`,
                 {
                     params: {
                         keyword: searchKeyword,

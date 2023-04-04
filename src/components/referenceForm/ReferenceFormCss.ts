@@ -16,6 +16,12 @@ const ReferenceFormCss = styled.div`
             font-size: 18px;
         }
         .search {
+            display: flex;
+            .selectLIst {
+                border-radius: 5px;
+                border: 2px solid #d9d9d9;
+                margin-right: 10px;
+            }
             form {
                 display: flex;
                 .searchBox {
@@ -26,12 +32,12 @@ const ReferenceFormCss = styled.div`
                 .searchBt {
                     ${Button}
                     background: ${TmainCol};
-                    margin-left: 15px;
+                    margin-left: 10px;
                 }
                 .searchBtS {
                     ${Button}
                     background: ${SmainCol};
-                    margin-left: 15px;
+                    margin-left: 10px;
                 }
             }
         }

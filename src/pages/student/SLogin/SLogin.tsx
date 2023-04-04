@@ -39,6 +39,8 @@ const SLogin = () => {
                         name: user.name,
                         no: user.no,
                         user: "student",
+                        classNo: user.classNo,
+                        teacherNo: user.teacherNo,
                     }),
                 );
             } else {

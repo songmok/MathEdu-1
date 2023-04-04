@@ -96,7 +96,9 @@ const TClassTestDetail = (props: IPath) => {
                                         </td>
                                     ) : (
                                         <td>
-                                            <span>ㅡ</span>
+                                            <form>
+                                                <input />
+                                            </form>
                                         </td>
                                     )}
                                     <button

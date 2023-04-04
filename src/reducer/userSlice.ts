@@ -6,6 +6,8 @@ export interface userType {
     name: string;
     no: number;
     user: string;
+    classNo: number;
+    teacherNo: number;
 }
 
 const initialState: userType = {
@@ -14,6 +16,8 @@ const initialState: userType = {
     name: "",
     no: 0,
     user: "",
+    classNo: 0,
+    teacherNo: 0,
 };
 
 const userSlice = createSlice({
@@ -26,6 +30,8 @@ const userSlice = createSlice({
             state.name = action.payload.name;
             state.no = action.payload.no;
             state.user = action.payload.user;
+            state.classNo = action.payload.classNo;
+            state.teacherNo = action.payload.teacherNo;
         },
         logoutUser(state) {
             state.id = "";
@@ -33,6 +39,8 @@ const userSlice = createSlice({
             state.name = "";
             state.no = 0;
             state.user = "";
+            state.classNo = 0;
+            state.teacherNo = 0;
         },
     },
 });

@@ -16,6 +16,12 @@ const NoticeFormCss = styled.div`
             font-size: 18px;
         }
         .search {
+            display: flex;
+            .selectLIst {
+                border-radius: 5px;
+                border: 2px solid #d9d9d9;
+                margin-right: 10px;
+            }
             form {
                 display: flex;
                 .searchBox {

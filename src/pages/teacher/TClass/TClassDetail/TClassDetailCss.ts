@@ -7,5 +7,6 @@ export const TClassDetailCss = styled.section`
         width: 100%;
         justify-content: space-between;
         padding-bottom: 30px;
+        gap: 30px;
     }
 `;

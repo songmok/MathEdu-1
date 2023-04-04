@@ -38,7 +38,7 @@ const TClassTest = (props: IClassNumber) => {
         Navigate(`/teacher/class/detail/test/testdetail/${no}`);
     };
     const goClassTestList = (no: string | null) => {
-        Navigate(`/teacher/class/detail/test?classno=${no}`);
+        Navigate(`/teacher/class/detail/test?classno=${no}&page=1`);
     };
     const classStudentInfoApi = async () => {
         try {

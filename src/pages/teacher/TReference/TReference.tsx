@@ -74,7 +74,7 @@ const TReference = () => {
 
     useEffect(() => {
         fetchData();
-    }, [page, keyword, handler]);
+    }, [page, keyword, handler, classNo]);
 
     const deleteRef = async () => {
         if (window.confirm("정말 삭제하시겠습니까?")) {
@@ -112,8 +112,8 @@ const TReference = () => {
                             setCheckedList={setCheckedList}
                             setSearchKeyword={setSearchKeyword}
                             handleSubmit={handleSubmit}
+                            setClassNo={setClassNo}
                         />
-
                         <div className="sectionBt">
                             <button className="deleteBt" onClick={deleteRef}>
                                 삭제

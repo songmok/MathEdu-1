@@ -92,8 +92,6 @@ const TReferenceWrite = () => {
         }
     };
 
-    console.log(classList);
-
     useEffect(() => {
         fetchData();
     }, []);

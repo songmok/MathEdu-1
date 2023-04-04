@@ -2,9 +2,11 @@ import NoticeFormCss from "./NoticeFormCss";
 
 import { INotice } from "../../pages/teacher/TNotice/TNotice";
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/store";
+import { IClassList } from "../../pages/teacher/TNotice/TNoticeWrite/TNoticeWrite";
+import axios from "axios";
 
 interface IProps {
     sectionTitle: string;
@@ -12,6 +14,7 @@ interface IProps {
     checkedList: number[];
     setCheckedList: React.Dispatch<React.SetStateAction<number[]>>;
     setSearchKeyword: React.Dispatch<React.SetStateAction<string>>;
+    setClassNo?: React.Dispatch<React.SetStateAction<number>>;
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
@@ -56,6 +59,30 @@ const NoticeForm = (props: IProps) => {
         setAllChecked(isChecked);
     };
 
+    const [classList, setClassList] = useState<IClassList[]>([]);
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(
+                `http://192.168.0.62:9988/api/teacher/classList/${user.id}`,
+            );
+            console.log(response.data);
+            setClassList(response.data.classList);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const classChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        if (props.setClassNo) {
+            props.setClassNo(parseInt(e.target.value));
+        }
+    };
+
     return (
         <NoticeFormCss>
             <div className="sectionTop">
@@ -63,10 +90,29 @@ const NoticeForm = (props: IProps) => {
                     {props.sectionTitle}
                 </p>
                 <div className="search">
+                    {classList && (
+                        <select
+                            placeholder="반 선택"
+                            defaultValue="class-list"
+                            className="selectLIst"
+                            onChange={classChange}
+                        >
+                            <option value="class-list" disabled>
+                                반 목록
+                            </option>
+                            <option value="0">전체</option>
+                            {classList.map(ele => (
+                                <option key={ele.no} value={ele.no}>
+                                    {ele.name}
+                                </option>
+                            ))}
+                        </select>
+                    )}
                     <form onSubmit={props.handleSubmit}>
                         <input
                             type="text"
                             className="searchBox"
+                            placeholder="검색어를 입력하세요."
                             onChange={e =>
                                 props.setSearchKeyword(e.target.value)
                             }

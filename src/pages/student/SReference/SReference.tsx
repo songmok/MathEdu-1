@@ -10,8 +10,11 @@ import { Link } from "react-router-dom";
 import Loading from "../../../components/loading/Loading";
 
 import { IReference } from "../../teacher/TReference/TReference";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/store";
 
 const SReference = () => {
+    const user = useSelector((state: RootState) => state.user);
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const page = searchParams.get("page");
@@ -19,7 +22,6 @@ const SReference = () => {
 
     const [searchKeyword, setSearchKeyword] = useState<string>("");
 
-    const [classNo, setClassNo] = useState(0);
     const [order, setOrder] = useState("desc");
 
     const [refLIst, setRefList] = useState<IReference>();
@@ -36,7 +38,7 @@ const SReference = () => {
     const fetchData = async () => {
         try {
             const response = await axios.get(
-                `http://192.168.0.62:9988/api/bbs/${classNo}/1/${order}`,
+                `http://192.168.0.62:9988/api/bbs/${user.classNo}/${user.teacherNo}/${order}`,
                 {
                     params: {
                         keyword: searchKeyword,

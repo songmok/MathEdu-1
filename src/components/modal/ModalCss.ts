@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { SfontCol, SmainCol } from "../../utils/Color";
+import { SfontCol, SmainCol, TfontCol, TmainCol } from "../../utils/Color";
 
 const ModalCss = styled.div`
     position: fixed;
@@ -17,6 +17,12 @@ const ModalCss = styled.div`
         position: relative;
         display: flex;
         flex-direction: column;
+        .boxTitle {
+            position: absolute;
+            top: 50px;
+            font-size: 20px;
+            color: ${TfontCol};
+        }
         p {
             position: absolute;
             top: 50px;
@@ -32,6 +38,18 @@ const ModalCss = styled.div`
             cursor: pointer;
             border: none;
             color: ${SfontCol};
+            background: none;
+            font-size: 40px;
+        }
+        .closeT {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            color: ${TfontCol};
             background: none;
             font-size: 40px;
         }
@@ -53,6 +71,7 @@ const ModalCss = styled.div`
             }
             input {
                 margin-bottom: 10px;
+                border: 2px solid #d9d9d9;
                 border-radius: 5px;
                 width: 250px;
                 height: 40px;
@@ -65,6 +84,45 @@ const ModalCss = styled.div`
                 width: 250px;
                 height: 50px;
                 background: ${SmainCol};
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 18px;
+            }
+        }
+        .putExam {
+            display: flex;
+            flex-direction: column;
+            label {
+                font-size: 16px;
+                margin-bottom: 5px;
+            }
+            input {
+                margin-bottom: 10px;
+                border: 2px solid #d9d9d9;
+                border-radius: 5px;
+                width: 250px;
+                height: 40px;
+                outline: none;
+                padding: 5px 10px;
+                font-size: 16px;
+            }
+            select {
+                margin-bottom: 10px;
+                border: 2px solid #d9d9d9;
+                border-radius: 5px;
+                width: 250px;
+                height: 40px;
+                outline: none;
+                padding: 5px 10px;
+                font-size: 16px;
+            }
+            .submitBt {
+                margin-top: 40px;
+                width: 250px;
+                height: 50px;
+                background: ${TmainCol};
                 color: #fff;
                 border: none;
                 border-radius: 5px;

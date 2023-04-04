@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { TfontCol, TmainCol } from "../../../../utils/Color";
+import { mainContainer } from '../../../../utils/Layout';
 
 export const TClassTestDetailCss = styled.div`
     .wrap {
