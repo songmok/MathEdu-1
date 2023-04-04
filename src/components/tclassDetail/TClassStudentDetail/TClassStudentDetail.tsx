@@ -27,11 +27,13 @@ interface IClassNumber {
 const TClassStudentDetail = (props: IClassNumber) => {
     const { classQuNo } = props;
     const navigate = useNavigate();
-    const goClassStudent = (no: number) => {
-        navigate(`/teacher/class/detail/studentinfo/${no}`);
+    const goClassStudent = (id: string) => {
+        navigate(`/teacher/class/detail/studentinfo/${id}`);
     };
 
     const [classStudent, setClassStudent] = useState<ITlist[]>();
+
+    console.log(classStudent);
 
     const classStudentListApi = async () => {
         try {
@@ -83,16 +85,14 @@ const TClassStudentDetail = (props: IClassNumber) => {
                                     </td>
                                     <td>
                                         <img
-                                            src={`${process.env.PUBLIC_URL}/images/profile.jpg`}
+                                            src={`http://192.168.0.62:9988/${ele.img}`}
                                         />
                                     </td>
                                     <td>
                                         <span
                                             className="linkname"
                                             onClick={() => {
-                                                goClassStudent(
-                                                    parseInt(ele.id),
-                                                );
+                                                goClassStudent(ele.id);
                                             }}
                                         >
                                             {ele.name}

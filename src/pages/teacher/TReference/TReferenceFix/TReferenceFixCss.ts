@@ -53,11 +53,26 @@ const TReferenceFixCss = styled.div`
                     height: 400px;
                 }
             }
-            .file-area {
-                margin-bottom: 10px;
+            .old-file {
                 display: flex;
-                align-items: center;
-                height: 42.45px;
+                flex-direction: column;
+                justify-content: center;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                padding: 12px 15px;
+                    .xBt {
+                        height: 15px;
+                        width: 15px;
+                        margin-left: 5px;
+                        cursor: pointer;
+                    }
+                }
+            }
+            .file-area {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin-bottom: 10px;
                 border: 1px solid #ccc;
                 padding: 12px 15px;
             }

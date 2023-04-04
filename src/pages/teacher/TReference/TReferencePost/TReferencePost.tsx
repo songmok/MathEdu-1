@@ -4,8 +4,10 @@ import TReferencePostCss from "./TReferencePostCss";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../reducer/store";
 
-interface IReference {
+export interface IReference {
     no: number;
     category: string;
     classNo: number;
@@ -33,6 +35,8 @@ const TReferencePost = () => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const bbsNo = searchParams.get("no");
+    const user = useSelector((state: RootState) => state.user);
+    const teacherNo = user.no;
 
     const [reference, setReference] = useState<IReference>();
 
@@ -67,6 +71,20 @@ const TReferencePost = () => {
 
     const goFix = () => {
         navigate(`/teacher/reference/fix`, { state: reference });
+    };
+
+    const deletePost = async () => {
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+            try {
+                const response = await axios.delete(
+                    `http://192.168.0.62:9988/api/bbs/${bbsNo}/${teacherNo}`,
+                );
+                alert(response.data.message);
+                navigate("/teacher/reference?page=1");
+            } catch (error) {
+                console.error(error);
+            }
+        }
     };
 
     return (
@@ -105,9 +123,9 @@ const TReferencePost = () => {
 
                         <div className="file-area">
                             <span className="file">첨부파일</span>
-                            {reference?.files ? (
+                            {reference?.files.length !== 0 ? (
                                 <div className="file-list">
-                                    {reference.files.map(file => (
+                                    {reference?.files.map(file => (
                                         <div key={file.fileName}>
                                             <a
                                                 href={`http://192.168.0.62:9988${file.downloadURL}`}
@@ -164,7 +182,12 @@ const TReferencePost = () => {
                                 </button>
                             </div>
                             <div className="button-right">
-                                <button className="deleteBt">삭제</button>
+                                <button
+                                    className="deleteBt"
+                                    onClick={deletePost}
+                                >
+                                    삭제
+                                </button>
                                 <button className="modifyBt" onClick={goFix}>
                                     수정
                                 </button>

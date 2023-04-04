@@ -98,8 +98,8 @@ const TClass = () => {
                                 <tr className="tableHeader">
                                     <th>번호</th>
                                     <th>반</th>
-                                    <th>요일</th>
                                     <th>학년</th>
+                                    <th>요일</th>
                                     <th>개강일</th>
                                     <th>종강일</th>
                                 </tr>

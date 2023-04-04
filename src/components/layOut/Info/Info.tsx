@@ -43,7 +43,7 @@ const Info = (props: InfoProps) => {
                             </li>
                             <li className="infoText">
                                 <span className={`key ${color}`}>
-                                    생년월일{" "}
+                                    생년월일
                                 </span>
                                 <span className="data">{basicInfo?.birth}</span>
                             </li>

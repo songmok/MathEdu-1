@@ -4,6 +4,8 @@ import TNoticePostCss from "./TNoticePostCss";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../reducer/store";
 
 export interface INotice {
     no: number;
@@ -32,6 +34,8 @@ const TNoticePost = () => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const noticeNo = searchParams.get("no");
+    const user = useSelector((state: RootState) => state.user);
+    const teacherNo = user.no;
 
     const [notice, setNotice] = useState<INotice>();
 
@@ -66,6 +70,20 @@ const TNoticePost = () => {
 
     const goFix = () => {
         navigate(`/teacher/notice/fix`, { state: notice });
+    };
+
+    const deletePost = async () => {
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+            try {
+                const response = await axios.delete(
+                    `http://192.168.0.62:9988/api/bbs/${noticeNo}/${teacherNo}`,
+                );
+                alert(response.data.message);
+                navigate("/teacher/notice?page=1");
+            } catch (error) {
+                console.error(error);
+            }
+        }
     };
 
     return (
@@ -162,7 +180,12 @@ const TNoticePost = () => {
                                 </button>
                             </div>
                             <div className="button-right">
-                                <button className="deleteBt">삭제</button>
+                                <button
+                                    className="deleteBt"
+                                    onClick={deletePost}
+                                >
+                                    삭제
+                                </button>
                                 <button className="modifyBt" onClick={goFix}>
                                     수정
                                 </button>

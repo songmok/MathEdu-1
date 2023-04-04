@@ -53,7 +53,7 @@ const SNotice = () => {
     const fetchData = async () => {
         try {
             const response = await axios.get(
-                `http://192.168.0.62:9988/api/notice/${classNo}/1/${order}`,
+                `http://192.168.0.62:9988/api/notice/${classNo}/8/${order}`,
                 {
                     params: {
                         keyword: searchKeyword,

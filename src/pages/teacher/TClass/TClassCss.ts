@@ -49,6 +49,7 @@ const TClassCss = styled.div`
         }
         .sectionMain {
             .table {
+                margin-bottom: 10px;
                 border-radius: 5px;
                 width: 100%;
                 text-align: center;
