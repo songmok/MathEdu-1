@@ -1,16 +1,15 @@
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/store";
 import SSidebar from "../../../components/sSidebar/SSidebar";
+import SClassGradeGraphCss from "./SGradeCss";
 import Highcharts from "highcharts/highstock";
-import HighchartsReact from "highcharts-react-official";
-import SGradeCss from "./SGradeCss";
-import { useEffect, useRef, useState } from "react";
-
 import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
-// 더미데이터
-import dummyData from "./gradedummy.json";
 import SGaugeChart from "../../../components/SGaugeChart/SGaugeChart";
-import HeaderCss from "../../../components/header/HeaderCss";
-import Header from "../../../components/header/Header";
+import TestAnalysis from "../../../components/testAnalysis/TestAnalysis";
+import axios from "axios";
 
 highchartsMore(Highcharts);
 solidGauge(Highcharts);
@@ -21,77 +20,135 @@ export interface examType {
 }
 export interface gColors {
     mainCol: string;
+    backCol: string;
 }
-
-export interface studentData {
-    info: {
-        basicInfo: {
-            address: string;
-            alternatePhone: string;
-            birth: string;
-            classDays: string;
-            className: string;
-            endtime: string;
-            grade: string;
-            id: string;
-            name: string;
-            phone: string;
-            profileImgURL: string;
-            regDt: string;
-            school: string;
-            starttime: string;
-            teacher: string;
-        };
-        monthlyTest: {
-            score: string;
-            srank: string;
-            testDt: string;
-            tieCnt: string;
-            totalStudents: string;
-        };
-        weeklyTest: {
-            score: string;
-            srank: string;
-            testDt: string;
-            tieCnt: string;
-            totalStudents: string;
-        };
-    };
+export interface gLineColors {
+    mainCol: string;
+    subCol: string;
+    pointCol: string;
+}
+export interface testResult {
+    score: number;
+    srank: number;
+    tieCnt: number;
+    totalStudents: number;
+    testDt: string;
+}
+export interface TStudentInfo {
+    name: string;
+    profileImgURL: string;
+    birth: string;
+    phone: string;
+    class: string;
+    school: string;
+    id: number;
+    alternatePhone: string;
+    classDays: string;
+    startTime: string;
+    endTime: string;
+    address: string;
+    grade: number;
+    regDt: string;
+    teacher: string;
+}
+export interface testAnalysis {
+    classAvgScores: Array<number>;
+    personalScores: Array<number>;
+    tableData: Array<{
+        attend: number;
+        classAvg: number;
+        examDt: string;
+        score: number;
+        top30pAvg: number;
+    }>;
+    top30pAvgScores: Array<number>;
 }
 
 const SGrade = () => {
-    const chartRef = useRef(null);
+    const user = useSelector((state: RootState) => state.user);
+    console.log(user.id);
 
-    // 주간 월간 변경
-    const [wmBtn, setWmBtn] = useState<examType>({
-        typeName: "주간",
-        type: "week",
+    const [weekTR, setWeekTR] = useState<testResult>({
+        score: 0,
+        srank: 0,
+        tieCnt: 0,
+        totalStudents: 0,
+        testDt: "",
     });
-    const wmchange = () => {
-        if (wmBtn.typeName === "주간") {
-            setWmBtn({ typeName: "월간", type: "month" });
-        } else {
-            setWmBtn({ typeName: "주간", type: "week" });
-        }
-    };
+    const [monthTR, setMonthTR] = useState<testResult>({
+        score: 0,
+        srank: 0,
+        tieCnt: 0,
+        totalStudents: 0,
+        testDt: "",
+    });
+    const [sInfo, setSInfo] = useState<TStudentInfo>({
+        name: "",
+        profileImgURL: "",
+        birth: "",
+        phone: "",
+        class: "",
+        school: "",
+        id: 0,
+        alternatePhone: "",
+        classDays: "",
+        startTime: "",
+        endTime: "",
+        address: "",
+        grade: 0,
+        regDt: "",
+        teacher: "",
+    });
+    const [monthTest, setMonthTest] = useState<testAnalysis>({
+        personalScores: [],
+        classAvgScores: [],
+        top30pAvgScores: [],
+        tableData: [],
+    });
 
-    const sColors = {
-        SmainCol: "#005853",
-        SfontCol: "#00A49A",
-        TmainCol: "#201E59",
-        TfontCol: "#4543A0",
-        backCol: "#d9d9d9",
-        White: "#fff",
-    };
+    const [weekTest, setWeekTest] = useState<testAnalysis>({
+        personalScores: [],
+        classAvgScores: [],
+        top30pAvgScores: [],
+        tableData: [],
+    });
+    const [order, setOrder] = useState("asc");
 
-    // 년도 월 select option
-    const [scMunth, setScMunth] = useState("");
-    const [scYear, setScYear] = useState("");
+    const stuId = user.id;
+
+    // 학생 정보 데이터연동
+    useEffect(() => {
+        let params: { stuId?: string } = {
+            stuId: stuId,
+        };
+        axios
+            .get(`http://192.168.0.62:9988/api/student/${stuId}`, {
+                params: params,
+            })
+            .then(res => {
+                setWeekTR(res.data.info.monthlyTest);
+                setMonthTR(res.data.info.weeklyTest);
+                setSInfo(res.data.info.basicInfo);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }, []);
 
     const now = new Date(); // 현재 날짜 및 시간
     const nowYear = now.getFullYear(); // 연도
-    // console.log("연도 : ", nowYear);
+    const nowMonth = now.getMonth(); // 월
 
+    const [scMunth, setScMunth] = useState(nowMonth);
+    const [scYear, setScYear] = useState(nowYear);
+
+    const cM = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setScMunth(Number(e.target.value));
+    };
+    const cY = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setScYear(Number(e.target.value));
+    };
+    // 년도 월 select option 생성
     const month = () => {
         let months = [];
         for (let i = 1; i < 13; i += 1) {
@@ -103,129 +160,117 @@ const SGrade = () => {
         }
 
         return months.map(item => (
-            <option key={item} value={item}>
+            <option key={item} value={item} selected={item === nowMonth}>
                 {item}월
             </option>
         ));
     };
     const year = () => {
         let years = [];
-        for (let i = 2020; i < nowYear; i += 1) {
+        for (let i = 2020; i < nowYear + 1; i += 1) {
             years.push(i);
         }
 
         return years.map(item => (
-            <option key={item} value={item}>
+            <option key={item} value={item} selected={item === nowYear}>
                 {item}년
             </option>
         ));
     };
 
-    // 더미데이터
-    const personalSc = JSON.parse(dummyData.personalScores);
-    const classSc = JSON.parse(dummyData.classAvgScores);
-    const topSc = JSON.parse(dummyData.top30pAvgScores);
+    // 주간 월간 변경
+    const [wmBtn, setWmBtn] = useState<examType>({
+        typeName: "주간",
+        type: "week",
+    });
 
-    // 차트 옵션 주차
-    const weekSc = personalSc.length;
-
-    let week = [];
-    for (let i = 0; i < weekSc; i++) {
-        week.push(i + 1 + "주");
-    }
-
-    console.log(wmBtn.type);
-
-    const options = {
-        chart: {
-            type: "spline",
-        },
-        title: {
-            text: "",
-        },
-        xAxis: {
-            title: {
-                text: "",
-            },
-            categories: week,
-        },
-        yAxis: {
-            title: {
-                text: "점수",
-            },
-        },
-        series: [
-            {
-                name: "내 점수",
-                data: personalSc,
-                lineColor: sColors.SfontCol,
-                lineWidth: 3,
-                marker: {
-                    symbol: "circle",
-                    lineWidth: 3,
-                    fillColor: "#fff",
-                    lineColor: sColors.SfontCol,
-                },
-            },
-            {
-                name: "반 평균",
-                data: classSc,
-                lineColor: sColors.TfontCol,
-                lineWidth: 3,
-                marker: {
-                    symbol: "circle",
-                    lineWidth: 3,
-                    fillColor: sColors.White,
-                    lineColor: sColors.TfontCol,
-                },
-            },
-            {
-                name: "최고점수",
-                data: topSc,
-                lineColor: sColors.SmainCol,
-                lineWidth: 3,
-                marker: {
-                    symbol: "circle",
-                    lineWidth: 3,
-                    fillColor: "#fff",
-                    lineColor: sColors.SmainCol,
-                },
-            },
-        ],
+    // 주간 월간 성적 그래프
+    const sWeeklyTest = async () => {
+        let params: {
+            order: string;
+            stuId?: string;
+            year: number;
+            month: number;
+        } = {
+            order: order,
+            month: scMunth,
+            stuId: stuId,
+            year: scYear,
+        };
+        try {
+            const res = await axios.get(
+                `http://192.168.0.62:9988/api/student/exam/weekly/${stuId}/${scYear}/${scMunth}/${order}`,
+                { params },
+            );
+            // console.log("test", res.data);
+            setWeekTest(res.data.data);
+        } catch (error) {
+            console.error("주간시험 결과를 찾을 수 없습니다", error);
+        }
     };
+    const sMonthlyTest = async () => {
+        let params: { order: string; stuId?: string; year: number } = {
+            order: order,
+            stuId: stuId,
+            year: scYear,
+        };
+        try {
+            const res = await axios.get(
+                `http://192.168.0.62:9988/api/student/exam/monthly/${stuId}/${scYear}/${order}`,
+                { params: params },
+            );
+            // console.log(res.data.data);
+            setMonthTest(res.data.data);
+        } catch (error) {
+            console.error("월간시험 결과를 찾을 수 없습니다", error);
+        }
+    };
+
+    // 월간 주간 변경 버튼
+    const wmChange = () => {
+        if (wmBtn.typeName === "주간") {
+            setWmBtn({ typeName: "월간", type: "month" });
+            sMonthlyTest();
+        } else {
+            setWmBtn({ typeName: "주간", type: "week" });
+            sWeeklyTest();
+        }
+    };
+
+    const handleOrderChange = (
+        event: React.ChangeEvent<{ value: unknown }>,
+    ) => {
+        setOrder(event.target.value as string);
+    };
+
+    //확인버튼
+    const wMcheck = () => {};
+
+    useEffect(() => {
+        sWeeklyTest();
+        sMonthlyTest();
+    }, [scMunth, scYear, order]);
 
     return (
         <>
             <SSidebar />
-            <SGradeCss>
+            <SClassGradeGraphCss>
                 <div className="tests">
                     <SGaugeChart
                         examType={{ typeName: "주간" }}
                         gColors={{
-                            mainCol: "#4543A0",
+                            mainCol: "#00A49A",
                             backCol: "#d9d9d9",
                         }}
-                        testResult={{
-                            score: 0,
-                            srank: 0,
-                            tieCnt: 0,
-                            totalStudents: 0,
-                            testDt: "",
-                        }}
+                        testResult={weekTR}
                     />
                     <SGaugeChart
                         examType={{ typeName: "월간" }}
                         gColors={{
-                            mainCol: "#4543A0",
+                            mainCol: "#00A49A",
                             backCol: "#d9d9d9",
                         }}
-                        testResult={{
-                            score: 0,
-                            srank: 0,
-                            tieCnt: 0,
-                            totalStudents: 0,
-                            testDt: "",
-                        }}
+                        testResult={monthTR}
                     />
                 </div>
                 <div className="analysis">
@@ -233,62 +278,62 @@ const SGrade = () => {
                         <p className="subTitle">
                             {`${wmBtn.typeName}`} 성적 분석
                         </p>
-                        <button className="chbt subtitle" onClick={wmchange}>
+                        <button className="chbt subtitle" onClick={wmChange}>
                             {`${wmBtn.typeName}` === "주간" ? "월간" : "주간"}
                             성적 분석
                         </button>
                     </div>
 
                     <form className="subTitle flexForm">
-                        <select
-                            value={scYear}
-                            onChange={e => setScYear(e.target.value)}
-                        >
-                            {year()}
+                        {wmBtn.typeName === "주간" ? (
+                            <>
+                                <select onChange={e => cY(e)}>{year()}</select>
+                                <span>년</span>
+                                <select onChange={e => cM(e)}>{month()}</select>
+                                <span>월</span>
+                            </>
+                        ) : (
+                            <>
+                                <select onChange={e => cY(e)}>{year()}</select>
+                                <span>년</span>
+                            </>
+                        )}
+                        <select value={order} onChange={handleOrderChange}>
+                            <option value="asc">오름차순</option>
+                            <option value="desc">내림차순</option>
                         </select>
-                        <span>년</span>
-                        <select
-                            value={scMunth}
-                            onChange={e => setScMunth(e.target.value)}
-                        >
-                            {month()}
-                        </select>
-                        <span>월</span>
-                        <button type="submit" className="submitBt">
-                            확인
-                        </button>
+                        {/* <button
+                        type="submit"
+                        className="submitBt"
+                        onClick={wMcheck}
+                    >
+                        확인
+                    </button> */}
                     </form>
 
-                    <HighchartsReact
-                        ref={chartRef}
-                        highcharts={Highcharts}
-                        oneToOne={true}
-                        options={options}
-                    />
-                    <table className="table">
-                        <thead>
-                            <tr className="tableHeader">
-                                <th>시험일</th>
-                                <th>내점수</th>
-                                <th>반평균</th>
-                                <th>상위 30%</th>
-                                <th>전체응시생</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {dummyData.tableData.map((item, index) => (
-                                <tr key={index} className="tableMain">
-                                    <td>{item.examDt}</td>
-                                    <td>{item.score}</td>
-                                    <td>{item.classAvg}</td>
-                                    <td>{item.top30pAvg}</td>
-                                    <td>{item.attend}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    {wmBtn.typeName === "주간" ? (
+                        <TestAnalysis
+                            testAnalysis={weekTest}
+                            examType={{ typeName: "주간" }}
+                            gLineColors={{
+                                mainCol: "#4543A0",
+                                subCol: "#00A49A",
+                                pointCol: "#005853",
+                            }}
+                        />
+                    ) : (
+                        <TestAnalysis
+                            testAnalysis={monthTest}
+                            examType={{ typeName: "월간" }}
+                            gLineColors={{
+                                mainCol: "#4543A0",
+                                subCol: "#00A49A",
+                                pointCol: "#005853",
+                            }}
+                        />
+                    )}
                 </div>
-            </SGradeCss>
+            </SClassGradeGraphCss>
         </>
     );
 };

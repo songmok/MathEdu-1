@@ -104,7 +104,7 @@ const Info = (props: InfoProps) => {
                         </ul>
                     </div>
                 </div>
-                <TClassGradeGraph />
+                {headerName === "마이 페이지" ? <></> : <TClassGradeGraph />}
             </InfoCss>
         </>
     );
