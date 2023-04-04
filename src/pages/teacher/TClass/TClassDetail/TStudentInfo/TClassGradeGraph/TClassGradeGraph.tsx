@@ -60,11 +60,6 @@ export interface testAnalysis {
     }>;
     top30pAvgScores: Array<number>;
 }
-export interface selectDate{
-    month:number
-    week:number
-}
-
 const TClassGradeGraph = () => {
     const [weekTR, setWeekTR] = useState<testResult>({
         score: 0,
@@ -138,7 +133,7 @@ const TClassGradeGraph = () => {
     const now = new Date(); // 현재 날짜 및 시간
     const nowYear = now.getFullYear(); // 연도
     const nowMonth = now.getMonth(); // 월
-    console.log("월 : ", nowMonth, "연도 : ", nowYear);
+    // console.log("월 : ", nowMonth, "연도 : ", nowYear);
 
     const [scMunth, setScMunth] = useState(nowMonth);
     const [scYear, setScYear] = useState(nowYear);
@@ -203,7 +198,6 @@ const TClassGradeGraph = () => {
                 `http://192.168.0.62:9988/api/student/exam/weekly/${stuId}/${scYear}/${scMunth}/${order}`,
                 { params },
             );
-            console.log("test", res.data);
             setWeekTest(res.data.data);
         } catch (error) {
             console.error("주간시험 결과를 찾을 수 없습니다", error);
@@ -220,7 +214,6 @@ const TClassGradeGraph = () => {
                 `http://192.168.0.62:9988/api/student/exam/monthly/${stuId}/${scYear}/${order}`,
                 { params: params },
             );
-            console.log(res.data.data);
             setMonthTest(res.data.data);
         } catch (error) {
             console.error("월간시험 결과를 찾을 수 없습니다", error);
@@ -241,7 +234,6 @@ const TClassGradeGraph = () => {
     const handleOrderChange = (
         event: React.ChangeEvent<{ value: unknown }>,
     ) => {
-        console.log("order", order);
         setOrder(event.target.value as string);
     };
 
@@ -252,8 +244,6 @@ const TClassGradeGraph = () => {
         sWeeklyTest();
         sMonthlyTest();
     }, [scMunth, scYear, order]);
-
-    console.log(scMunth, scYear, order);
 
     return (
         <TClassGradeGraphCss>
@@ -316,9 +306,9 @@ const TClassGradeGraph = () => {
                         testAnalysis={weekTest}
                         examType={{ typeName: "주간" }}
                         gLineColors={{
-                            mainCol: "#005853",
-                            subCol: "#00A49A",
-                            pointCol: "#4543A0",
+                            mainCol: "#00A49A",
+                            subCol: "#4543A0",
+                            pointCol: "#201E59",
                         }}
                     />
                 ) : (
@@ -326,11 +316,10 @@ const TClassGradeGraph = () => {
                         testAnalysis={monthTest}
                         examType={{ typeName: "월간" }}
                         gLineColors={{
-                            mainCol: "#005853",
-                            subCol: "#00A49A",
-                            pointCol: "#4543A0",
+                            mainCol: "#00A49A",
+                            subCol: "#4543A0",
+                            pointCol: "#201E59",
                         }}
-
                     />
                 )}
             </div>

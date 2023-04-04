@@ -1,18 +1,10 @@
-import { mainContainer } from "./../../../utils/Layout";
 import styled from "styled-components";
+import { mainContainer } from "./../../../utils/Layout";
+
 import { SfontCol } from "../../../utils/Color";
 import { Button } from "../../../utils/Layout";
-
 const SGradeCss = styled.div`
     ${mainContainer}
-    .header {
-        display: flex;
-        justify-content: space-between;
-        .title {
-            color: ${SfontCol};
-            font-size: 25px;
-        }
-    }
     .subTitle {
         color: ${SfontCol};
         font-size: 18px;
@@ -39,9 +31,9 @@ const SGradeCss = styled.div`
         gap: 30px;
         .testType {
             padding: 30px;
-            width: 520px;
-            height: 320px;
-            border-radius: 15px;
+            width: 50%;
+            height: 100%;
+            border-radius: 30px;
             background: #fff;
             .newTest {
                 display: flex;
@@ -52,13 +44,22 @@ const SGradeCss = styled.div`
                     width: 50%;
 
                     .percentage {
+                        display: flex;
+                        flex-direction: column;
                         font-size: 36px;
                         font-weight: 600;
+                        line-height: 36px;
                         position: absolute;
                         top: 50%;
                         left: 50%;
                         transform: translate(-50%, -50%);
                         color: ${SfontCol};
+                        > span {
+                            font-size: 14px;
+                            font-weight: 400;
+                            text-align: center;
+                            line-height: 18px;
+                        }
                         .percent {
                             font-size: 20px;
                             font-weight: 500;
@@ -69,19 +70,22 @@ const SGradeCss = styled.div`
                     position: relative;
                     display: block;
                     width: 50%;
+                    font-size: 20px;
 
                     .gradeLR {
                         display: flex;
                         justify-content: space-between;
                         padding-bottom: 10px;
                         margin-left: 30px;
+
                         .gradeLRC {
+                            text-align: left;
                             color: ${SfontCol};
                         }
                         .gradeLRC::after {
                             position: absolute;
                             content: "";
-                            transform: translateY(8px);
+                            transform: translateY(10px);
                             left: 15px;
                             width: 5px;
                             height: 5px;
@@ -93,11 +97,12 @@ const SGradeCss = styled.div`
             }
         }
     }
+
     .analysis {
         margin-top: 30px;
         padding: 30px;
-        width: calc(520px * 2 + 30px);
-        border-radius: 15px;
+        width: 100%;
+        border-radius: 30px;
         background: #fff;
         .chtitle {
             display: flex;

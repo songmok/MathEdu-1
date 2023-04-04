@@ -48,29 +48,24 @@ const TestAnalysis = (props: Iprops) => {
         const month = data.examDt.split("-")[1]; // '-' 문자를 기준으로 분리해서 배열에서 두 번째 값 추출
         return Number(month); // 추출한 월을 숫자형으로 변환하여 반환
     });
-    console.log(112233, testDate); //[3, 3, 3, 3, 3]
+    //console.log(3, testDate); //[3, 3, 3, 3, 3]
 
     const weekNums = props.testAnalysis.tableData.map(data => {
         const examDt = data.examDt; // 날짜
-        const dateObj = new Date(examDt); //날짜로 변환
+        const dateObj = new Date(examDt); // 날짜로 변환
         const firstDayOfMonth = new Date(
-            dateObj.getFullYear(),
-            dateObj.getMonth(),
-            1,
-        ); //월 구하기
+            dateObj.getFullYear(), //년도
+            dateObj.getMonth(), //월
+            1, //첫번째 날짜를 나타내는 값입니다.
+        );
         const diffInDays = dateObj.getDate() - firstDayOfMonth.getDate();
-
         const weekNum = Math.ceil(
             (diffInDays + firstDayOfMonth.getDay() + 1) / 7,
         );
 
         return weekNum;
     });
-
-    console.log(weekNums); // 출력 결과: [1, 4]
-
-    // 차트 옵션 주차/월차 횟수
-    // const testNum = testDate.length;
+    //console.log(weekNums); // 출력 결과: []
 
     const newtestArr = [];
     for (let i = 0; i < testDate.length; i++) {
@@ -80,7 +75,7 @@ const TestAnalysis = (props: Iprops) => {
             newtestArr.push(weekNums[i] + "주");
         }
     }
-    console.log(123, newtestArr); // ["3주", "4주", "3주", "6주", "2주"]
+    //console.log(123, newtestArr);
 
     // 그래프 옵션
     const options = {
@@ -100,6 +95,7 @@ const TestAnalysis = (props: Iprops) => {
             title: {
                 text: "점수",
             },
+            max: 100,
         },
         series: [
             {
