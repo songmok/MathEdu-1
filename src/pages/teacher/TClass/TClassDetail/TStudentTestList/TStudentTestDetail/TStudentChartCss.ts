@@ -18,56 +18,70 @@ export const TStudentChartCss = styled.div`
             display: flex;
             justify-content: space-between;
             width: 100%;
-            ul {
+            justify-content: space-around;
+            > ul {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 > li {
-                    width: 500px;
+                    width: 200px;
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
                     padding-bottom: 20px;
-                    justify-content: end;
+                    align-items: center;
                     span {
-                        font-size: 20px;
+                        font-size: 15px;
                     }
-                    > span:first-child {
-                        font-size: 25px;
+                    > span:first-of-type {
+                        font-size: 20px;
                         color: ${TfontCol};
+                        position: relative;
+                        &::after {
+                            position: absolute;
+                            content: "";
+                            top: 50%;
+                            transform: translateY(-50%);
+                            left: -15px;
+                            width: 5px;
+                            height: 5px;
+                            border-radius: 50%;
+                            background: ${TfontCol};
+                        }
                     }
                     .score {
                         justify-self: start;
                     }
                 }
-
                 .seat {
                     margin-top: 20px;
                     display: flex;
                     flex-direction: column;
                     align-items: flex-start;
-                    > span:first-child {
-                        font-size: 30px;
-                        margin-right: 20px;
+                    > span:first-of-type {
+                        font-size: 20px;
                         color: ${TfontCol};
                     }
-
                     > ul {
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
                         align-items: flex-start;
                         margin-left: 0;
-
                         > li {
                             list-style: none;
                             margin-top: 10px;
                             display: flex;
                             justify-content: space-between;
-                            width: 290px;
-
+                            width: 150px;
+                            align-items: center;
+                            padding-bottom: 10px;
                             span {
-                                font-size: 20px;
+                                font-size: 15px;
+                            }
+                            > span:first-of-type {
+                                font-size: 15px;
+                                color: ${TfontCol};
                             }
                         }
                     }
