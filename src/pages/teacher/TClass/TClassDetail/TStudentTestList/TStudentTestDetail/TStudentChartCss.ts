@@ -19,22 +19,21 @@ export const TStudentChartCss = styled.div`
             justify-content: space-between;
             width: 100%;
             ul {
-                width: 33%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-
                 > li {
                     width: 500px;
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
                     padding-bottom: 20px;
+                    justify-content: end;
                     span {
-                        font-size: 25px;
+                        font-size: 20px;
                     }
                     > span:first-child {
-                        font-size: 30px;
+                        font-size: 25px;
                         color: ${TfontCol};
                     }
                     .score {
