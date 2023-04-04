@@ -13,7 +13,7 @@ const TStudentInfoCss = styled.div`
         position: relative;
         padding: 30px;
         height: 333px;
-        border-radius: 30px;
+        border-radius: 15px;
         background-color: #fff;
         h5 {
             font-weight: normal;
