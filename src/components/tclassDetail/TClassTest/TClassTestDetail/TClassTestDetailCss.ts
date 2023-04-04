@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { TfontCol, TmainCol } from "../../../../utils/Color";
-import { mainContainer } from '../../../../utils/Layout';
+import { mainContainer } from "../../../../utils/Layout";
 
 export const TClassTestDetailCss = styled.div`
     .wrap {
@@ -39,9 +39,8 @@ export const TClassTestDetailCss = styled.div`
                     height: 40px;
                     width: 100%;
                     > td {
-                        width: calc(100% / 6);
                         > img {
-                            width: 45%;
+                            width: 100px;
                         }
                         .linkname {
                             cursor: pointer;
@@ -50,6 +49,21 @@ export const TClassTestDetailCss = styled.div`
                                 padding-bottom: 1px;
                                 color: ${TfontCol};
                             }
+                        }
+                        button {
+                            border: none;
+                            height: 30px;
+                            width: 50px;
+                            border-radius: 5px;
+                            margin-right: 5px;
+                            cursor: pointer;
+                            color: white;
+                        }
+                        .re {
+                            background-color: #a7a390;
+                        }
+                        .wr {
+                            background-color: #1f1d58;
                         }
                     }
                 }
