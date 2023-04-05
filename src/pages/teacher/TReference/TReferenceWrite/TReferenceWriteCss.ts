@@ -68,11 +68,11 @@ const TReferenceWriteCss = styled.div`
             justify-content: end;
             .cancleBt {
                 ${Button}
-                background: ${TmainCol};
+                background: ${TfontCol};
             }
             .completeBt {
                 ${Button}
-                background: ${TmainCol};
+                background: ${TfontCol};
                 margin-left: 10px;
             }
         }

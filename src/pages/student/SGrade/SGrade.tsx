@@ -126,8 +126,8 @@ const SGrade = () => {
                 params: params,
             })
             .then(res => {
-                setWeekTR(res.data.info.monthlyTest);
-                setMonthTR(res.data.info.weeklyTest);
+                setWeekTR(res.data.info.weeklyTest);
+                setMonthTR(res.data.info.monthlyTest);
                 setSInfo(res.data.info.basicInfo);
             })
             .catch(err => {
@@ -137,8 +137,8 @@ const SGrade = () => {
 
     const now = new Date(); // 현재 날짜 및 시간
     const nowYear = now.getFullYear(); // 연도
-    const nowMonth = now.getMonth()+1; // 월
-    const mon = "0" + (nowMonth);
+    const nowMonth = now.getMonth() + 1; // 월
+    const mon = "0" + nowMonth;
 
     const [scMunth, setScMunth] = useState(nowMonth);
     const [scYear, setScYear] = useState(nowYear);

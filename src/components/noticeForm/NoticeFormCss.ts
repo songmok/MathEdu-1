@@ -35,7 +35,7 @@ const NoticeFormCss = styled.div`
                 }
                 .searchBt {
                     ${Button}
-                    background: ${TmainCol};
+                    background: ${TfontCol};
                     margin-left: 15px;
                 }
                 .searchBtS {
@@ -54,7 +54,7 @@ const NoticeFormCss = styled.div`
             width: 100%;
             text-align: center;
             .tableHeader {
-                background: ${TmainCol};
+                background: ${TfontCol};
                 color: #fff;
                 border: none;
                 height: 50px;
@@ -77,7 +77,7 @@ const NoticeFormCss = styled.div`
                 }
             }
             .noRef {
-                padding: 100px 0;
+                padding: 180px 0;
             }
         }
     }

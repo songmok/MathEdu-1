@@ -53,7 +53,7 @@ const TSignupCss = styled.div`
                         position: absolute;
                         right: -5px;
                         ${Button}
-                        background: ${TmainCol};
+                        background: ${TfontCol};
                     }
                     .userCheck {
                         width: 300px;
@@ -74,10 +74,10 @@ const TSignupCss = styled.div`
                 .signBt {
                     margin: 0 auto;
                     color: white;
-                    background: ${TmainCol};
-                    width: 350px;
+                    background: ${TfontCol};
+                    border: none;
+                    width: 100%;
                     height: 50px;
-                    background: ${TmainCol};
                     color: #fff;
                     border-radius: 5px;
                     cursor: pointer;

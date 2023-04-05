@@ -17,7 +17,7 @@ const TReferencePostCss = styled.div`
             font-weight: 500;
         }
         .notice-board {
-            border-top: 2px solid ${TmainCol};
+            border-top: 2px solid ${TfontCol};
             .title-area {
                 display: flex;
                 align-items: center;
@@ -121,20 +121,20 @@ const TReferencePostCss = styled.div`
                 padding: 10px;
                 display: flex;
                 justify-content: space-between;
-                border-top: 2px solid ${TmainCol};
+                border-top: 2px solid ${TfontCol};
                 .listBt {
                     ${Button}
-                    background: ${TmainCol};
+                    background: ${TfontCol};
                 }
                 .button-right {
                     display: flex;
                     .deleteBt {
                         ${Button}
-                        background: ${TmainCol};
+                        background: ${TfontCol};
                     }
                     .modifyBt {
                         ${Button}
-                        background: ${TmainCol};
+                        background: ${TfontCol};
                         margin-left: 10px;
                     }
                 }

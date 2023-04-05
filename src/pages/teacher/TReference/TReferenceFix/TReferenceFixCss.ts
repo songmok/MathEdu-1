@@ -82,11 +82,11 @@ const TReferenceFixCss = styled.div`
             justify-content: end;
             .cancleBt {
                 ${Button}
-                background: ${TmainCol};
+                background: ${TfontCol};
             }
             .fixBt {
                 ${Button}
-                background: ${TmainCol};
+                background: ${TfontCol};
                 margin-left: 10px;
             }
         }

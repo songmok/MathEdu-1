@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TmainCol } from "../../../utils/Color";
+import { TfontCol, TmainCol } from "../../../utils/Color";
 import { Button, mainContainer } from "../../../utils/Layout";
 
 const TNoticeCss = styled.div`
@@ -16,11 +16,11 @@ const TNoticeCss = styled.div`
             margin-bottom: 10px;
             .deleteBt {
                 ${Button}
-                background: ${TmainCol};
+                background: ${TfontCol};
             }
             .createBt {
                 ${Button}
-                background: ${TmainCol};
+                background: ${TfontCol};
                 margin-left: 10px;
             }
         }
@@ -32,7 +32,7 @@ const TNoticeCss = styled.div`
             display: flex;
             justify-content: center;
             .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
-                background-color: ${TmainCol};
+                background-color: ${TfontCol};
             }
         }
     }

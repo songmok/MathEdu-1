@@ -16,11 +16,11 @@ const TReferenceCss = styled.div`
             margin-bottom: 10px;
             .deleteBt {
                 ${Button}
-                background: ${TmainCol};
+                background: ${TfontCol};
             }
             .createBt {
                 ${Button}
-                background: ${TmainCol};
+                background: ${TfontCol};
                 margin-left: 10px;
             }
         }
@@ -32,7 +32,7 @@ const TReferenceCss = styled.div`
             display: flex;
             justify-content: center;
             .css-19micn4-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
-                background-color: ${TmainCol};
+                background-color: ${TfontCol};
             }
         }
     }

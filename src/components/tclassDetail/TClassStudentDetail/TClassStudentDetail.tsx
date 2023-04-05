@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { TClassStudentDetailCss } from "./TClassStudentDetailCss";
-
 export interface ITlist {
     no: string;
     img: string;
@@ -30,11 +28,8 @@ const TClassStudentDetail = (props: IClassNumber) => {
     const goClassStudent = (id: string) => {
         navigate(`/teacher/class/detail/studentinfo/${id}`);
     };
-
     const [classStudent, setClassStudent] = useState<ITlist[]>();
-
     console.log(classStudent);
-
     const classStudentListApi = async () => {
         try {
             const response = await axios.get(
@@ -76,7 +71,7 @@ const TClassStudentDetail = (props: IClassNumber) => {
                                 <th style={{ width: "20%" }}>
                                     {headerList.student}
                                 </th>
-                                <th style={{ width: "5%" }}>
+                                <th style={{ width: "10%" }}>
                                     {headerList.phone}
                                 </th>
                                 <th
@@ -87,11 +82,10 @@ const TClassStudentDetail = (props: IClassNumber) => {
                                 >
                                     {headerList.parentPhone}
                                 </th>
-                                <th style={{ width: "30%" }}>
+                                <th style={{ width: "10%" }}>
                                     {headerList.address}
                                 </th>
                             </tr>
-
                             {classStudent?.map((ele, idx) => (
                                 <tr key={ele.no} className="tableMain">
                                     {/* <Link></Link> */}
@@ -112,7 +106,9 @@ const TClassStudentDetail = (props: IClassNumber) => {
                                     >
                                         <span>{ele.name}</span>
                                     </td>
-                                    <td style={{ width: "5%" }}>{ele.phone}</td>
+                                    <td style={{ width: "10%" }}>
+                                        {ele.phone}
+                                    </td>
                                     <td style={{ width: "5%" }}>
                                         {ele.alternatephone}
                                     </td>
@@ -128,5 +124,4 @@ const TClassStudentDetail = (props: IClassNumber) => {
         </>
     );
 };
-
 export default TClassStudentDetail;

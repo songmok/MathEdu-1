@@ -35,7 +35,7 @@ const ReferenceFormCss = styled.div`
                 }
                 .searchBt {
                     ${Button}
-                    background: ${TmainCol};
+                    background: ${TfontCol};
                     margin-left: 10px;
                 }
                 .searchBtS {
@@ -53,7 +53,7 @@ const ReferenceFormCss = styled.div`
             width: 100%;
             text-align: center;
             .tableHeader {
-                background: ${TmainCol};
+                background: ${TfontCol};
                 color: #fff;
                 border: none;
                 height: 50px;
@@ -76,7 +76,7 @@ const ReferenceFormCss = styled.div`
                 }
             }
             .noRef {
-                padding: 100px 0;
+                padding: 200px 0;
             }
         }
     }
