@@ -126,9 +126,8 @@ const SGaugeChart = (props: Iprops) => {
                     <span className="percentage">
                         <span>점수</span>
                         <p>
-                        {score}
-                           
-                            <span className="percent">점</span>
+                            {score}
+                            <span className="percent"> 점</span>
                         </p>
                     </span>
                 </div>

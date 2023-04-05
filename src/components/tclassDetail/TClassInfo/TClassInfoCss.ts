@@ -3,24 +3,28 @@ import { TfontCol } from "../../../utils/Color";
 
 export const TClassInfoCss = styled.div`
     background-color: #fff;
-    padding: 15px;
+    padding: 30px;
     border-radius: 15px;
     .header {
         display: flex;
         justify-content: space-between;
         > span {
             color: ${TfontCol};
-            font-size: 18px;
+            font-size: 20px;
+            font-weight: 500;
         }
     }
     .wrap {
         width: 500px;
         padding: 0 30px;
         > ul {
+            
             li {
+                
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                border-bottom: 1px solid #F5F5F5;
                 &:last-child {
                     padding: 0;
                 }
@@ -33,10 +37,9 @@ export const TClassInfoCss = styled.div`
                         position: relative;
                         em {
                             color: ${TfontCol};
-                            font-weight: bold;
                             white-space: nowrap;
                             font-style: normal;
-                            font-size: 1rem;
+                            font-size: 18px;
                         }
                     }
                     > span::after {
@@ -56,15 +59,13 @@ export const TClassInfoCss = styled.div`
                     text-align: center;
                     overflow: hidden;
                     width: 50%;
-                    font-size: 15px;
+                    font-size: 16px;
                     letter-spacing: 1px;
                     .wave {
                         margin: 0 10px;
                     }
                     span {
                         text-overflow: ellipsis;
-
-                        font-weight: bold;
                     }
                 }
             }
