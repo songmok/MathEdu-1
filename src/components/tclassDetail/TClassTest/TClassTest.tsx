@@ -72,11 +72,13 @@ const TClassTest = (props: IClassNumber) => {
                 <div className="sectionMain">
                     <table className="table">
                         <tr className="tableHeader">
-                            <th>{headerList.no}</th>
-                            <th>{headerList.title}</th>
-                            <th>{headerList.attend}</th>
-                            <th>{headerList.average}</th>
-                            <th style={{ letterSpacing: "-1px" }}>
+                            <th style={{ width: "5%" }}>{headerList.no}</th>
+                            <th style={{ width: "25%" }}>{headerList.title}</th>
+                            <th style={{ width: "5%" }}>{headerList.attend}</th>
+                            <th style={{ width: "5%" }}>
+                                {headerList.average}
+                            </th>
+                            <th style={{ letterSpacing: "-1px", width: "15%" }}>
                                 {headerList.examdt}
                             </th>
                         </tr>
@@ -89,8 +91,9 @@ const TClassTest = (props: IClassNumber) => {
                                     onClick={() => {
                                         goClassTest(ele.examNo);
                                     }}
+                                    className="linkname"
                                 >
-                                    <span className="linkname">
+                                    <span className="linknamein">
                                         {ele.examName}
                                     </span>
                                 </td>

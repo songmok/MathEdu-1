@@ -4,6 +4,7 @@ import { TfontCol } from "../../../utils/Color";
 export const TClassInfoCss = styled.div`
     background-color: #fff;
     padding: 30px;
+    padding-right: 15px;
     border-radius: 15px;
     .header {
         display: flex;
@@ -17,6 +18,9 @@ export const TClassInfoCss = styled.div`
     .wrap {
         width: 500px;
         padding: 0 30px;
+        @media screen and (max-width: 500px) {
+            width: 450px;
+        }
         > ul {
             
             li {
@@ -39,7 +43,7 @@ export const TClassInfoCss = styled.div`
                             color: ${TfontCol};
                             white-space: nowrap;
                             font-style: normal;
-                            font-size: 18px;
+                            font-size: 15px;
                         }
                     }
                     > span::after {
@@ -59,13 +63,14 @@ export const TClassInfoCss = styled.div`
                     text-align: center;
                     overflow: hidden;
                     width: 50%;
+                    letter-spacing: 0.5px;
                     font-size: 16px;
                     letter-spacing: 1px;
                     .wave {
                         margin: 0 10px;
                     }
                     span {
-                        text-overflow: ellipsis;
+                        font-size: 15px;
                     }
                 }
             }

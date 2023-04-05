@@ -138,26 +138,25 @@ const TStudentTestList = () => {
                             <tbody>
                                 {testList.map((ele, idx) => (
                                     <tr key={idx} className="tableMain">
-                                        <td>
+                                        <td style={{ width: "10%" }}>
                                             <span>{ele.examNo}</span>
                                         </td>
-                                        <td>
-                                            <span
-                                                className="linkname"
-                                                onClick={() => {
-                                                    goClassTest(ele.examNo);
-                                                }}
-                                            >
-                                                {ele.examName}
-                                            </span>
+                                        <td
+                                            style={{ width: "30%" }}
+                                            className="linkname"
+                                            onClick={() => {
+                                                goClassTest(ele.examNo);
+                                            }}
+                                        >
+                                            <span>{ele.examName}</span>
                                         </td>
-                                        <td>
+                                        <td style={{ width: "10%" }}>
                                             <span>{ele.attendCount}</span>
                                         </td>
-                                        <td>
+                                        <td style={{ width: "10%" }}>
                                             <span>{ele.avgScore}</span>
                                         </td>
-                                        <td>
+                                        <td style={{ width: "15%" }}>
                                             <span>{ele.examDt}</span>
                                         </td>
                                     </tr>

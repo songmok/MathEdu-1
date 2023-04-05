@@ -20,7 +20,7 @@ const TClassCss = styled.div`
         .sectionTop {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             p {
                 color: ${TfontCol};
                 font-size: 20px;
@@ -38,8 +38,8 @@ const TClassCss = styled.div`
                         padding: 0 5px;
                     }
                     .searchBt {
+                        background: ${TfontCol};
                         border: none;
-                        background: ${TmainCol};
                         color: #fff;
                         height: 30px;
                         width: 70px;
@@ -51,24 +51,34 @@ const TClassCss = styled.div`
         }
         .sectionMain {
             .table {
-                margin-bottom: 10px;
+                margin-bottom: 20px;
                 border-radius: 5px;
                 width: 100%;
                 text-align: center;
-                .tableHeader {
-                    background: ${TmainCol};
-                    color: #fff;
-                    border: none;
-                    height: 50px;
+                thead {
+                    .tableHeader {
+                        background: ${TfontCol};
+                        color: #fff;
+                        border: none;
+                        height: 50px;
+                    }
                 }
-                .tableMain {
-                    height: 40px;
-                    .className {
-                        cursor: pointer;
+                tbody {
+                    .tableMain {
+                        height: 40px;
                         &:hover {
-                            border-bottom: 1px solid;
-                            padding-bottom: 1px;
-                            color: ${TfontCol};
+                            background: #f8f9fa;
+                        }
+                        td {
+                            border-bottom: 1px solid rgb(216, 216, 216);
+                        }
+                        .className {
+                            cursor: pointer;
+                            > span {
+                                &:hover {
+                                    color: ${TfontCol};
+                                }
+                            }
                         }
                     }
                 }
@@ -77,7 +87,7 @@ const TClassCss = styled.div`
                 display: flex;
                 justify-content: center;
                 .css-19micn4-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
-                    background: ${TmainCol};
+                    background: ${TfontCol};
                 }
             }
         }
