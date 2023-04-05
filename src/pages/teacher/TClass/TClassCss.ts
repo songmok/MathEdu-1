@@ -20,7 +20,7 @@ const TClassCss = styled.div`
         .sectionTop {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             p {
                 color: ${TfontCol};
                 font-size: 18px;
@@ -36,8 +36,8 @@ const TClassCss = styled.div`
                         border-radius: 5px;
                     }
                     .searchBt {
+                        background: ${TfontCol};
                         border: none;
-                        background: ${TmainCol};
                         color: #fff;
                         height: 30px;
                         width: 70px;
@@ -49,13 +49,13 @@ const TClassCss = styled.div`
         }
         .sectionMain {
             .table {
-                margin-bottom: 10px;
+                margin-bottom: 20px;
                 border-radius: 5px;
                 width: 100%;
                 text-align: center;
                 thead {
                     .tableHeader {
-                        background: ${TmainCol};
+                        background: ${TfontCol};
                         color: #fff;
                         border: none;
                         height: 50px;
@@ -69,11 +69,11 @@ const TClassCss = styled.div`
                         }
                         td {
                             border-bottom: 1px solid rgb(216, 216, 216);
-                            .className {
-                                cursor: pointer;
+                        }
+                        .className {
+                            cursor: pointer;
+                            > span {
                                 &:hover {
-                                    border-bottom: 1px solid;
-                                    padding-bottom: 1px;
                                     color: ${TfontCol};
                                 }
                             }
@@ -85,7 +85,7 @@ const TClassCss = styled.div`
                 display: flex;
                 justify-content: center;
                 .css-19micn4-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
-                    background: ${TmainCol};
+                    background: ${TfontCol};
                 }
             }
         }

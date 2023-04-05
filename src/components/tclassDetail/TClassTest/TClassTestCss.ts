@@ -4,7 +4,6 @@ import { TfontCol, TmainCol } from "../../../utils/Color";
 export const TClassTestCss = styled.div`
     background-color: #fff;
     padding: 30px;
-    padding-right: 15px;
     padding-bottom: 15px;
     border-radius: 15px;
     .header {
@@ -26,7 +25,7 @@ export const TClassTestCss = styled.div`
             border: medium none;
             border-radius: 5px;
             cursor: pointer;
-            background: rgb(32, 30, 89);
+            background: ${TfontCol};
             margin-left: 15px;
             span {
                 color: white;
@@ -39,39 +38,36 @@ export const TClassTestCss = styled.div`
             border-radius: 5px;
             text-align: center;
             position: relative;
-
             .tableHeader {
-                background: ${TmainCol};
                 color: #fff;
                 border: none;
                 overflow: hidden;
-                th {
-                    padding: 5px 76px;
-                }
+                background: ${TfontCol};
             }
             /* 선생님 - 반 학생 헤더 */
             .teacherTableHeader {
-                background: ${TmainCol};
+                background: ${TfontCol};
                 color: #fff;
                 border: none;
                 height: 50px;
             }
             .tableMain {
                 overflow: hidden;
+                &:hover {
+                    background: #f8f9fa;
+                }
                 > td {
-                    max-width: 50px;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
-                    font-size: 20px;
-                    padding: 15px 0;
-                    .linkname {
-                        cursor: pointer;
-                        &:hover {
-                            border-bottom: 1px solid;
-                            padding-bottom: 1px;
-                            color: ${TfontCol};
-                        }
+                    font-size: 16px;
+                    padding: 16px 0;
+                    border-bottom: 1px solid rgb(216, 216, 216);
+                }
+                .linkname {
+                    cursor: pointer;
+                    &:hover {
+                        color: ${TfontCol};
                     }
                 }
             }

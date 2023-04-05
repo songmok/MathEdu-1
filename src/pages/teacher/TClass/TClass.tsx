@@ -111,17 +111,14 @@ const TClass = () => {
                                             <td style={{ width: "5%" }}>
                                                 <span>{ele.classNo}</span>
                                             </td>
-                                            <td style={{ width: "25%" }}>
-                                                <span
-                                                    className="className"
-                                                    onClick={() => {
-                                                        goClassDetail(
-                                                            ele.classNo,
-                                                        );
-                                                    }}
-                                                >
-                                                    {ele.name}
-                                                </span>
+                                            <td
+                                                style={{ width: "25%" }}
+                                                onClick={() => {
+                                                    goClassDetail(ele.classNo);
+                                                }}
+                                                className="className"
+                                            >
+                                                <span>{ele.name}</span>
                                             </td>
                                             <td>
                                                 <span>{ele.grade}</span>

@@ -23,14 +23,14 @@ export const TClassTestDetailCss = styled.div`
                 text-align: center;
 
                 .tableHeader {
-                    background: ${TmainCol};
+                    background: ${TfontCol};
                     color: #fff;
                     border: none;
                     height: 50px;
                 }
                 /* 선생님 - 반 학생 헤더 */
                 .teacherTableHeader {
-                    background: ${TmainCol};
+                    background: ${TfontCol};
                     color: #fff;
                     border: none;
                     height: 50px;

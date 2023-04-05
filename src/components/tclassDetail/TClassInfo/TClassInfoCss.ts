@@ -17,6 +17,9 @@ export const TClassInfoCss = styled.div`
     .wrap {
         width: 500px;
         padding: 0 30px;
+        @media screen and (max-width: 500px) {
+            width: 450px;
+        }
         > ul {
             li {
                 display: flex;
