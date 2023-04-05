@@ -13,7 +13,7 @@ export const InfoCss = styled.div`
         position: relative;
         padding: 30px;
         height: 333px;
-        border-radius: 30px;
+        border-radius: 15px;
         background-color: #fff;
         width: 100%;
         > div {
@@ -21,7 +21,8 @@ export const InfoCss = styled.div`
             justify-content: space-between;
             h5 {
                 font-weight: normal;
-                font-size: 18px;
+                font-size: 20px;
+                font-weight: 500;
                 margin-bottom: 30px;
             }
         }
@@ -53,7 +54,7 @@ export const InfoCss = styled.div`
                     .key {
                         position: absolute;
                         left: 0;
-                        font-size: 20px;
+                        font-size: 18px;
                         display: block;
                     }
                     .data {

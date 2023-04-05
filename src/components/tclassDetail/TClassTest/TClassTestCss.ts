@@ -13,6 +13,7 @@ export const TClassTestCss = styled.div`
         > span {
             color: ${TfontCol};
             font-size: 20px;
+            font-weight: 500;
         }
         button {
             background: transparent;

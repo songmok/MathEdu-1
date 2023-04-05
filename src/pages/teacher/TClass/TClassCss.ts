@@ -23,7 +23,8 @@ const TClassCss = styled.div`
             margin-bottom: 20px;
             p {
                 color: ${TfontCol};
-                font-size: 18px;
+                font-size: 20px;
+                font-weight: 500;
             }
             .search {
                 display: flex;
@@ -31,9 +32,10 @@ const TClassCss = styled.div`
                 form {
                     display: flex;
                     .searchBox {
-                        border: 2px solid #d9d9d9;
+                        border: 1px solid #d9d9d9;
                         height: 30px;
                         border-radius: 5px;
+                        padding: 0 5px;
                     }
                     .searchBt {
                         background: ${TfontCol};

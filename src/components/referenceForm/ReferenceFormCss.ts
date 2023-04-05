@@ -9,25 +9,29 @@ const ReferenceFormCss = styled.div`
         margin-bottom: 20px;
         .ps {
             color: ${SfontCol};
-            font-size: 18px;
+            font-size: 20px;
+            font-weight: 500;
         }
         .pt {
             color: ${TfontCol};
-            font-size: 18px;
+            font-size: 20px;
+            font-weight: 500;
         }
         .search {
             display: flex;
             .selectLIst {
                 border-radius: 5px;
-                border: 2px solid #d9d9d9;
+                border: 1px solid #d9d9d9;
                 margin-right: 10px;
+                padding: 0 5px;
             }
             form {
                 display: flex;
                 .searchBox {
-                    border: 2px solid #d9d9d9;
+                    border: 1px solid #d9d9d9;
                     height: 30px;
                     border-radius: 5px;
+                    padding: 0 5px;
                 }
                 .searchBt {
                     ${Button}

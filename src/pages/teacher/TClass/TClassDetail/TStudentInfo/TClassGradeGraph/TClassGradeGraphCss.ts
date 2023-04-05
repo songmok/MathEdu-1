@@ -4,7 +4,8 @@ import { Button } from "../../../../../../utils/Layout";
 const TClassGradeGraph = styled.div`
     .subTitle {
         color: ${TfontCol};
-        font-size: 18px;
+        font-size: 20px;
+        font-weight: 500
     }
     .flexForm {
         display: flex;
@@ -32,7 +33,7 @@ const TClassGradeGraph = styled.div`
             padding: 30px;
             width: 50%;
             height: 100%;
-            border-radius: 30px;
+            border-radius: 15px;
             background: #fff;
             .newTest {
                 display: flex;
@@ -45,16 +46,16 @@ const TClassGradeGraph = styled.div`
                     .percentage {
                         display: flex;
                         flex-direction: column;
-                        font-size: 36px;
+                        font-size: 60px;
                         font-weight: 600;
-                        line-height: 36px;
+                        line-height: 60px;
                         position: absolute;
                         top: 50%;
                         left: 50%;
                         transform: translate(-50%, -50%);
                         color: ${TfontCol};
                         > span {
-                            font-size: 14px;
+                            font-size: 20px;
                             font-weight: 400;
                             text-align: center;
                             line-height: 18px;
@@ -101,7 +102,7 @@ const TClassGradeGraph = styled.div`
         margin-top: 30px;
         padding: 30px;
         width: 100%;
-        border-radius: 30px;
+        border-radius: 15px;
         background: #fff;
         .chtitle {
             display: flex;

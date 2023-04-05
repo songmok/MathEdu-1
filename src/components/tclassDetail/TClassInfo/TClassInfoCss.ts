@@ -12,6 +12,7 @@ export const TClassInfoCss = styled.div`
         > span {
             color: ${TfontCol};
             font-size: 20px;
+            font-weight: 500;
         }
     }
     .wrap {
@@ -21,10 +22,13 @@ export const TClassInfoCss = styled.div`
             width: 450px;
         }
         > ul {
+            
             li {
+                
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                border-bottom: 1px solid #F5F5F5;
                 &:last-child {
                     padding: 0;
                 }
@@ -60,6 +64,8 @@ export const TClassInfoCss = styled.div`
                     overflow: hidden;
                     width: 50%;
                     letter-spacing: 0.5px;
+                    font-size: 16px;
+                    letter-spacing: 1px;
                     .wave {
                         margin: 0 10px;
                     }

@@ -16,7 +16,8 @@ export const TClassStudentDetailCss = styled.div`
             p {
                 padding-bottom: 15px;
                 color: ${TfontCol};
-                font-size: 18px;
+                font-size: 20px;
+                font-weight: 500;
             }
         }
         .sectionMain {

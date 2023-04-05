@@ -53,7 +53,7 @@ const TStudentTestDetail = () => {
         },
         title: {
             align: "center",
-            text: "",
+            text: "성적 통계",
         },
         accessibility: {
             announceNewData: {
@@ -73,6 +73,9 @@ const TStudentTestDetail = () => {
             enabled: false,
         },
         plotOptions: {
+            column: {
+                borderRadius: 5,
+            },
             series: {
                 borderWidth: 0,
                 dataLabels: {
@@ -89,17 +92,17 @@ const TStudentTestDetail = () => {
                     {
                         name: "반평균",
                         y: avg,
-                        color: "#F0F",
+                        color: "#201E59",
                     },
                     {
                         name: "최고점수",
                         y: maxValue,
-                        color: "#F00",
+                        color: "#4543A0",
                     },
                     {
                         name: "최저점수",
                         y: minValue,
-                        color: "#00F",
+                        color: "#00A49A",
                     },
                 ],
             },
@@ -107,19 +110,14 @@ const TStudentTestDetail = () => {
     };
     const optionsArr = {
         chart: {
-            type: "line",
+            type: "spline",
         },
         title: {
             text: "점수 분포도",
         },
-        subtitle: {
-            text:
-                'Source: <a href="https://fas.org/issues/nuclear-weapons/status-world-nuclear-forces/" ' +
-                'target="_blank">FAS</a>',
-        },
         xAxis: {
             categories: [
-                "20미만",
+                "20점 미만",
                 "20점 ~ 39점",
                 "40점 ~ 59점",
                 "60점 ~ 79점",
@@ -133,11 +131,13 @@ const TStudentTestDetail = () => {
             max: 8,
         },
         tooltip: {
-            pointFormat:
-                "{series.name} had stockpiled <b>{point.y:,.0f}</b><br/>warheads in {point.x}",
+            pointFormat: "{point.x.name} {point.y}명 ",
         },
         plotOptions: {
             area: {
+                lineWidth: 2,
+                softThreshold: true,
+                linecap: "round",
                 pointStart: 0,
                 marker: {
                     enabled: false,
@@ -151,10 +151,19 @@ const TStudentTestDetail = () => {
                 },
             },
         },
+
         series: [
             {
                 name: "학생",
                 data: arrData,
+                lineColor: "#4543A0",
+                lineWidth: 3,
+                marker: {
+                    symbol: "circle",
+                    lineWidth: 3,
+                    fillColor: "#fff",
+                    lineColor: "#4543A0",
+                },
             },
         ],
     };

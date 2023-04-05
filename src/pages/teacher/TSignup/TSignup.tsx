@@ -142,6 +142,7 @@ const TSignup = () => {
                                     <input
                                         type="text"
                                         className="username"
+                                        maxLength={16}
                                         value={username}
                                         onChange={e =>
                                             setUsername(e.target.value)

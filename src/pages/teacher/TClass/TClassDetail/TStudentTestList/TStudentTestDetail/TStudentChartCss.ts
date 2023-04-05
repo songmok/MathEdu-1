@@ -9,7 +9,7 @@ export const TStudentChartCss = styled.div`
             display: block;
             margin-bottom: 30px;
             span {
-                padding-bottom: 15px;
+                padding-bottom: 18px;
                 color: ${TfontCol};
                 font-size: 18px;
             }
@@ -18,8 +18,10 @@ export const TStudentChartCss = styled.div`
             display: flex;
             justify-content: space-between;
             width: 100%;
-            justify-content: space-around;
+            justify-content: space-between;
+
             > ul {
+                width: 20%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;

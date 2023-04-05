@@ -17,7 +17,7 @@ export const TStudentTestListCss = styled.div`
             margin-bottom: 20px;
             .sectionTitle {
                 color: ${TfontCol};
-                font-size: 18px;
+                font-size: 20px;
             }
             .select {
                 select {

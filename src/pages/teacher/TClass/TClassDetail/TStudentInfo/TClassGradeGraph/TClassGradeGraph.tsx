@@ -60,6 +60,7 @@ export interface testAnalysis {
     }>;
     top30pAvgScores: Array<number>;
 }
+
 const TClassGradeGraph = () => {
     const [weekTR, setWeekTR] = useState<testResult>({
         score: 0,
@@ -121,8 +122,8 @@ const TClassGradeGraph = () => {
                 params: params,
             })
             .then(res => {
-                setWeekTR(res.data.info.monthlyTest);
-                setMonthTR(res.data.info.weeklyTest);
+                setWeekTR(res.data.info.weeklyTest);
+                setMonthTR(res.data.info.monthlyTest);
                 setSInfo(res.data.info.basicInfo);
             })
             .catch(err => {
@@ -132,7 +133,8 @@ const TClassGradeGraph = () => {
 
     const now = new Date(); // 현재 날짜 및 시간
     const nowYear = now.getFullYear(); // 연도
-    const nowMonth = now.getMonth(); // 월
+    const nowMonth = now.getMonth() + 1; // 월
+    const mon = "0" + nowMonth;
     // console.log("월 : ", nowMonth, "연도 : ", nowYear);
 
     const [scMunth, setScMunth] = useState(nowMonth);
@@ -219,6 +221,7 @@ const TClassGradeGraph = () => {
             console.error("월간시험 결과를 찾을 수 없습니다", error);
         }
     };
+    // console.log("월", monthTest, "주", weekTest, monthTR, weekTR, sInfo);
 
     // 월간 주간 변경 버튼
     const wmChange = () => {
@@ -236,9 +239,6 @@ const TClassGradeGraph = () => {
     ) => {
         setOrder(event.target.value as string);
     };
-
-    //확인버튼
-    const wMcheck = () => {};
 
     useEffect(() => {
         sWeeklyTest();
@@ -279,7 +279,9 @@ const TClassGradeGraph = () => {
                         <>
                             <select onChange={e => cY(e)}>{year()}</select>
                             <span>년</span>
-                            <select onChange={e => cM(e)}>{month()}</select>
+                            <select onChange={e => cM(e)} defaultValue={mon}>
+                                {month()}
+                            </select>
                             <span>월</span>
                         </>
                     ) : (
