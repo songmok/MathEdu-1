@@ -97,8 +97,6 @@ const TReference = () => {
         navigate("/teacher/reference/write");
     };
 
-    console.log(refLIst);
-
     return (
         <>
             <TSidebar />

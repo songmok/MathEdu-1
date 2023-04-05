@@ -12,7 +12,8 @@ const TSignupCss = styled.div`
             margin-bottom: 10px;
             p {
                 color: ${TfontCol};
-                font-size: 18px;
+                font-size: 20px;
+                font-weight: 600;
             }
         }
         .sectionMain {
