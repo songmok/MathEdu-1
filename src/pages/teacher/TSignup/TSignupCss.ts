@@ -9,11 +9,11 @@ const TSignupCss = styled.div`
         padding: 30px;
         border-radius: 15px;
         .sectionTop {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             p {
                 color: ${TfontCol};
                 font-size: 20px;
-                font-weight: 600;
+                font-weight: 500;
             }
         }
         .sectionMain {

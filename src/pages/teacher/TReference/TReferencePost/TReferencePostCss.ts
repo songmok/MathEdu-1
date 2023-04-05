@@ -12,8 +12,9 @@ const TReferencePostCss = styled.div`
         border-radius: 15px;
         .section-title {
             color: ${TfontCol};
-            font-size: 18px;
+            font-size: 20px;
             margin-bottom: 10px;
+            font-weight: 500;
         }
         .notice-board {
             border-top: 2px solid ${TmainCol};

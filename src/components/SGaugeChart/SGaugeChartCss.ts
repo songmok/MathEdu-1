@@ -6,7 +6,7 @@ const SGaugeChartCss = styled.div`
     .tests {
         .subTitle {
             color: ${TfontCol};
-            font-size: 18px;
+            font-size: 20px;
         }
         display: flex;
         gap: 30px;
@@ -27,16 +27,16 @@ const SGaugeChartCss = styled.div`
                     .percentage {
                         display: flex;
                         flex-direction: column;
-                        font-size: 36px;
+                        font-size: 60px;
                         font-weight: 600;
-                        line-height: 36px;
+                        line-height: 60px;
                         position: absolute;
                         top: 50%;
                         left: 50%;
                         transform: translate(-50%, -50%);
                         color: ${TfontCol};
                         > span {
-                            font-size: 14px;
+                            font-size: 20px;
                             font-weight: 400;
                             text-align: center;
                             line-height: 18px;
@@ -51,6 +51,7 @@ const SGaugeChartCss = styled.div`
                     position: relative;
                     display: block;
                     width: 50%;
+                    font-size: 18px;
 
                     .gradeLR {
                         display: flex;
