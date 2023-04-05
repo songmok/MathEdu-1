@@ -14,6 +14,7 @@ const SNoticePostCss = styled.div`
             color: ${SfontCol};
             font-size: 18px;
             margin-bottom: 10px;
+            font-weight: 500;
         }
         .notice-board {
             border-top: 2px solid ${SmainCol};

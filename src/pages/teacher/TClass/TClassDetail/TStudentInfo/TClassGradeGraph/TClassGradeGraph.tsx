@@ -134,6 +134,7 @@ const TClassGradeGraph = () => {
     const now = new Date(); // 현재 날짜 및 시간
     const nowYear = now.getFullYear(); // 연도
     const nowMonth = now.getMonth() + 1; // 월
+    const mon = "0" + nowMonth;
     // console.log("월 : ", nowMonth, "연도 : ", nowYear);
 
     const [scMunth, setScMunth] = useState(nowMonth);
@@ -278,7 +279,9 @@ const TClassGradeGraph = () => {
                         <>
                             <select onChange={e => cY(e)}>{year()}</select>
                             <span>년</span>
-                            <select onChange={e => cM(e)}>{month()}</select>
+                            <select onChange={e => cM(e)} defaultValue={mon}>
+                                {month()}
+                            </select>
                             <span>월</span>
                         </>
                     ) : (
