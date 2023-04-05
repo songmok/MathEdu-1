@@ -98,8 +98,8 @@ const TClass = () => {
                                 <tr className="tableHeader">
                                     <th>번호</th>
                                     <th>반</th>
-                                    <th>학년</th>
                                     <th>요일</th>
+                                    <th>학년</th>
                                     <th>개강일</th>
                                     <th>종강일</th>
                                 </tr>
@@ -108,25 +108,22 @@ const TClass = () => {
                                 return (
                                     <tbody key={ele.classNo}>
                                         <tr className="tableMain">
-                                            <td>
+                                            <td style={{ width: "5%" }}>
                                                 <span>{ele.classNo}</span>
                                             </td>
-                                            <td>
-                                                <span
-                                                    className="className"
-                                                    onClick={() => {
-                                                        goClassDetail(
-                                                            ele.classNo,
-                                                        );
-                                                    }}
-                                                >
-                                                    {ele.name}
-                                                </span>
+                                            <td
+                                                style={{ width: "25%" }}
+                                                onClick={() => {
+                                                    goClassDetail(ele.classNo);
+                                                }}
+                                                className="className"
+                                            >
+                                                <span>{ele.name}</span>
                                             </td>
                                             <td>
                                                 <span>{ele.grade}</span>
                                             </td>
-                                            <td>
+                                            <td style={{ width: "15%" }}>
                                                 <span>{ele.days}</span>
                                             </td>
                                             <td>

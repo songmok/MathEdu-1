@@ -6,7 +6,7 @@ const ReferenceFormCss = styled.div`
     .sectionTop {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
         .ps {
             color: ${SfontCol};
             font-size: 20px;
@@ -47,7 +47,7 @@ const ReferenceFormCss = styled.div`
         }
     }
     .sectionMain {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         .table {
             border-radius: 5px;
             width: 100%;

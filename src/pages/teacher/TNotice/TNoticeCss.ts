@@ -6,8 +6,10 @@ const TNoticeCss = styled.div`
     ${mainContainer}
     .section {
         background: #fff;
+        position: relative;
         padding: 30px;
         border-radius: 15px;
+        height: 652px;
         .sectionBt {
             display: flex;
             justify-content: end;
@@ -23,6 +25,10 @@ const TNoticeCss = styled.div`
             }
         }
         .pagination {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, -15px);
             display: flex;
             justify-content: center;
             .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {

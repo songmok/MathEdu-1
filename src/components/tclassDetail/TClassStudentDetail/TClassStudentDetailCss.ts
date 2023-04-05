@@ -2,6 +2,10 @@ import styled from "styled-components";
 import { TfontCol, TmainCol } from "../../../utils/Color";
 
 export const TClassStudentDetailCss = styled.div`
+    padding: 30px;
+    padding-top: 0px;
+    margin-left: 250px;
+    width: 92%;
     .wrap {
         background: #fff;
         padding: 30px;
@@ -19,18 +23,17 @@ export const TClassStudentDetailCss = styled.div`
         .sectionMain {
             .table {
                 border-radius: 5px;
-                width: 100%;
                 text-align: center;
 
                 .tableHeader {
-                    background: ${TmainCol};
+                    background: ${TfontCol};
                     color: #fff;
                     border: none;
                     height: 50px;
                 }
                 /* 선생님 - 반 학생 헤더 */
                 .teacherTableHeader {
-                    background: ${TmainCol};
+                    background: ${TfontCol};
                     color: #fff;
                     border: none;
                     height: 50px;
@@ -38,18 +41,22 @@ export const TClassStudentDetailCss = styled.div`
                 .tableMain {
                     height: 40px;
                     width: 100%;
+                    &:hover {
+                        background: #f8f9fa;
+                    }
                     > td {
                         width: calc(100% / 6);
+                        height: 130px;
+                        border-bottom: 1px solid rgb(216, 216, 216);
                         > img {
-                            width: 45%;
+                            width: 25%;
                         }
-                        .linkname {
-                            cursor: pointer;
-                            &:hover {
-                                border-bottom: 1px solid;
-                                padding-bottom: 1px;
-                                color: ${TfontCol};
-                            }
+                    }
+                    .linkname {
+                        cursor: pointer;
+                        &:hover {
+                            padding-bottom: 1px;
+                            color: ${TfontCol};
                         }
                     }
                 }

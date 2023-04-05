@@ -8,6 +8,8 @@ const TReferenceCss = styled.div`
         background: #fff;
         padding: 30px;
         border-radius: 15px;
+        height: 652px;
+        position: relative;
         .sectionBt {
             display: flex;
             justify-content: end;
@@ -23,6 +25,10 @@ const TReferenceCss = styled.div`
             }
         }
         .pagination {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, -15px);
             display: flex;
             justify-content: center;
             .css-19micn4-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {

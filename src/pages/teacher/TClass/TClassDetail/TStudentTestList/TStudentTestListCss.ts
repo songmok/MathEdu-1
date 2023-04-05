@@ -8,11 +8,13 @@ export const TStudentTestListCss = styled.div`
         background: #fff;
         padding: 30px;
         border-radius: 15px;
+        height: 652px;
+        position: relative;
         .sectionTop {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             .sectionTitle {
                 color: ${TfontCol};
                 font-size: 20px;
@@ -33,10 +35,10 @@ export const TStudentTestListCss = styled.div`
                 border-radius: 5px;
                 width: 100%;
                 text-align: center;
-                margin-bottom: 10px;
+                margin-bottom: 20px;
                 /* Table Header */
                 .tableHeader {
-                    background: ${TmainCol};
+                    background: ${TfontCol};
                     color: #fff;
                     border: none;
                     height: 50px;
@@ -49,13 +51,14 @@ export const TStudentTestListCss = styled.div`
                         background: #f8f9fa;
                     }
                     > td {
-                        .linkname {
-                            cursor: pointer;
-                            &:hover {
-                                border-bottom: 1px solid;
-                                padding-bottom: 1px;
-                                color: ${TfontCol};
-                            }
+                    }
+                    .linkname {
+                        cursor: pointer;
+                        &:hover {
+                            color: ${TfontCol};
+                        }
+                        &:hover {
+                            color: ${TfontCol};
                         }
                     }
                 }
@@ -63,22 +66,26 @@ export const TStudentTestListCss = styled.div`
             .bt-area {
                 display: flex;
                 justify-content: end;
-                margin-bottom: 10px;
+                margin-bottom: 20px;
                 button {
                     ${Button}
+
                     border: none;
                     border-radius: 5px;
-                    background: rgb(32, 30, 89);
+                    background: ${TfontCol};
                     color: white;
                 }
             }
             /* Pagination */
             .pagination {
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translate(-50%, -15px);
                 display: flex;
                 justify-content: center;
-
                 .css-19micn4-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
-                    background: ${TmainCol};
+                    background: ${TfontCol};
                 }
             }
         }

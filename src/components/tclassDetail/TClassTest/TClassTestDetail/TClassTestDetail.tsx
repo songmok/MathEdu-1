@@ -21,9 +21,10 @@ export interface ITexstudentListItem {
 interface IPath {
     classPaNo: string;
     examPaNo: string;
+    classTestSummaryApi: () => void;
 }
 const TClassTestDetail = (props: IPath) => {
-    const { classPaNo, examPaNo } = props;
+    const { classPaNo, examPaNo, classTestSummaryApi } = props;
     const [exStudentList, setExStudentList] = useState<ITexstudentListItem[]>();
 
     // 학생 점수 리스트 api
@@ -50,6 +51,8 @@ const TClassTestDetail = (props: IPath) => {
         } catch (error) {
             console.error("점수 등록에 실패했습니다.", error);
         }
+        classStudentTestApi();
+        classTestSummaryApi();
     };
     useEffect(() => {
         classStudentTestApi();

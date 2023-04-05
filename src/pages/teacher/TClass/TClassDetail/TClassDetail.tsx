@@ -7,7 +7,6 @@ import TSidebar from "../../../../components/tSidebar/TSidebar";
 import { TClassDetailCss } from "./TClassDetailCss";
 
 const TClassDetail = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
     const location = useLocation();
     const classQuNo = new URLSearchParams(location.search).get("classno");
     console.log("lo", classQuNo);

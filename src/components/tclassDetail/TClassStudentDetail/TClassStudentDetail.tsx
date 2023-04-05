@@ -67,40 +67,58 @@ const TClassStudentDetail = (props: IClassNumber) => {
                     <div className="sectionMain">
                         <table className="table">
                             <tr className="tableHeader">
-                                <th>{headerList.number}</th>
-                                <th>{headerList.picture}</th>
-                                <th>{headerList.student}</th>
-                                <th>{headerList.phone}</th>
-                                <th style={{ letterSpacing: "-1px" }}>
+                                <th style={{ width: "5%" }}>
+                                    {headerList.number}
+                                </th>
+                                <th style={{ width: "20%" }}>
+                                    {headerList.picture}
+                                </th>
+                                <th style={{ width: "20%" }}>
+                                    {headerList.student}
+                                </th>
+                                <th style={{ width: "5%" }}>
+                                    {headerList.phone}
+                                </th>
+                                <th
+                                    style={{
+                                        letterSpacing: "-1px",
+                                        width: "5%",
+                                    }}
+                                >
                                     {headerList.parentPhone}
                                 </th>
-                                <th>{headerList.address}</th>
+                                <th style={{ width: "30%" }}>
+                                    {headerList.address}
+                                </th>
                             </tr>
 
                             {classStudent?.map((ele, idx) => (
                                 <tr key={ele.no} className="tableMain">
                                     {/* <Link></Link> */}
-                                    <td>
+                                    <td style={{ width: "5%" }}>
                                         <span>{ele.no}</span>
                                     </td>
-                                    <td>
+                                    <td style={{ width: "20%" }}>
                                         <img
                                             src={`http://192.168.0.62:9988/${ele.img}`}
                                         />
                                     </td>
-                                    <td>
-                                        <span
-                                            className="linkname"
-                                            onClick={() => {
-                                                goClassStudent(ele.id);
-                                            }}
-                                        >
-                                            {ele.name}
-                                        </span>
+                                    <td
+                                        style={{ width: "20%" }}
+                                        className="linkname"
+                                        onClick={() => {
+                                            goClassStudent(ele.id);
+                                        }}
+                                    >
+                                        <span>{ele.name}</span>
                                     </td>
-                                    <td>{ele.phone}</td>
-                                    <td>{ele.alternatephone}</td>
-                                    <td>{ele.address}</td>
+                                    <td style={{ width: "5%" }}>{ele.phone}</td>
+                                    <td style={{ width: "5%" }}>
+                                        {ele.alternatephone}
+                                    </td>
+                                    <td style={{ width: "30%" }}>
+                                        {ele.address}
+                                    </td>
                                 </tr>
                             ))}
                         </table>

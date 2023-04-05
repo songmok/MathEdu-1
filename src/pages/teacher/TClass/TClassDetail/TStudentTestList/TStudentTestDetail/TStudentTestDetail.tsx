@@ -224,7 +224,11 @@ const TStudentTestDetail = () => {
                             </div>
                         </div>
                     </TStudentChartCss>
-                    <TClassTestDetail classPaNo={classNo} examPaNo={examNo} />
+                    <TClassTestDetail
+                        classPaNo={classNo}
+                        examPaNo={examNo}
+                        classTestSummaryApi={classTestSummaryApi}
+                    />
                 </div>
             </TStudentTestDetailCss>
         </>

@@ -3,6 +3,7 @@ export const mainContainer = `
     padding: 30px;
     margin-left:250px;
     margin-top:90px;
+    
 `;
 
 export const Button = `
