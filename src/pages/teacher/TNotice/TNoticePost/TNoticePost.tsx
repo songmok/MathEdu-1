@@ -76,7 +76,7 @@ const TNoticePost = () => {
         if (window.confirm("정말 삭제하시겠습니까?")) {
             try {
                 const response = await axios.delete(
-                    `http://192.168.0.62:9988/api/bbs/${noticeNo}/${teacherNo}`,
+                    `http://192.168.0.62:9988/api/notice/${noticeNo}/${teacherNo}`,
                 );
                 alert(response.data.message);
                 navigate("/teacher/notice?page=1");
