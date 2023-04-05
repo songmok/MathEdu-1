@@ -124,18 +124,19 @@ const SGaugeChart = (props: Iprops) => {
                         options={GaugeChart}
                     />
                     <span className="percentage">
-                        <span>상위</span>
+                        <span>점수</span>
                         <p>
-                            {percentage}
-                            <span className="percent">%</span>
+                        {score}
+                           
+                            <span className="percent">점</span>
                         </p>
                     </span>
                 </div>
 
                 <ul className="gradeList">
                     <li className="gradeLR">
-                        <span className="gradeLRC">점수</span>
-                        <span className="gradeLRCI">{score}</span>
+                        <span className="gradeLRC">상위</span>
+                        <span className="gradeLRCI"> {percentage}%</span>
                     </li>
 
                     <li className="gradeLR">

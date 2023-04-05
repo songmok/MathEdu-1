@@ -137,8 +137,8 @@ const SGrade = () => {
 
     const now = new Date(); // 현재 날짜 및 시간
     const nowYear = now.getFullYear(); // 연도
-    const nowMonth = now.getMonth(); // 월
-    const mon = "0" + (nowMonth + 1);
+    const nowMonth = now.getMonth()+1; // 월
+    const mon = "0" + (nowMonth);
 
     const [scMunth, setScMunth] = useState(nowMonth);
     const [scYear, setScYear] = useState(nowYear);
