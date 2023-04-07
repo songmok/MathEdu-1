@@ -76,7 +76,7 @@ const TClassStudentDetail = (props: IClassNumber) => {
                                 <th style={{ width: "20%" }}>
                                     {headerList.student}
                                 </th>
-                                <th style={{ width: "5%" }}>
+                                <th style={{ width: "10%" }}>
                                     {headerList.phone}
                                 </th>
                                 <th
@@ -87,7 +87,7 @@ const TClassStudentDetail = (props: IClassNumber) => {
                                 >
                                     {headerList.parentPhone}
                                 </th>
-                                <th style={{ width: "30%" }}>
+                                <th style={{ width: "10%" }}>
                                     {headerList.address}
                                 </th>
                             </tr>
@@ -112,7 +112,9 @@ const TClassStudentDetail = (props: IClassNumber) => {
                                     >
                                         <span>{ele.name}</span>
                                     </td>
-                                    <td style={{ width: "5%" }}>{ele.phone}</td>
+                                    <td style={{ width: "10%" }}>
+                                        {ele.phone}
+                                    </td>
                                     <td style={{ width: "5%" }}>
                                         {ele.alternatephone}
                                     </td>

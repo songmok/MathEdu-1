@@ -63,7 +63,7 @@ export const TClassTestDetailCss = styled.div`
                             background-color: #a7a390;
                         }
                         .wr {
-                            background-color: #1f1d58;
+                            background-color: ${TfontCol};
                         }
                     }
                 }
